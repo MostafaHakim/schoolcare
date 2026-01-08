@@ -6,14 +6,11 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 const authUser = async (req, res, next) => {
   try {
-    const token =
-      req.cookies?.token || req.headers.authorization?.split(" ")[1];
-
+    const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
       return res.status(401).json({ message: "No token provided" });
     }
 
-    // blacklist check
     const isBlacklisted = await BlackListToken.findOne({ token });
     if (isBlacklisted) {
       return res.status(401).json({ message: "Token expired" });

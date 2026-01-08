@@ -20,36 +20,50 @@ const LoginPage = () => {
     }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const res = await fetch(
+  //       `${import.meta.env.VITE_BASE_URL}/api/user/login`,
+  //       {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify(formData),
+  //       }
+  //     );
+
+  //     const data = await res.json();
+
+  //     if (!res.ok) {
+  //       toast.error(data.message || "Login failed");
+  //       return;
+  //     }
+
+  //     login(data.user, data.token);
+  //     localStorage.setItem("token", data.token);
+  //     toast.success("Login successful 🎉");
+  //     if (data.user.userRole === "teacher") {
+  //       navigate("/teacher", { replace: true });
+  //     } else {
+  //       navigate("/student", { replace: true });
+  //     }
+  //   } catch (error) {
+  //     toast.error("Server error. Try again later");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/user/login`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+    const user = await login(formData);
 
-      const data = await res.json();
+    if (!user) return;
 
-      if (!res.ok) {
-        toast.error(data.message || "Login failed");
-        return;
-      }
-
-      login(data.user, data.token);
-      localStorage.setItem("token", data.token);
-      toast.success("Login successful 🎉");
-      if (data.user.userRole === "teacher") {
-        navigate("/teacher", { replace: true });
-      } else {
-        navigate("/student", { replace: true });
-      }
-    } catch (error) {
-      toast.error("Server error. Try again later");
+    if (user.userRole === "teacher") {
+      navigate("/teacher", { replace: true });
+    } else {
+      navigate("/student", { replace: true });
     }
   };
 

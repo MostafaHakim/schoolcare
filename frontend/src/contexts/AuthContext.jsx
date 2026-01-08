@@ -40,10 +40,35 @@ export const AuthProvider = ({ children }) => {
     fetchProfile();
   }, [token]);
 
-  const login = (userData, token) => {
-    localStorage.setItem("token", token);
-    setToken(token);
-    setUser(userData);
+  const login = async (formData) => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/user/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Login failed");
+        return null;
+      }
+
+      localStorage.setItem("token", data.token);
+      setToken(data.token);
+      setUser(data.user);
+
+      toast.success("Login successful 🎉");
+
+      return data.user;
+    } catch (error) {
+      toast.error("Server error. Try again later");
+      return null;
+    }
   };
 
   const logout = async () => {
