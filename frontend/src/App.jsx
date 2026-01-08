@@ -112,7 +112,7 @@ function App() {
               <Route path="performance" element={<PerformancePage />} />
             </Route>
 
-            {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </AuthProvider>
       </Router>
