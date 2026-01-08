@@ -39,14 +39,17 @@ const getAllUsers = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const { userId, password } = req.body;
-    console.log(req.body);
+    const { userId, password, userRole } = req.body;
+
     const user = await User.findOne({ userId });
-    console.log(user);
+
     if (!user) {
       return res.status(404).send("User not found");
     }
-
+    const isMatchRole = user.userRole === userRole;
+    if (!isMatchRole) {
+      return res.status(401).send("Invalid User");
+    }
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
       return res.status(401).send("Invalid password");

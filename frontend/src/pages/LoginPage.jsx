@@ -11,6 +11,7 @@ const LoginPage = () => {
   const [formData, setFormData] = useState({
     userId: "",
     password: "",
+    userRole: role,
   });
 
   const handleChange = (e) => {
