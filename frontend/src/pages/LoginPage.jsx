@@ -3,15 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const LoginPage = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [role, setRole] = useState("student");
-
-  const { login } = useAuth();
   const [formData, setFormData] = useState({
     userId: "",
     password: "",
-    userRole: role,
+    userRole: "student",
   });
 
   const handleChange = (e) => {
@@ -102,9 +100,11 @@ const LoginPage = () => {
                 <button
                   key={r}
                   type="button"
-                  onClick={() => setRole(r)}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, userRole: r }))
+                  }
                   className={`flex-1 py-2 text-sm font-medium ${
-                    role === r
+                    formData.userRole === r
                       ? "bg-purple-600 text-white"
                       : "bg-gray-100 text-gray-600"
                   }`}
@@ -121,7 +121,9 @@ const LoginPage = () => {
                 name="userId"
                 value={formData.userId}
                 onChange={handleChange}
-                placeholder={role === "teacher" ? "Teacher ID" : "Student ID"}
+                placeholder={
+                  formData.userRole === "teacher" ? "Teacher ID" : "Student ID"
+                }
                 className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-purple-500"
               />
 
