@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -21,6 +22,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const res = await fetch(
         `${import.meta.env.VITE_BASE_URL}/api/user/login`,
@@ -33,20 +35,21 @@ const LoginPage = () => {
 
       const data = await res.json();
 
-      if (data.user) {
-        login(data.user);
-        localStorage.setItem("token", data.token);
-
-        if (data.user.userRole === "teacher") {
-          navigate("/teacher", { replace: true });
-        } else if (data.user.userRole === "student") {
-          navigate("/student", { replace: true });
-        } else {
-          navigate("/", { replace: true });
-        }
+      if (!res.ok) {
+        toast.error(data.message || "Login failed");
+        return;
       }
-    } catch (err) {
-      console.error("Login failed", err);
+
+      login(data.user);
+      localStorage.setItem("token", data.token);
+      toast.success("Login successful 🎉");
+      if (data.user.userRole === "teacher") {
+        navigate("/teacher", { replace: true });
+      } else {
+        navigate("/student", { replace: true });
+      }
+    } catch (error) {
+      toast.error("Server error. Try again later");
     }
   };
 

@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Layout from "./components/Layout";
-
+import { ToastContainer } from "react-toastify";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -60,51 +60,63 @@ const DashboardRouter = () => {
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
+    <>
+      {" "}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
 
-          {/* Teacher */}
-          <Route
-            path="/teacher"
-            element={
-              <RoleBasedRoute allowedRoles={["teacher"]}>
-                <TeacherLayout />
-              </RoleBasedRoute>
-            }
-          >
-            <Route index element={<TeacherDashboard />} />
-            <Route path="homework" element={<HomeWork />} />
-            <Route path="homework/:name" element={<ClassWiseHomeWork />} />
+            {/* Teacher */}
             <Route
-              path="homework/:name/:id"
-              element={<TeacherHomeworkDetailPage />}
-            />
+              path="/teacher"
+              element={
+                <RoleBasedRoute allowedRoles={["teacher"]}>
+                  <TeacherLayout />
+                </RoleBasedRoute>
+              }
+            >
+              <Route index element={<TeacherDashboard />} />
+              <Route path="homework" element={<HomeWork />} />
+              <Route path="homework/:name" element={<ClassWiseHomeWork />} />
+              <Route
+                path="homework/:name/:id"
+                element={<TeacherHomeworkDetailPage />}
+              />
+              <Route
+                path="homework/:name/addhomework"
+                element={<AddHomeWork />}
+              />
+              <Route path="profile" element={<ProfilePage />} />
+            </Route>
+
+            {/* Student */}
             <Route
-              path="homework/:name/addhomework"
-              element={<AddHomeWork />}
-            />
-            <Route path="profile" element={<ProfilePage />} />
-          </Route>
+              path="/"
+              element={
+                <RoleBasedRoute allowedRoles={["student"]}>
+                  <StudentLayout />
+                </RoleBasedRoute>
+              }
+            >
+              <Route index element={<HomePage />} />
+              <Route path="performance" element={<PerformancePage />} />
+            </Route>
 
-          {/* Student */}
-          <Route
-            path="/"
-            element={
-              <RoleBasedRoute allowedRoles={["student"]}>
-                <StudentLayout />
-              </RoleBasedRoute>
-            }
-          >
-            <Route index element={<HomePage />} />
-            <Route path="performance" element={<PerformancePage />} />
-          </Route>
-
-          {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
-        </Routes>
-      </AuthProvider>
-    </Router>
+            {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </>
   );
 }
 
