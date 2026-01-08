@@ -40,7 +40,7 @@ const LoginPage = () => {
         return;
       }
 
-      login(data.user);
+      login(data.user, data.token);
       localStorage.setItem("token", data.token);
       toast.success("Login successful 🎉");
       if (data.user.userRole === "teacher") {

@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -40,13 +40,38 @@ export const AuthProvider = ({ children }) => {
     fetchProfile();
   }, [token]);
 
-  const login = (userData) => {
+  const login = (userData, token) => {
+    localStorage.setItem("token", token);
+    setToken(token);
     setUser(userData);
   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
+  const logout = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/user/logout`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Logout failed");
+        return;
+      }
+
+      toast.success("Logout successful 🎉");
+    } catch (err) {
+      toast.error("Server error");
+    } finally {
+      localStorage.removeItem("token");
+      setUser(null);
+      setToken(null);
+    }
   };
 
   return (
