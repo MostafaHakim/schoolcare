@@ -5,9 +5,6 @@ import {
   ChevronRight,
   Newspaper,
 } from "lucide-react";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const HomePage = () => {
   const calendarDays = [
@@ -19,7 +16,6 @@ const HomePage = () => {
     [25, 26, 27, 28, 29, 30, 31],
     [1, 2, 3, 4, 5, 6, 7],
   ];
-  const { user } = useAuth();
 
   return (
     <div className="space-y-6">

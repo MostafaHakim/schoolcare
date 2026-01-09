@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Layout from "./components/Layout";
 import { ToastContainer } from "react-toastify";
@@ -52,6 +57,7 @@ function App() {
               <StudentProvider>
                 <Routes>
                   <Route path="/login" element={<LoginPage />} />
+
                   {/* ==================Author===================== */}
                   <Route
                     path="/admin"
@@ -117,7 +123,7 @@ function App() {
                     <Route path="performance" element={<PerformancePage />} />
                   </Route>
 
-                  {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+                  <Route path="*" element={<Navigate to="/login" replace />} />
                 </Routes>
               </StudentProvider>
             </HomeworkProvider>

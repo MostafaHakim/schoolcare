@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const LoginPage = () => {
-  const { login } = useAuth();
+  const { user, userRole, login } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -12,6 +12,13 @@ const LoginPage = () => {
     password: "",
     userRole: "student",
   });
+
+  useEffect(() => {
+    if (user && userRole) {
+      if (userRole === "teacher") navigate("/teacher", { replace: true });
+      else if (userRole === "student") navigate("/student", { replace: true });
+    }
+  }, [user, userRole, navigate]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -25,8 +32,7 @@ const LoginPage = () => {
     const u = await login(formData);
     if (!u) return;
 
-    if (formData.userRole === "teacher")
-      navigate("/teacher", { replace: true });
+    if (u.userRole === "teacher") navigate("/teacher", { replace: true });
     else navigate("/student", { replace: true });
   };
   return (

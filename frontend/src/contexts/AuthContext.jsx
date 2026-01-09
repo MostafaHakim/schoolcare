@@ -11,17 +11,8 @@ export const AuthProvider = ({ children }) => {
   );
   const [loading, setLoading] = useState(true);
 
-  // ===== Profile fetch =====
   useEffect(() => {
     const fetchProfile = async () => {
-      if (!token || !userRole) {
-        setUser(null);
-        setLoading(false);
-        return;
-      }
-
-      setLoading(true);
-
       try {
         const url =
           userRole === "teacher"
@@ -35,10 +26,8 @@ export const AuthProvider = ({ children }) => {
         if (!res.ok) throw new Error("Unauthorized");
 
         const data = await res.json();
-        // Student API may return user directly
         setUser(data.user || data);
       } catch (err) {
-        console.error("Profile fetch failed:", err);
         localStorage.removeItem("token");
         localStorage.removeItem("userRole");
         setToken(null);
@@ -49,8 +38,13 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    // only fetch if token AND role exist
-    if (token && userRole) fetchProfile();
+    if (token && userRole) {
+      setLoading(true);
+      fetchProfile();
+    } else {
+      setUser(null);
+      setLoading(false);
+    }
   }, [token, userRole]);
 
   // ===== Login =====
