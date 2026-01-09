@@ -1,17 +1,20 @@
 import { ArrowLeft, Eye, MessageCircle, Send, Download } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BiSolidEditAlt } from "react-icons/bi";
 import HomeWorkSubjectCard from "./HomeWorkSubjectCard";
+import { useHomework } from "../contexts/HomeworkContext";
+import { useEffect } from "react";
+import Homeworkicon from "../assets/homeworkicon.png";
 
 const TeacherHomeworkDetailPage = () => {
   const navigate = useNavigate();
-  const homeWorksData = {
-    id: 1,
-    subject: "Bangla",
-    image: "https://picsum.photos/300/200",
-    teacher: "Abdullah Al Shams",
-    date: new Date(),
-  };
+
+  const { id } = useParams();
+  const { fetchHomeworksById, homeworkById } = useHomework();
+  console.log(homeworkById);
+  useEffect(() => {
+    fetchHomeworksById(id);
+  }, [id]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center px-3 py-4">
@@ -33,7 +36,7 @@ const TeacherHomeworkDetailPage = () => {
             <h2 className="text-sm font-medium">Homework details</h2>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1541963463532-d68292c34b19"
+            src={homeworkById[0]?.image}
             alt="Homework"
             className="w-full h-72 sm:h-64 object-cover"
           />
@@ -46,11 +49,11 @@ const TeacherHomeworkDetailPage = () => {
           </button>
           <div className="absolute p-4 bg-white rounded-2xl bottom-[-100px] left-4 right-4 md:hidden">
             <HomeWorkSubjectCard
-              subject={homeWorksData.subject}
-              teacher={homeWorksData.teacher}
-              date={homeWorksData.date}
-              image={homeWorksData.image}
-              id={homeWorksData.id}
+              subject={homeworkById[0]?.subject}
+              teacher={homeworkById[0]?.teacher}
+              date={homeworkById[0]?.date}
+              image={Homeworkicon}
+              id={homeworkById[0]?._id}
             />
           </div>
         </div>
@@ -58,17 +61,7 @@ const TeacherHomeworkDetailPage = () => {
         {/* Content */}
         <div className="px-4 py-4 space-y-3 mt-28 md:mt-0">
           {/* Bangla Description */}
-          <p className="text-sm text-gray-800 leading-relaxed">
-            আজকের হোমওয়ার্ক হলো — Capital Letter সম্পর্কে অনুশীলন করা ও মনে
-            রাখা।
-          </p>
-
-          <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
-            <li>সব শব্দে Capital Letter সঠিকভাবে লিখতে হবে।</li>
-            <li>প্রতিটি বাক্যের শুরুতে Capital Letter দিতে হবে।</li>
-            <li>খাতায় সুন্দরভাবে লিখে ছবি তুলে জমা দিতে হবে।</li>
-          </ul>
-
+          <p>{homeworkById[0]?.details}</p>
           {/* Stats */}
           <div className="grid grid-cols-2 border border-blue-100 p-4 rounded-xl">
             <div className="col-span-1 flex flex-row items-center justify-center space-x-2 border-blue-100">

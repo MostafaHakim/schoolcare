@@ -1,90 +1,73 @@
-import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { MoveRight, BookOpen, MoveLeft } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
+import { MoveLeft } from "lucide-react";
 import { GoPlus } from "react-icons/go";
 import CalendarHeader from "../components/CalendarHeader";
 import HomeWorkSubjectCard from "../components/HomeWorkSubjectCard";
-
+import { useHomework } from "../contexts/HomeworkContext";
+import { useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 const ClassWiseHomeWork = () => {
   const { name } = useParams();
-  const [homeWorks, setHomeWorks] = useState({});
+  const { loading, homeworkByClass, fetchHomeworksByClass } = useHomework();
+  const { user } = useAuth();
 
-  const homeWorksData = [
-    {
-      id: 1,
-      subject: "Bangla",
-      image: "https://picsum.photos/300/200",
-      teacher: "Abdullah Al Shams",
-      date: new Date(),
-    },
-    {
-      id: 2,
-      subject: "English",
-      image: "https://picsum.photos/300/200",
-      teacher: "Al Boshir",
-      date: new Date(),
-    },
-    {
-      id: 3,
-      subject: "Mathmatics",
-      image: "https://picsum.photos/300/200",
-      teacher: "Borkot ahamed",
-      date: new Date(),
-    },
-    {
-      id: 4,
-      subject: "Science",
-      image: "https://picsum.photos/300/200",
-      teacher: "Rabbani khan",
-      date: new Date(),
-    },
-  ];
-
+  useEffect(() => {
+    fetchHomeworksByClass(name, user.username);
+  }, [name, user]);
   return (
-    <div className=" bg-white/90 flex flex-col space-y-4">
+    <div className="bg-white/90 flex flex-col space-y-4 min-h-screen">
       {/* ===== Header ===== */}
-      <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
-        <div className="flex flex-row items-start justify-start space-x-2">
-          <MoveLeft className="flex lg:hidden" />
-          <h1 className="text-lg font-semibold text-gray-800">Class {name}</h1>
-        </div>
+      <Header name={name} />
 
-        <Link
-          to="addhomework"
-          className=" flex-row items-center justify-center space-x-2 px-8 py-3  rounded-[10px] bg-[#9542e7] text-white hidden lg:flex"
-        >
-          <GoPlus className="text-2xl " />
-          <span>Add Homework</span>
-        </Link>
-      </div>
       {/* ===== Date Selector ===== */}
       <div className="p-4">
         <CalendarHeader />
       </div>
+
+      {/* ===== Homework List ===== */}
       <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {homeWorksData.map((item) => (
-          <div key={item.id}>
-            <HomeWorkSubjectCard
-              subject={item.subject}
-              teacher={item.teacher}
-              date={item.date}
-              image={item.image}
-              id={item.id}
-            />
-          </div>
-        ))}
+        {loading ? (
+          <p className="text-gray-500 col-span-full text-center">Loading...</p>
+        ) : homeworkByClass.length === 0 ? (
+          <p className="text-gray-500 col-span-full text-center">
+            No homework found
+          </p>
+        ) : (
+          homeworkByClass.map((item) => {
+            return <HomeWorkSubjectCard key={item._id} {...item} />;
+          })
+        )}
       </div>
-      <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
-        <Link
-          to="addhomework"
-          className=" flex-row items-center justify-center space-x-2 px-8 py-3  rounded-[10px] bg-[#9542e7] text-white lg:hidden flex w-full"
-        >
-          <GoPlus className="text-2xl" />
-          <span>Add Homework</span>
-        </Link>
+
+      {/* ===== Footer Add Button (Mobile) ===== */}
+      <div className="flex lg:hidden px-4">
+        <AddHomeworkButton fullWidth />
       </div>
     </div>
   );
 };
 
 export default ClassWiseHomeWork;
+
+/* ===== Helper Components ===== */
+const Header = ({ name }) => (
+  <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b lg:border-gray-200">
+    <div className="flex flex-row items-center space-x-2">
+      <MoveLeft className="lg:hidden" />
+      <h1 className="text-lg font-semibold text-gray-800">Class {name}</h1>
+    </div>
+    <AddHomeworkButton className="hidden lg:flex" />
+  </div>
+);
+
+const AddHomeworkButton = ({ className = "", fullWidth = false }) => (
+  <Link
+    to="addhomework"
+    className={`flex items-center justify-center space-x-2 px-8 py-3 rounded-[10px] bg-[#9542e7] text-white ${
+      fullWidth ? "w-full" : ""
+    } ${className}`}
+  >
+    <GoPlus className="text-2xl" />
+    <span>Add Homework</span>
+  </Link>
+);

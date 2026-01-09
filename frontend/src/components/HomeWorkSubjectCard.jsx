@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const HomeWorkSubjectCard = ({ subject, teacher, date, image, id }) => {
+const HomeWorkSubjectCard = ({ image, subject, teacher, date, _id }) => {
   function formatDateToDDMMMYY(date) {
     const options = {
       day: "2-digit",
@@ -16,7 +16,7 @@ const HomeWorkSubjectCard = ({ subject, teacher, date, image, id }) => {
 
   return (
     <Link
-      to={`${id}`}
+      to={`${_id}`}
       className="flex flex-row lg:flex-col space-x-4 lg:space-y-4 p-4 border border-blue-100 rounded-xl"
     >
       <img className="w-1/3 lg:w-full rounded-xl" src={image} alt="" />

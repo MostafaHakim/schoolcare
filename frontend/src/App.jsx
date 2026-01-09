@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Layout from "./components/Layout";
 import { ToastContainer } from "react-toastify";
@@ -27,36 +22,15 @@ import HomeWork from "./pages/HomeWork";
 import ClassWiseHomeWork from "./pages/ClassWiseHomeWork";
 import AddHomeWork from "./components/AddHomeWork";
 import TeacherHomeworkDetailPage from "./components/TeacherHomeworkDetailPage";
-
-/* ---------- Protected Route ---------- */
-const ProtectedLayout = () => {
-  const { loading } = useAuth();
-  const token = localStorage.getItem("token");
-  if (loading) return <div>Loading...</div>;
-
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return <Layout />;
-};
-
-/* ---------- Dashboard Redirect ---------- */
-const DashboardRouter = () => {
-  const { user, loading } = useAuth();
-
-  if (loading) return <div>Loading...</div>;
-  if (!user) return <Navigate to="/login" replace />;
-
-  switch (user.userRole) {
-    case "teacher":
-      return <TeacherDashboard />;
-    case "admin":
-      return <AdminDashboard />;
-    default:
-      return <HomePage />;
-  }
-};
+import { ClassProvider } from "./contexts/classContext";
+import { HomeworkProvider } from "./contexts/HomeworkContext";
+import Admission from "./pages/Admission";
+import AllStudents from "./pages/AllStudents";
+import ClassWiseStudents from "./pages/ClassWiseStudents";
+import AdmissionForm from "./components/AdmissionForm";
+import StudentDashboard from "./pages/dashboards/StudentDashboard";
+import AuthorLayout from "./components/layouts/AuthorLayout";
+import { StudentProvider } from "./contexts/studentContext";
 
 function App() {
   return (
@@ -64,7 +38,7 @@ function App() {
       {" "}
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop
         closeOnClick
@@ -73,47 +47,81 @@ function App() {
       />
       <Router>
         <AuthProvider>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
+          <ClassProvider>
+            <HomeworkProvider>
+              <StudentProvider>
+                <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  {/* ==================Author===================== */}
+                  <Route
+                    path="/admin"
+                    element={
+                      <RoleBasedRoute allowedRoles={["author"]}>
+                        <AuthorLayout />
+                      </RoleBasedRoute>
+                    }
+                  >
+                    <Route index element={<AdminDashboard />} />
+                  </Route>
 
-            {/* Teacher */}
-            <Route
-              path="/teacher"
-              element={
-                <RoleBasedRoute allowedRoles={["teacher"]}>
-                  <TeacherLayout />
-                </RoleBasedRoute>
-              }
-            >
-              <Route index element={<TeacherDashboard />} />
-              <Route path="homework" element={<HomeWork />} />
-              <Route path="homework/:name" element={<ClassWiseHomeWork />} />
-              <Route
-                path="homework/:name/:id"
-                element={<TeacherHomeworkDetailPage />}
-              />
-              <Route
-                path="homework/:name/addhomework"
-                element={<AddHomeWork />}
-              />
-              <Route path="profile" element={<ProfilePage />} />
-            </Route>
+                  {/* ==================Teacher===================== */}
+                  <Route
+                    path="/teacher"
+                    element={
+                      <RoleBasedRoute allowedRoles={["teacher"]}>
+                        <TeacherLayout />
+                      </RoleBasedRoute>
+                    }
+                  >
+                    <Route index element={<TeacherDashboard />} />
+                    <Route path="homework" element={<HomeWork />} />
+                    <Route
+                      path="homework/:name"
+                      element={<ClassWiseHomeWork />}
+                    />
+                    <Route
+                      path="homework/:name/:id"
+                      element={<TeacherHomeworkDetailPage />}
+                    />
+                    <Route
+                      path="homework/:name/addhomework"
+                      element={<AddHomeWork />}
+                    />
 
-            {/* Student */}
-            <Route
-              path="/"
-              element={
-                <RoleBasedRoute allowedRoles={["student"]}>
-                  <StudentLayout />
-                </RoleBasedRoute>
-              }
-            >
-              <Route index element={<HomePage />} />
-              <Route path="performance" element={<PerformancePage />} />
-            </Route>
+                    <Route path="admission" element={<Admission />} />
+                    <Route
+                      path="admission/allstudents"
+                      element={<AllStudents />}
+                    />
+                    <Route
+                      path="admission/:name"
+                      element={<ClassWiseStudents />}
+                    />
+                    <Route
+                      path="admission/:name/form"
+                      element={<AdmissionForm />}
+                    />
+                    <Route path="profile" element={<ProfilePage />} />
+                  </Route>
 
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          </Routes>
+                  {/*===================== Student =====================*/}
+                  <Route
+                    path="/student"
+                    element={
+                      <RoleBasedRoute allowedRoles={["student"]}>
+                        <StudentLayout />
+                      </RoleBasedRoute>
+                    }
+                  >
+                    <Route index element={<StudentDashboard />} />
+                    <Route path="performance" element={<PerformancePage />} />
+                  </Route>
+
+                  {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+                </Routes>
+              </StudentProvider>
+            </HomeworkProvider>
+          </ClassProvider>
         </AuthProvider>
       </Router>
     </>

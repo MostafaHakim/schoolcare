@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    studentId: "",
     userId: "",
     password: "",
     userRole: "student",
@@ -20,53 +20,15 @@ const LoginPage = () => {
     }));
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await fetch(
-  //       `${import.meta.env.VITE_BASE_URL}/api/user/login`,
-  //       {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(formData),
-  //       }
-  //     );
-
-  //     const data = await res.json();
-
-  //     if (!res.ok) {
-  //       toast.error(data.message || "Login failed");
-  //       return;
-  //     }
-
-  //     login(data.user, data.token);
-  //     localStorage.setItem("token", data.token);
-  //     toast.success("Login successful 🎉");
-  //     if (data.user.userRole === "teacher") {
-  //       navigate("/teacher", { replace: true });
-  //     } else {
-  //       navigate("/student", { replace: true });
-  //     }
-  //   } catch (error) {
-  //     toast.error("Server error. Try again later");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const u = await login(formData);
+    if (!u) return;
 
-    const user = await login(formData);
-
-    if (!user) return;
-
-    if (user.userRole === "teacher") {
+    if (formData.userRole === "teacher")
       navigate("/teacher", { replace: true });
-    } else {
-      navigate("/student", { replace: true });
-    }
+    else navigate("/student", { replace: true });
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-t from-gray-400 via-blue-200 to-gray-400 flex items-center justify-center p-3 sm:p-6 relative">
       {/* White Canvas */}
@@ -135,8 +97,12 @@ const LoginPage = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
-                name="userId"
-                value={formData.userId}
+                name={formData.userRole === "teacher" ? "userId" : "studentId"}
+                value={
+                  formData.userRole === "teacher"
+                    ? formData.userId
+                    : formData.studentId
+                }
                 onChange={handleChange}
                 placeholder={
                   formData.userRole === "teacher" ? "Teacher ID" : "Student ID"

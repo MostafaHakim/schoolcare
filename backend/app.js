@@ -5,7 +5,11 @@ const cookiesPurser = require("cookie-parser");
 const connectDB = require("./config/db");
 const app = express();
 const cors = require("cors");
+
 const userRouter = require("./router/user.route");
+const studentRouter = require("./router/student.route");
+const classRouter = require("./router/class.route");
+const homeworkRouter = require("./router/homework.route");
 
 connectDB();
 app.use(cors());
@@ -18,5 +22,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/student", studentRouter);
+app.use("/api/classes", classRouter);
+app.use("/api/homework", homeworkRouter);
 
 module.exports = app;

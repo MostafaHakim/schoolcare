@@ -5,102 +5,126 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [userRole, setUserRole] = useState(
+    localStorage.getItem("userRole") || null
+  );
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useState(() => localStorage.getItem("token"));
 
+  // ===== Profile fetch =====
   useEffect(() => {
     const fetchProfile = async () => {
-      if (!token) {
+      if (!token || !userRole) {
+        setUser(null);
         setLoading(false);
         return;
       }
 
+      setLoading(true);
+
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/user/profile`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const url =
+          userRole === "teacher"
+            ? `${import.meta.env.VITE_BASE_URL}/api/user/profile`
+            : `${import.meta.env.VITE_BASE_URL}/api/student/profile`;
+
+        const res = await fetch(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
         if (!res.ok) throw new Error("Unauthorized");
 
         const data = await res.json();
-        setUser(data);
+        // Student API may return user directly
+        setUser(data.user || data);
       } catch (err) {
+        console.error("Profile fetch failed:", err);
         localStorage.removeItem("token");
+        localStorage.removeItem("userRole");
+        setToken(null);
+        setUserRole(null);
         setUser(null);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProfile();
-  }, [token]);
+    // only fetch if token AND role exist
+    if (token && userRole) fetchProfile();
+  }, [token, userRole]);
 
+  // ===== Login =====
   const login = async (formData) => {
+    setLoading(true);
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/user/login`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const url =
+        formData.userRole === "teacher"
+          ? `${import.meta.env.VITE_BASE_URL}/api/user/login`
+          : `${import.meta.env.VITE_BASE_URL}/api/student/login`;
 
-      const data = await res.json();
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {
         toast.error(data.message || "Login failed");
         return null;
       }
 
+      // Save token & role first
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userRole", formData.userRole);
       setToken(data.token);
-      setUser(data.user);
+      setUserRole(formData.userRole);
+      setUser(data.user || data); // student API may return user directly
 
       toast.success("Login successful 🎉");
-
-      return data.user;
-    } catch (error) {
+      return data.user || data;
+    } catch (err) {
       toast.error("Server error. Try again later");
       return null;
+    } finally {
+      setLoading(false);
     }
   };
 
+  // ===== Logout =====
   const logout = async () => {
+    setLoading(true);
     try {
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/user/logout`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const url =
+        userRole === "teacher"
+          ? `${import.meta.env.VITE_BASE_URL}/api/user/logout`
+          : `${import.meta.env.VITE_BASE_URL}/api/student/logout`;
 
-      const data = await res.json();
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      if (!res.ok) {
-        toast.error(data.message || "Logout failed");
-        return;
-      }
+      const data = await res.json().catch(() => ({}));
 
-      toast.success("Logout successful 🎉");
+      if (!res.ok) toast.error(data.message || "Logout failed");
+      else toast.success("Logout successful 🎉");
     } catch (err) {
       toast.error("Server error");
     } finally {
       localStorage.removeItem("token");
-      setUser(null);
+      localStorage.removeItem("userRole");
       setToken(null);
+      setUserRole(null);
+      setUser(null);
+      setLoading(false);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{ user, userRole, token, login, logout, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );

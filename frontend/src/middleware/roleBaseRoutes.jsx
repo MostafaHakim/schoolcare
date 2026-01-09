@@ -11,14 +11,14 @@ const RoleBasedRoute = ({ allowedRoles, children }) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (!allowedRoles.includes(user.userRole)) {
+  if (!allowedRoles.includes(user?.userRole)) {
     const redirectMap = {
       teacher: "/teacher",
-      student: "/",
+      student: "/student",
       admin: "/admin",
     };
 
-    return <Navigate to={redirectMap[user.userRole] || "/login"} replace />;
+    return <Navigate to={redirectMap[user?.userRole] || "/login"} replace />;
   }
 
   return children;

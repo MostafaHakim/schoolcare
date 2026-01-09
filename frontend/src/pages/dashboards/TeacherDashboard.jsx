@@ -5,6 +5,7 @@ import ProgressBar from "../../components/common/ProgressBar";
 import { Link } from "react-router-dom";
 
 const TeacherDashboard = () => {
+  console.log("tacherDash");
   return (
     <div className="p-4 sm:p-6 space-y-8 bg-white/90">
       <div className="lg:hidden">

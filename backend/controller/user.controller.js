@@ -1,22 +1,27 @@
-const { get } = require("mongoose");
 const User = require("../models/user.model");
 const BlackListToken = require("../models/blackListTokenModel");
 
 const createUser = async (req, res) => {
   try {
-    const { username, userId, userRole, password, phone } = req.body;
-
-    if (!username || !userId || !password || !userRole || !phone) {
+    const { username, userId, userRole, password, phone, school } = req.body;
+    if (!username || !userId || !password || !userRole || !phone || !school) {
       return res.status(400).send("Missing required fields");
     }
 
-    const isExistingUser = await User.findOne({ username });
+    const isExistingUser = await User.findOne({ userId });
 
     if (isExistingUser) {
       return res.status(409).send("Username already exists");
     }
 
-    const newUser = new User({ username, userId, userRole, password, phone });
+    const newUser = new User({
+      username,
+      userId,
+      userRole,
+      password,
+      phone,
+      school,
+    });
 
     const user = await newUser.save();
 
