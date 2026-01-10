@@ -52,10 +52,14 @@ export const HomeworkProvider = ({ children }) => {
   };
   /* ===== Fetch  homeworks By Class For Student ===== */
 
-  const fetchHomeworksByClassForStudent = async (className) => {
+  const fetchHomeworksByClassForStudent = async (className, school) => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/homework/classes/${className}`
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/api/homework/classes/${className}?school=${encodeURIComponent(
+          school
+        )}`
       );
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();

@@ -3,13 +3,13 @@ const Homework = require("../models/homework.model");
 
 const createHomeWork = async (req, res) => {
   try {
-    const { subject, details, teacher, className } = req.body;
+    const { subject, details, teacher, className, school } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ message: "Image is required" });
     }
 
-    if (!subject || !details || !teacher || !className) {
+    if (!subject || !details || !teacher || !className || !school) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -25,6 +25,7 @@ const createHomeWork = async (req, res) => {
       details,
       teacher,
       className,
+      school,
     });
 
     res.status(201).json(homework);
@@ -59,7 +60,12 @@ const getHomeworkByClass = async (req, res) => {
 const getHomeworkByClassForStudents = async (req, res) => {
   try {
     const { className } = req.params;
-    const homework = await Homework.find({ className });
+
+    let { school } = req.query;
+
+    school = school?.trim();
+
+    const homework = await Homework.find({ className, school });
     if (!homework) {
       return res.status(401).json({ message: "Home Work Not Found" });
     }

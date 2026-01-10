@@ -10,6 +10,7 @@ const userRouter = require("./router/user.route");
 const studentRouter = require("./router/student.route");
 const classRouter = require("./router/class.route");
 const homeworkRouter = require("./router/homework.route");
+const announcemantRoute = require("./router/anouncement.route");
 
 connectDB();
 app.use(cors());
@@ -25,5 +26,6 @@ app.use("/api/user", userRouter);
 app.use("/api/student", studentRouter);
 app.use("/api/classes", classRouter);
 app.use("/api/homework", homeworkRouter);
+app.use("/api/announcemant", announcemantRoute);
 
 module.exports = app;

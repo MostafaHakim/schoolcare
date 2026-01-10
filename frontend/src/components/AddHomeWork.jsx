@@ -14,9 +14,13 @@ const AddHomeWork = () => {
   const [details, setDetails] = useState("");
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef();
+
   const { user } = useAuth();
+
   const { AddHomeWork: addHomeworkContext } = useHomework();
+
   const navigate = useNavigate();
+
   const { name } = useParams();
 
   /* ===== Handlers ===== */
@@ -35,7 +39,7 @@ const AddHomeWork = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!image || !subject || !details || !user?.username) {
+    if (!image || !subject || !details || !user?.username || !user?.school) {
       return toast.error("All fields are required");
     }
 
@@ -43,8 +47,9 @@ const AddHomeWork = () => {
     formData.append("image", image);
     formData.append("subject", subject);
     formData.append("details", details);
-    formData.append("teacher", user.username);
+    formData.append("teacher", user?.username);
     formData.append("className", name);
+    formData.append("school", user?.school);
 
     setLoading(true);
     try {

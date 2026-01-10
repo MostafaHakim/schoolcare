@@ -6,13 +6,17 @@ const StudentContext = createContext();
 
 export const StudentProvider = ({ children }) => {
   const [students, setStudents] = useState([]);
+
   const [classStudents, setClassStudents] = useState([]);
+
   const [loading, setLoading] = useState(true);
+
   const { user } = useAuth();
-  console.log(user);
+
   //  fetch student
   useEffect(() => {
     if (!user?.school) return;
+
     const fetchStudent = async (school) => {
       try {
         const res = await fetch(
@@ -24,9 +28,11 @@ export const StudentProvider = ({ children }) => {
         if (!res.ok) throw new Error("Failed to fetch");
 
         const data = await res.json();
+
         setStudents(data);
       } catch (err) {
         setStudents([]);
+
         toast.error("Failed to load classes");
       } finally {
         setLoading(false);
@@ -35,6 +41,8 @@ export const StudentProvider = ({ children }) => {
 
     fetchStudent(user?.school);
   }, [user?.school]);
+
+  // ================fatch Student By Class=================
 
   const fetchClassWiseStudent = async (classId, school) => {
     try {

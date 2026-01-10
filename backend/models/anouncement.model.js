@@ -1,13 +1,14 @@
 // models/Homework.js
 const mongoose = require("mongoose");
 
-const homeworkSchema = new mongoose.Schema(
+const AnouncementSchema = new mongoose.Schema(
   {
-    image: {
+    title: {
       type: String,
       required: true,
+      trim: true,
     },
-    subject: {
+    descriptions: {
       type: String,
       required: true,
       trim: true,
@@ -22,21 +23,19 @@ const homeworkSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    className: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    details: {
-      type: String,
-      required: true,
-    },
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    conmment: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
+    like: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Homework", homeworkSchema);
+const Anouncement = mongoose.model("Anouncement", AnouncementSchema);
+module.exports = Anouncement;

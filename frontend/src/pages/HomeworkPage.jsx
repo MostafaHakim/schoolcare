@@ -14,11 +14,11 @@ const HomeworkPage = () => {
     useHomework();
 
   useEffect(() => {
-    if (user.classId) {
-      fetchHomeworksByClassForStudent(user.classId);
+    if (user?.classId) {
+      fetchHomeworksByClassForStudent(user?.classId, user?.school);
     }
-  }, [user]);
-
+  }, [user?.school, user?.classId]);
+  console.log(user.school, user.classId);
   const dates = [
     { day: "30", label: "Wed" },
     { day: "31", label: "Thu" },
