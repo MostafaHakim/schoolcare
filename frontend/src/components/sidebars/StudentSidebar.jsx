@@ -12,12 +12,12 @@ import {
 
 const menu = [
   { path: "/", label: "Home", icon: Home },
-  { path: "/performance", label: "Performance", icon: BarChart3 },
-  { path: "/homework", label: "Home work", icon: BookOpen },
-  { path: "/results", label: "Results", icon: Award },
-  { path: "/finance", label: "Finance", icon: DollarSign },
-  { path: "/profile", label: "Profile", icon: User },
-  { path: "/settings", label: "Setting", icon: Settings },
+  { path: "/student/performance", label: "Performance", icon: BarChart3 },
+  { path: "/student/homework", label: "Home work", icon: BookOpen },
+  { path: "/student/results", label: "Results", icon: Award },
+  { path: "/student/finance", label: "Finance", icon: DollarSign },
+  { path: "/student/profile", label: "Profile", icon: User },
+  { path: "/student/settings", label: "Setting", icon: Settings },
 ];
 
 const StudentSidebar = () => {

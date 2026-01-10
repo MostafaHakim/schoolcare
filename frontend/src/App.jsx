@@ -119,8 +119,13 @@ function App() {
                       </RoleBasedRoute>
                     }
                   >
-                    <Route index element={<StudentDashboard />} />
+                    <Route index element={<HomePage />} />
                     <Route path="performance" element={<PerformancePage />} />
+                    <Route path="homework" element={<HomeworkPage />} />
+                    <Route path="results" element={<ComingSoonPage />} />
+                    <Route path="finance" element={<ComingSoonPage />} />
+                    <Route path="profile" element={<ComingSoonPage />} />
+                    <Route path="settings" element={<ProfilePage />} />
                   </Route>
 
                   <Route path="*" element={<Navigate to="/login" replace />} />
