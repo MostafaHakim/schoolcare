@@ -9,14 +9,21 @@ const {
   logoutStudent,
   deleteStudent,
   studentProfile,
+  getStudentByClass,
 } = require("../controller/student.controller");
 
 const router = express.Router();
 
 router.get("/", getAllstudent);
+
+router.get("/class/:classId", getStudentByClass);
+
 router.post("/", upload.single("image"), createStudent);
+
 router.post("/login", loginStudent);
+
 router.get("/profile", studentAuth, studentProfile);
+
 router.get("/logout", studentAuth, logoutStudent);
 
 router.delete("/:id", deleteStudent);

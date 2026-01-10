@@ -32,12 +32,11 @@ const Header = () => {
             className="relative p-2 rounded-lg hover:bg-gray-100"
           >
             <div className="flex items-center gap-3">
-              <img
-                src="https://i.pravatar.cc/40"
-                className="w-10 h-10 rounded-full"
-              />
+              <img src={user.image} className="w-10 h-10 rounded-full" />
               <div className="text-right">
-                <p className="text-sm font-semibold capitalize">{user?.name}</p>
+                <p className="text-sm font-semibold capitalize">
+                  {user?.username}
+                </p>
                 <p className="text-xs text-gray-400">{user?.id}</p>
               </div>
             </div>{" "}

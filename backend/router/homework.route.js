@@ -9,6 +9,7 @@ const {
   getAllHomework,
   getHomeworkByClass,
   getHomeworkById,
+  getHomeworkByClassForStudents,
 } = require("../controller/homework.controller");
 
 router.post("/", upload.single("image"), createHomeWork);
@@ -16,6 +17,7 @@ router.post("/", upload.single("image"), createHomeWork);
 router.get("/", getAllHomework);
 
 router.get("/:className", getHomeworkByClass);
+router.get("/classes/:className", getHomeworkByClassForStudents);
 
 router.get("/single/:id", getHomeworkById);
 module.exports = router;

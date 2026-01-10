@@ -122,13 +122,17 @@ function App() {
                     <Route index element={<HomePage />} />
                     <Route path="performance" element={<PerformancePage />} />
                     <Route path="homework" element={<HomeworkPage />} />
+                    <Route
+                      path="homework/:id"
+                      element={<HomeworkDetailPage />}
+                    />
                     <Route path="results" element={<ComingSoonPage />} />
                     <Route path="finance" element={<ComingSoonPage />} />
                     <Route path="profile" element={<ComingSoonPage />} />
                     <Route path="settings" element={<ProfilePage />} />
                   </Route>
 
-                  <Route path="*" element={<Navigate to="/login" replace />} />
+                  {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
                 </Routes>
               </StudentProvider>
             </HomeworkProvider>

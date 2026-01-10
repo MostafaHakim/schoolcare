@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MoveRight, BookOpen, MoveLeft, UsersRound } from "lucide-react";
 import { GoPlus } from "react-icons/go";
 import ClassAddModal from "../components/ClassAddModal";
 import { useClass } from "../contexts/classContext";
+import { useStudent } from "../contexts/studentContext";
 
 const Admission = () => {
   const { classes } = useClass();
 
+  const { students } = useStudent();
   const [open, setOpen] = useState(false);
 
   return (
@@ -25,7 +27,7 @@ const Admission = () => {
             <div className="flex flex-col items-start justify-between w-full space-y-6">
               <span className="text-lg ">See All Students</span>
               <div className="text-2xl lg:text-3xl font-semibold lg:font-bold  text-gray-800">
-                231
+                {students.length}
               </div>
             </div>
             <div className="flex flex-col items-end justify-between w-full space-y-4">

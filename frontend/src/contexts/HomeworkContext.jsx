@@ -6,6 +6,7 @@ const HomeworkContext = createContext();
 export const HomeworkProvider = ({ children }) => {
   const [homework, setHomework] = useState([]);
   const [homeworkByClass, setHomeworkByClass] = useState([]);
+  const [studentHomeworkByClass, setStudentHomeworkByClass] = useState([]);
   const [homeworkById, setHomeworkById] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +31,7 @@ export const HomeworkProvider = ({ children }) => {
     fetchHomeworks();
   }, []);
 
-  /* ===== Fetch  homeworks By Class ===== */
+  /* ===== Fetch  homeworks By Class For Teacher ===== */
 
   const fetchHomeworksByClass = async (className, teacher) => {
     try {
@@ -44,6 +45,25 @@ export const HomeworkProvider = ({ children }) => {
       setHomeworkByClass(data);
     } catch (err) {
       setHomeworkByClass([]);
+      toast.error("Failed to load Homework");
+    } finally {
+      setLoading(false);
+    }
+  };
+  /* ===== Fetch  homeworks By Class For Student ===== */
+
+  const fetchHomeworksByClassForStudent = async (className) => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/homework/classes/${className}`
+      );
+      if (!res.ok) throw new Error("Failed to fetch");
+      const data = await res.json();
+
+      setStudentHomeworkByClass(data);
+      return data;
+    } catch (err) {
+      setStudentHomeworkByClass([]);
       toast.error("Failed to load Homework");
     } finally {
       setLoading(false);
@@ -101,6 +121,8 @@ export const HomeworkProvider = ({ children }) => {
         fetchHomeworksByClass,
         fetchHomeworksById,
         homeworkById,
+        fetchHomeworksByClassForStudent,
+        studentHomeworkByClass,
       }}
     >
       {children}

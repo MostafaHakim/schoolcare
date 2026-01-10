@@ -7,6 +7,10 @@ const createNewClass = async (req, res) => {
     if (!name || !school) {
       return res.status(401).json({ message: "all fields are required" });
     }
+    const isExisted = await Class.findOne({ name, school });
+    if (isExisted) {
+      return res.status(401).json({ message: "Class Already Existed" });
+    }
     const newClass = new Class({
       name,
       school,
@@ -18,14 +22,21 @@ const createNewClass = async (req, res) => {
   }
 };
 
+// ===========Get All Class==============
 const getAllClass = async (req, res) => {
   try {
-    const allClass = await Class.find();
+    let { school } = req.query;
+    console.log(school);
+    school = school?.trim();
+
+    const allClass = await Class.find({ school });
     res.status(200).json(allClass);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
 };
+
+// ===========Get Class By Id==============
 
 const getClassById = async (req, res) => {
   const { id } = req.params;

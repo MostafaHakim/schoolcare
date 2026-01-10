@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import { Home, BarChart3, BookOpen, User } from "lucide-react";
 
 const nav = [
-  { path: "/teacher", label: "Home", icon: Home },
-  { path: "/teacher/performance", label: "Performance", icon: BarChart3 },
-  { path: "/teacher/homework", label: "Home work", icon: BookOpen },
-  { path: "/teacher/profile", label: "Profile", icon: User },
+  { path: "/student", label: "Home", icon: Home },
+  { path: "/student/performance", label: "Performance", icon: BarChart3 },
+  { path: "/student/homework", label: "Home work", icon: BookOpen },
+  { path: "/student/profile", label: "Profile", icon: User },
 ];
 
 const TeacherMobileBottomNav = () => {

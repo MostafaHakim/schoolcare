@@ -55,6 +55,20 @@ const getHomeworkByClass = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
+const getHomeworkByClassForStudents = async (req, res) => {
+  try {
+    const { className } = req.params;
+    const homework = await Homework.find({ className });
+    if (!homework) {
+      return res.status(401).json({ message: "Home Work Not Found" });
+    }
+    res.status(200).json(homework);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 const getHomeworkById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -74,4 +88,5 @@ module.exports = {
   getAllHomework,
   getHomeworkByClass,
   getHomeworkById,
+  getHomeworkByClassForStudents,
 };

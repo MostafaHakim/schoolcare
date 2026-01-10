@@ -1,8 +1,21 @@
 import { MoveLeft } from "lucide-react";
 import { GoPlus } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useStudent } from "../contexts/studentContext";
+import { useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 const ClassWiseStudents = () => {
+  const { name } = useParams();
+  const { user } = useAuth();
+  const { fetchClassWiseStudent, classStudents } = useStudent();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (name && user?.school) {
+      fetchClassWiseStudent(name, user.school);
+    }
+  }, [name, user]);
+
   const students = [
     {
       studenId: "12345",
@@ -30,13 +43,16 @@ const ClassWiseStudents = () => {
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-8 lg:space-y-0 bg-white px-4 py-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row items-center justify-between space-x-2">
             <div className="flex flex-row items-center justify-between space-x-2">
-              <MoveLeft className="flex lg:hidden" />
+              <MoveLeft
+                className="flex lg:hidden"
+                onClick={() => navigate(-1)}
+              />
               <h1 className="text-lg font-semibold text-gray-800">
                 All Students
               </h1>
             </div>
             <h2 className="text-xl text-gray-400 font-lexend">
-              Total Students {students.length}
+              Total Students {classStudents.length}
             </h2>
           </div>
           <Link
@@ -59,12 +75,12 @@ const ClassWiseStudents = () => {
             </thead>
 
             <tbody>
-              {students.map((student, index) => (
+              {classStudents.map((student, index) => (
                 <tr key={index} className="hover:bg-gray-50 transition">
-                  <td className="px-3 py-2 border">{student.studenId}</td>
+                  <td className="px-3 py-2 border">{student.studentId}</td>
                   <td className="px-3 py-2 border">{student.name}</td>
                   <td className="px-3 py-2 border">{student.roll}</td>
-                  <td className="px-3 py-2 border">{student.class}</td>
+                  <td className="px-3 py-2 border">{student.classId}</td>
                 </tr>
               ))}
             </tbody>

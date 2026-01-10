@@ -1,13 +1,25 @@
-import { ArrowLeft, Eye, MessageCircle, Send, Download } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Eye, MessageCircle, Send, Download } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useHomework } from "../contexts/HomeworkContext";
+import { useEffect } from "react";
 
 const HomeworkDetailPage = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+  const { fetchHomeworksById, homeworkById } = useHomework();
+
+  useEffect(() => {
+    if (id) {
+      fetchHomeworksById(id);
+    }
+  }, [id]);
+
+  console.log(homeworkById);
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center px-3 py-4">
       <div className="w-full  bg-white rounded-xl overflow-hidden">
-
         {/* Header */}
         <div className="flex items-center gap-3 px-4 py-3 border-b">
           <button onClick={() => navigate(-1)}>
@@ -19,7 +31,7 @@ const HomeworkDetailPage = () => {
         {/* Image Section */}
         <div className="relative">
           <img
-            src="https://images.unsplash.com/photo-1541963463532-d68292c34b19"
+            src={homeworkById[0]?.image}
             alt="Homework"
             className="w-full h-56 sm:h-64 object-cover"
           />
@@ -30,17 +42,10 @@ const HomeworkDetailPage = () => {
 
         {/* Content */}
         <div className="px-4 py-4 space-y-3">
-
           {/* Bangla Description */}
           <p className="text-sm text-gray-800 leading-relaxed">
-            আজকের হোমওয়ার্ক হলো — Capital Letter সম্পর্কে অনুশীলন করা ও মনে রাখা।
+            {homeworkById[0]?.details}
           </p>
-
-          <ul className="text-sm text-gray-700 list-disc pl-5 space-y-1">
-            <li>সব শব্দে Capital Letter সঠিকভাবে লিখতে হবে।</li>
-            <li>প্রতিটি বাক্যের শুরুতে Capital Letter দিতে হবে।</li>
-            <li>খাতায় সুন্দরভাবে লিখে ছবি তুলে জমা দিতে হবে।</li>
-          </ul>
 
           {/* Stats */}
           <div className="flex justify-between items-center text-sm text-gray-500 border-t pt-3">
@@ -58,7 +63,6 @@ const HomeworkDetailPage = () => {
 
         {/* Comments */}
         <div className="border-t px-4 py-4 space-y-3">
-
           <p className="text-xs text-gray-500">01</p>
 
           <div className="flex gap-3">
@@ -70,7 +74,7 @@ const HomeworkDetailPage = () => {
               <p className="text-sm font-medium">Taskia jannat Iva</p>
               <p className="text-xs text-gray-400">1 Hour</p>
               <p className="text-sm text-gray-700 mt-1">
-                স্যার আমি কালকে লিখবো, আজকে একটু কাজ আছে
+                স্যার আমি কালকে লিখবো, আজকে একটু কাজ আছে ddddd
               </p>
             </div>
           </div>
@@ -87,7 +91,6 @@ const HomeworkDetailPage = () => {
             <Send size={18} />
           </button>
         </div>
-
       </div>
     </div>
   );

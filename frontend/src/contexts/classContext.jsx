@@ -1,17 +1,26 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "./AuthContext";
 
 const ClassContext = createContext();
 
 export const ClassProvider = ({ children }) => {
   const [classes, setClasses] = useState([]); // ✅ array
   const [loading, setLoading] = useState(true);
-
+  const { user } = useAuth();
   // ✅ fetch classes
   useEffect(() => {
+    if (!user?.school) {
+      return;
+    }
+
     const fetchClasses = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/classes`);
+        const res = await fetch(
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/classes?school=${encodeURIComponent(user?.school)}`
+        );
 
         if (!res.ok) throw new Error("Failed to fetch");
 
@@ -26,7 +35,7 @@ export const ClassProvider = ({ children }) => {
     };
 
     fetchClasses();
-  }, []);
+  }, [user?.school]);
 
   //  add new class
   const addNewClass = async (formData) => {

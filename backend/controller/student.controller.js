@@ -64,14 +64,36 @@ const createStudent = async (req, res) => {
   }
 };
 
+// ===========Get All Students ===========
+
 const getAllstudent = async (req, res) => {
   try {
-    const student = await Student.find().select("-password");
+    let { school } = req.query;
+
+    school = school?.trim();
+
+    const student = await Student.find({ school }).select("-password");
+
     res.status(200).json(student);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
 };
+
+// ===========Get Students by Class ===========
+
+const getStudentByClass = async (req, res) => {
+  try {
+    const { classId } = req.params;
+    const { school } = req.query;
+    const student = await Student.find({ classId, school }).select("-password");
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+// ===========Login Student ===========
 
 const loginStudent = async (req, res) => {
   try {
@@ -99,6 +121,8 @@ const loginStudent = async (req, res) => {
   }
 };
 
+// ===========Delete Student ===========
+
 const deleteStudent = async (req, res) => {
   try {
     const { id } = req.params;
@@ -113,15 +137,22 @@ const deleteStudent = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
+// ===========Profile Student ===========
+
 const studentProfile = (req, res, next) => {
   res.status(201).json(req.user);
 };
+
+// ===========Logout Student ===========
+
 const logoutStudent = async (req, res) => {
   res.clearCookie("token");
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
   await BlackListToken.create({ token });
   res.status(200).json({ message: "Logout" });
 };
+
 module.exports = {
   createStudent,
   getAllstudent,
@@ -129,4 +160,5 @@ module.exports = {
   deleteStudent,
   logoutStudent,
   studentProfile,
+  getStudentByClass,
 };
