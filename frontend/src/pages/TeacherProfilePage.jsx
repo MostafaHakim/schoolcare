@@ -1,51 +1,56 @@
 import { ArrowLeft, Bell, Wallet, Info } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import { useClass } from "../contexts/classContext";
 
-const ProfilePage = () => {
+const TeacherProfilePage = () => {
+  const { user } = useAuth();
+  const { classes } = useClass();
+
   return (
     <div className="space-y-4">
       {/* ===== Header ===== */}
       <div className="flex items-center gap-3">
         <ArrowLeft className="text-gray-600" />
-        <h1 className="text-lg font-semibold">Profile</h1>
+        <h1 className="text-lg font-semibold">Teacher's Profile</h1>
       </div>
 
       {/* ===== Main Card ===== */}
       <div className="bg-white rounded-2xl border p-4 space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <h2 className="text-2xl font-lexend uppercase text-violet-500">
+          {user?.school}
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 capitalize">
           {/* ===== Student Info ===== */}
           <div className="border rounded-xl p-4 space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center font-semibold">
-                T
+                {user?.username.slice(0, 1)}
               </div>
               <div>
-                <p className="font-medium">Taskia Jannat Iva</p>
-                <p className="text-xs text-gray-400">ID: 67542</p>
+                <p className="font-medium">{user?.username}</p>
+                <p className="text-xs text-gray-400">ID: {user?.userId}</p>
               </div>
             </div>
 
-            <div className="text-sm text-gray-600 space-y-1">
-              <p>Class: Play</p>
-              <p>Role: 02</p>
+            <div className="text-sm text-gray-600 space-y-1 capitalize">
+              <p>Phone: {user?.phone}</p>
+              <p>Role: {user?.userRole}</p>
               <p>Date of birth: 30 Oct-2025</p>
             </div>
           </div>
 
           {/* ===== Guardian Info ===== */}
           <div className="border rounded-xl p-4 space-y-3">
-            <div>
-              <p className="text-xs text-gray-400">Guardian Name</p>
-              <p className="text-sm font-medium">MD NAJIM UDDIN</p>
+            <div className="flex items-center gap-3">
+              <div>
+                <p className="font-medium">School Information</p>
+                <p className="text-xs text-gray-400">EIIN No: 1234</p>
+              </div>
             </div>
-            <div>
-              <p className="text-xs text-gray-400">Guardian Number</p>
-              <p className="text-sm font-medium">+8801762006582</p>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">Guardian Address</p>
-              <p className="text-sm">
-                Guragram, Hadar par 3150, Gowinghat, Sylhet
-              </p>
+            <div className="text-sm text-gray-600 space-y-1 capitalize">
+              <p>Total Classes: {classes?.length}</p>
+              <p>Total Teacher: {user?.length}</p>
+              <p>School Contect: 01722440899</p>
             </div>
           </div>
 
@@ -72,14 +77,9 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-
-        {/* ===== Contact Teacher Button ===== */}
-        <button className="w-full py-3 rounded-xl text-white font-medium bg-gradient-to-r from-purple-600 to-indigo-600">
-          Contact with school teacher
-        </button>
       </div>
     </div>
   );
 };
 
-export default ProfilePage;
+export default TeacherProfilePage;

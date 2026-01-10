@@ -9,7 +9,7 @@ import Layout from "./components/Layout";
 import { ToastContainer } from "react-toastify";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/TeacherProfilePage";
 import PerformancePage from "./pages/PerformancePage";
 import NoticePage from "./pages/NoticePage";
 import NoticeDetailPage from "./pages/NoticeDetailPage";
@@ -36,6 +36,7 @@ import AdmissionForm from "./components/AdmissionForm";
 import StudentDashboard from "./pages/dashboards/StudentDashboard";
 import AuthorLayout from "./components/layouts/AuthorLayout";
 import { StudentProvider } from "./contexts/studentContext";
+import TeacherProfilePage from "./pages/TeacherProfilePage";
 
 function App() {
   return (
@@ -107,7 +108,7 @@ function App() {
                       path="admission/:name/form"
                       element={<AdmissionForm />}
                     />
-                    <Route path="profile" element={<ProfilePage />} />
+                    <Route path="profile" element={<TeacherProfilePage />} />
                   </Route>
 
                   {/*===================== Student =====================*/}
