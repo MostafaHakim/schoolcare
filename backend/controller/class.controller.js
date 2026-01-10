@@ -2,7 +2,7 @@ const Class = require("../models/classes.model");
 
 const createNewClass = async (req, res) => {
   const { name, school } = req.body;
-  console.log(req.body);
+
   try {
     if (!name || !school) {
       return res.status(401).json({ message: "all fields are required" });
