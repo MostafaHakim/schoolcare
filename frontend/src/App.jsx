@@ -40,6 +40,9 @@ import TeacherProfilePage from "./pages/TeacherProfilePage";
 import Announcement from "./pages/Announcement";
 import AddAnouncement from "./components/AddAnouncement";
 import { AnouncementProvider } from "./contexts/AnoucementContext";
+import Attendance from "./pages/Attendance";
+import ClassWiseAttendance from "./pages/ClassWiseAttendance";
+import { AttendanceProvider } from "./contexts/AttendanceContext";
 
 function App() {
   return (
@@ -60,93 +63,113 @@ function App() {
             <HomeworkProvider>
               <StudentProvider>
                 <AnouncementProvider>
-                  <Routes>
-                    <Route path="/login" element={<LoginPage />} />
+                  <AttendanceProvider>
+                    <Routes>
+                      <Route path="/login" element={<LoginPage />} />
 
-                    {/* ==================Author===================== */}
-                    <Route
-                      path="/admin"
-                      element={
-                        <RoleBasedRoute allowedRoles={["author"]}>
-                          <AuthorLayout />
-                        </RoleBasedRoute>
-                      }
-                    >
-                      <Route index element={<AdminDashboard />} />
-                    </Route>
+                      {/* ==================Author===================== */}
+                      <Route
+                        path="/admin"
+                        element={
+                          <RoleBasedRoute allowedRoles={["author"]}>
+                            <AuthorLayout />
+                          </RoleBasedRoute>
+                        }
+                      >
+                        <Route index element={<AdminDashboard />} />
+                      </Route>
 
-                    {/* ==================Teacher===================== */}
-                    <Route
-                      path="/teacher"
-                      element={
-                        <RoleBasedRoute allowedRoles={["teacher"]}>
-                          <TeacherLayout />
-                        </RoleBasedRoute>
-                      }
-                    >
-                      <Route index element={<TeacherDashboard />} />
-                      <Route path="homework" element={<HomeWork />} />
+                      {/* ==================Teacher===================== */}
                       <Route
-                        path="homework/:name"
-                        element={<ClassWiseHomeWork />}
-                      />
-                      <Route
-                        path="homework/:name/:id"
-                        element={<TeacherHomeworkDetailPage />}
-                      />
-                      <Route
-                        path="homework/:name/addhomework"
-                        element={<AddHomeWork />}
-                      />
+                        path="/teacher"
+                        element={
+                          <RoleBasedRoute allowedRoles={["teacher"]}>
+                            <TeacherLayout />
+                          </RoleBasedRoute>
+                        }
+                      >
+                        <Route index element={<TeacherDashboard />} />
+                        <Route path="homework" element={<HomeWork />} />
+                        <Route
+                          path="homework/:name"
+                          element={<ClassWiseHomeWork />}
+                        />
+                        <Route
+                          path="homework/:name/:id"
+                          element={<TeacherHomeworkDetailPage />}
+                        />
+                        <Route
+                          path="homework/:name/addhomework"
+                          element={<AddHomeWork />}
+                        />
 
-                      <Route path="admission" element={<Admission />} />
-                      <Route
-                        path="admission/allstudents"
-                        element={<AllStudents />}
-                      />
-                      <Route
-                        path="admission/:name"
-                        element={<ClassWiseStudents />}
-                      />
-                      <Route
-                        path="admission/:name/form"
-                        element={<AdmissionForm />}
-                      />
-                      <Route path="announcement" element={<Announcement />} />
-                      <Route
-                        path="announcement/form"
-                        element={<AddAnouncement />}
-                      />
-                      <Route path="profile" element={<TeacherProfilePage />} />
-                    </Route>
+                        <Route path="admission" element={<Admission />} />
+                        <Route
+                          path="admission/allstudents"
+                          element={<AllStudents />}
+                        />
+                        <Route
+                          path="admission/:name"
+                          element={<ClassWiseStudents />}
+                        />
+                        <Route
+                          path="admission/:name/form"
+                          element={<AdmissionForm />}
+                        />
+                        <Route path="attendance" element={<Attendance />} />
+                        <Route
+                          path="attendance/:name"
+                          element={<ClassWiseAttendance />}
+                        />
 
-                    {/*===================== Student =====================*/}
-                    <Route
-                      path="/student"
-                      element={
-                        <RoleBasedRoute allowedRoles={["student"]}>
-                          <StudentLayout />
-                        </RoleBasedRoute>
-                      }
-                    >
-                      <Route index element={<HomePage />} />
-                      <Route path="performance" element={<PerformancePage />} />
-                      <Route path="homework" element={<HomeworkPage />} />
-                      <Route
-                        path="homework/:id"
-                        element={<HomeworkDetailPage />}
-                      />
-                      <Route path="results" element={<ComingSoonPage />} />
-                      <Route path="finance" element={<ComingSoonPage />} />
-                      <Route path="profile" element={<ComingSoonPage />} />
-                      <Route path="settings" element={<ProfilePage />} />
-                    </Route>
+                        <Route path="announcement" element={<Announcement />} />
 
-                    <Route
-                      path="*"
-                      element={<Navigate to="/login" replace />}
-                    />
-                  </Routes>
+                        <Route
+                          path="announcement/form"
+                          element={<AddAnouncement />}
+                        />
+
+                        <Route path="results" element={<ComingSoonPage />} />
+                        <Route path="finance" element={<ComingSoonPage />} />
+                        <Route path="chat" element={<ComingSoonPage />} />
+
+                        <Route
+                          path="profile"
+                          element={<TeacherProfilePage />}
+                        />
+                      </Route>
+
+                      {/*===================== Student =====================*/}
+                      <Route
+                        path="/student"
+                        element={
+                          <RoleBasedRoute allowedRoles={["student"]}>
+                            <StudentLayout />
+                          </RoleBasedRoute>
+                        }
+                      >
+                        <Route index element={<HomePage />} />
+                        <Route
+                          path="performance"
+                          element={<PerformancePage />}
+                        />
+                        <Route path="homework" element={<HomeworkPage />} />
+                        <Route
+                          path="homework/:id"
+                          element={<HomeworkDetailPage />}
+                        />
+                        <Route path="results" element={<ComingSoonPage />} />
+                        <Route path="finance" element={<ComingSoonPage />} />
+                        <Route path="profile" element={<ComingSoonPage />} />
+                        <Route path="settings" element={<ProfilePage />} />
+                      </Route>
+
+                      <Route
+                        path="*"
+                        element={<Navigate to="/login" replace />}
+                      />
+                    </Routes>
+                  </AttendanceProvider>
                 </AnouncementProvider>
               </StudentProvider>
             </HomeworkProvider>

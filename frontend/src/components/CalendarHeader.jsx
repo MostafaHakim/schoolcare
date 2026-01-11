@@ -1,27 +1,50 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { addDays, format, isSameDay } from "date-fns";
+import { addDays, format, isSameDay, isAfter } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const DAYS_TO_SHOW = 7;
 const CENTER_INDEX = Math.floor(DAYS_TO_SHOW / 2);
 
-const CalendarHeader = () => {
+const CalendarHeader = ({ selectedDate, setSelectedDate }) => {
+  // Normalize selectedDate to Date object
+  const normalizedDate =
+    selectedDate instanceof Date
+      ? selectedDate
+      : selectedDate
+      ? new Date(selectedDate)
+      : new Date();
+
   const today = new Date();
-  const [selectedDate, setSelectedDate] = useState(today);
+
   const [startDate, setStartDate] = useState(
-    addDays(selectedDate, -CENTER_INDEX)
+    addDays(normalizedDate, -CENTER_INDEX)
   );
 
   const containerRef = useRef(null);
   const isManualScroll = useRef(false);
   const scrollTimeout = useRef(null);
+  const selectedDateRef = useRef(normalizedDate);
+
+  // Update ref when normalizedDate changes
+  useEffect(() => {
+    selectedDateRef.current = normalizedDate;
+  }, [normalizedDate]);
 
   const days = Array.from({ length: DAYS_TO_SHOW }, (_, i) =>
     addDays(startDate, i)
   );
 
-  // Handle manual scroll
+  // Check if a date is in the future
+  const isFutureDate = (date) => {
+    return isAfter(date, today);
+  };
+
+  // Check if date is selectable (today or past)
+  const isDateSelectable = (date) => {
+    return !isFutureDate(date) || isSameDay(date, today);
+  };
+
   const handleScroll = useCallback(() => {
     if (!containerRef.current || isManualScroll.current) return;
 
@@ -33,40 +56,48 @@ const CalendarHeader = () => {
 
     scrollTimeout.current = setTimeout(() => {
       const container = containerRef.current;
+      if (!container) return;
+
       const containerWidth = container.offsetWidth;
       const scrollLeft = container.scrollLeft;
-      const itemWidth = 72; // w-12 (48px) + gap-12 (48px) = 96px, but let's approximate
+      const itemWidth = 72;
 
-      // Find which date is closest to center
       const centerPosition = scrollLeft + containerWidth / 2;
       const itemIndex = Math.round(centerPosition / itemWidth);
 
-      if (itemIndex >= 0 && itemIndex < days.length) {
-        const clickedDate = days[itemIndex];
-        setSelectedDate(clickedDate);
+      if (itemIndex >= 0 && itemIndex < DAYS_TO_SHOW && setSelectedDate) {
+        const clickedDate = addDays(startDate, itemIndex);
+        const currentSelectedDate = selectedDateRef.current;
+
+        // Only update if date is different AND is selectable
+        if (
+          !isSameDay(clickedDate, currentSelectedDate) &&
+          isDateSelectable(clickedDate)
+        ) {
+          setSelectedDate(clickedDate);
+        }
       }
 
       isManualScroll.current = false;
-    }, 150); // Debounce time
-  }, [days]);
+    }, 150);
+  }, [startDate, setSelectedDate]);
 
-  // When selectedDate changes, update startDate to keep it centered
+  // Update startDate when normalizedDate changes
   useEffect(() => {
-    setStartDate(addDays(selectedDate, -CENTER_INDEX));
-  }, [selectedDate]);
+    setStartDate(addDays(normalizedDate, -CENTER_INDEX));
+  }, [normalizedDate]);
 
-  // Scroll active date into view (only when not manual scrolling)
+  // Scroll to center when startDate changes
   useEffect(() => {
-    if (isManualScroll.current) return;
+    if (isManualScroll.current || !containerRef.current) return;
 
     const timer = setTimeout(() => {
-      if (!containerRef.current) return;
-
       const container = containerRef.current;
-      const containerWidth = container.offsetWidth;
-      const itemWidth = 72; // Approximate width of each item
+      if (!container) return;
 
-      // Calculate scroll position to center the selected date
+      const containerWidth = container.offsetWidth;
+      const itemWidth = 72;
+
       const scrollPosition =
         CENTER_INDEX * itemWidth - containerWidth / 2 + itemWidth / 2;
 
@@ -80,30 +111,70 @@ const CalendarHeader = () => {
   }, [startDate]);
 
   const handleDateClick = (date) => {
+    if (!isDateSelectable(date)) {
+      // If date is in the future, don't select it
+      return;
+    }
+
     isManualScroll.current = false;
-    setSelectedDate(date);
+    if (setSelectedDate && !isSameDay(date, normalizedDate)) {
+      setSelectedDate(date);
+    }
   };
 
   const handlePrev = () => {
     isManualScroll.current = false;
-    setSelectedDate(addDays(selectedDate, -1));
+    if (setSelectedDate) {
+      const prevDate = addDays(normalizedDate, -1);
+      if (isDateSelectable(prevDate)) {
+        setSelectedDate(prevDate);
+      }
+    }
   };
 
   const handleNext = () => {
     isManualScroll.current = false;
-    setSelectedDate(addDays(selectedDate, 1));
+    if (setSelectedDate) {
+      const nextDate = addDays(normalizedDate, 1);
+      // Only allow next if the next date is selectable (not future)
+      if (isDateSelectable(nextDate)) {
+        setSelectedDate(nextDate);
+      }
+    }
   };
 
   const handleToday = () => {
     isManualScroll.current = false;
-    setSelectedDate(today);
+    if (setSelectedDate && !isSameDay(today, normalizedDate)) {
+      setSelectedDate(today);
+    }
   };
+
+  // Initial scroll on mount
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const timer = setTimeout(() => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const containerWidth = container.offsetWidth;
+      const itemWidth = 72;
+
+      const scrollPosition =
+        CENTER_INDEX * itemWidth - containerWidth / 2 + itemWidth / 2;
+
+      container.scrollLeft = scrollPosition;
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="bg-white rounded-2xl border shadow-sm px-4 py-4 grid grid-cols-2 lg:flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between ">
       {/* Month */}
       <h2 className="text-lg font-semibold text-gray-800 whitespace-nowrap col-span-1 order-1">
-        {format(selectedDate, "MMMM yyyy")}
+        {format(normalizedDate, "MMMM yyyy")}
       </h2>
 
       {/* Dates - Scrollbar hidden */}
@@ -112,15 +183,18 @@ const CalendarHeader = () => {
           ref={containerRef}
           onScroll={handleScroll}
           className="flex i gap-4 sm:gap-6 md:gap-8 lg:gap-12 overflow-x-auto scrollbar-hide px-1 p-2 cursor-grab active:cursor-grabbing"
+          style={{ scrollBehavior: "smooth" }}
         >
           {days.map((date, index) => {
-            const isActive = isSameDay(date, selectedDate);
+            const isActive = isSameDay(date, normalizedDate);
             const isToday = isSameDay(date, today);
+            const isSelectable = isDateSelectable(date);
+            const isFuture = isFutureDate(date);
 
             return (
               <motion.button
                 key={date.toISOString()}
-                whileTap={{ scale: 0.95 }}
+                whileTap={isSelectable ? { scale: 0.95 } : {}}
                 onClick={() => handleDateClick(date)}
                 animate={{
                   scale: isActive ? 1.1 : 1,
@@ -134,30 +208,49 @@ const CalendarHeader = () => {
                   ${
                     isActive
                       ? "bg-gradient-to-tl from-violet-800 to-[#5777F6] text-white shadow-lg"
+                      : !isSelectable
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                       : "text-gray-600 hover:bg-gray-100"
                   } ${isToday && !isActive ? "border border-purple-300" : ""}`}
+                disabled={!isSelectable}
+                title={!isSelectable ? "Future dates cannot be selected" : ""}
               >
                 <span
-                  className={`font-medium ${isActive ? "font-semibold" : ""}`}
+                  className={`font-medium ${isActive ? "font-semibold" : ""} ${
+                    !isSelectable ? "opacity-50" : ""
+                  }`}
                 >
                   {format(date, "dd")}
                 </span>
                 <span
                   className={`text-xs ${
                     isActive ? "opacity-90" : "opacity-70"
-                  }`}
+                  } ${!isSelectable ? "opacity-50" : ""}`}
                 >
                   {format(date, "EE")}
                 </span>
                 {isToday && !isActive && (
                   <div className="absolute bottom-2 w-1 h-1 rounded-full bg-purple-500" />
                 )}
+                {isFuture && (
+                  <div className="absolute top-1 right-1 w-2 h-2">
+                    <svg
+                      className="w-full h-full text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                )}
               </motion.button>
             );
           })}
         </div>
-
-        {/* Center indicator line - optional */}
       </div>
 
       {/* Controls */}
@@ -179,6 +272,12 @@ const CalendarHeader = () => {
         <button
           onClick={handleNext}
           className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+          disabled={!isDateSelectable(addDays(normalizedDate, 1))}
+          title={
+            !isDateSelectable(addDays(normalizedDate, 1))
+              ? "Cannot select future dates"
+              : ""
+          }
         >
           <ChevronRight size={18} />
         </button>

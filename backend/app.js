@@ -11,6 +11,7 @@ const studentRouter = require("./router/student.route");
 const classRouter = require("./router/class.route");
 const homeworkRouter = require("./router/homework.route");
 const announcemantRoute = require("./router/anouncement.route");
+const attendanceRoute = require("./router/attendance.route");
 
 connectDB();
 app.use(cors());
@@ -27,5 +28,6 @@ app.use("/api/student", studentRouter);
 app.use("/api/classes", classRouter);
 app.use("/api/homework", homeworkRouter);
 app.use("/api/announcemant", announcemantRoute);
+app.use("/api/attendance", attendanceRoute);
 
 module.exports = app;

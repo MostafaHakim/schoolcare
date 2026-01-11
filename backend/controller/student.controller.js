@@ -85,8 +85,11 @@ const getAllstudent = async (req, res) => {
 const getStudentByClass = async (req, res) => {
   try {
     const { classId } = req.params;
+
     const { school } = req.query;
+
     const student = await Student.find({ classId, school }).select("-password");
+
     res.status(200).json(student);
   } catch (error) {
     res.status(500).send("Internal Server Error");
