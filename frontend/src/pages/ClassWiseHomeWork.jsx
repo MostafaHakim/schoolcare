@@ -1,19 +1,106 @@
+// import { Link, useParams } from "react-router-dom";
+// import { MoveLeft } from "lucide-react";
+// import { GoPlus } from "react-icons/go";
+// import CalendarHeader from "../components/CalendarHeader";
+// import HomeWorkSubjectCard from "../components/HomeWorkSubjectCard";
+// import { useHomework } from "../contexts/HomeworkContext";
+// import { useEffect } from "react";
+// import { useAuth } from "../contexts/AuthContext";
+// const ClassWiseHomeWork = () => {
+//   const { name } = useParams();
+//   const { loading, homeworkByClass, fetchHomeworksByClass } = useHomework();
+//   const { user } = useAuth();
+
+//   useEffect(() => {
+//     if ((!user?.username, !name)) {
+//       return;
+//     }
+//     fetchHomeworksByClass(name, user.username);
+//   }, [name, user?.username]);
+//   return (
+//     <div className="bg-white/90 flex flex-col space-y-4 min-h-screen">
+//       {/* ===== Header ===== */}
+//       <Header name={name} />
+
+//       {/* ===== Date Selector ===== */}
+//       <div className="p-4">
+//         <CalendarHeader />
+//       </div>
+
+//       {/* ===== Homework List ===== */}
+//       <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+//         {loading ? (
+//           <p className="text-gray-500 col-span-full text-center">Loading...</p>
+//         ) : homeworkByClass.length === 0 ? (
+//           <p className="text-gray-500 col-span-full text-center">
+//             No homework found
+//           </p>
+//         ) : (
+//           homeworkByClass.map((item) => {
+//             return <HomeWorkSubjectCard key={item._id} {...item} />;
+//           })
+//         )}
+//       </div>
+
+//       {/* ===== Footer Add Button (Mobile) ===== */}
+//       <div className="flex lg:hidden px-4">
+//         <AddHomeworkButton fullWidth />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ClassWiseHomeWork;
+
+// /* ===== Helper Components ===== */
+// const Header = ({ name }) => (
+//   <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b lg:border-gray-200">
+//     <div className="flex flex-row items-center space-x-2">
+//       <MoveLeft className="lg:hidden" />
+//       <h1 className="text-lg font-semibold text-gray-800">Class {name}</h1>
+//     </div>
+//     <AddHomeworkButton className="hidden lg:flex" />
+//   </div>
+// );
+
+// const AddHomeworkButton = ({ className = "", fullWidth = false }) => (
+//   <Link
+//     to="addhomework"
+//     className={`flex items-center justify-center space-x-2 px-8 py-3 rounded-[10px] bg-[#9542e7] text-white ${
+//       fullWidth ? "w-full" : ""
+//     } ${className}`}
+//   >
+//     <GoPlus className="text-2xl" />
+//     <span>Add Homework</span>
+//   </Link>
+// );
+
 import { Link, useParams } from "react-router-dom";
 import { MoveLeft } from "lucide-react";
 import { GoPlus } from "react-icons/go";
 import CalendarHeader from "../components/CalendarHeader";
 import HomeWorkSubjectCard from "../components/HomeWorkSubjectCard";
 import { useHomework } from "../contexts/HomeworkContext";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useAuth } from "../contexts/AuthContext";
+
 const ClassWiseHomeWork = () => {
   const { name } = useParams();
   const { loading, homeworkByClass, fetchHomeworksByClass } = useHomework();
   const { user } = useAuth();
 
+  // useCallback দিয়ে fetchData function টি memoize করুন
+  const fetchData = useCallback(async () => {
+    if (!user?.username || !name) {
+      return;
+    }
+    await fetchHomeworksByClass(name, user.username);
+  }, [name, user?.username, fetchHomeworksByClass]);
+
   useEffect(() => {
-    fetchHomeworksByClass(name, user.username);
-  }, [name, user]);
+    fetchData();
+  }, [fetchData]);
+
   return (
     <div className="bg-white/90 flex flex-col space-y-4 min-h-screen">
       {/* ===== Header ===== */}
@@ -53,7 +140,9 @@ export default ClassWiseHomeWork;
 const Header = ({ name }) => (
   <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b lg:border-gray-200">
     <div className="flex flex-row items-center space-x-2">
-      <MoveLeft className="lg:hidden" />
+      <Link to="/">
+        <MoveLeft className="lg:hidden" />
+      </Link>
       <h1 className="text-lg font-semibold text-gray-800">Class {name}</h1>
     </div>
     <AddHomeworkButton className="hidden lg:flex" />
