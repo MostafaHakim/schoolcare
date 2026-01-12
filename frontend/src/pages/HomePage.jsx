@@ -1,26 +1,6 @@
-import {
-  Calendar,
-  BookOpen,
-  Bell,
-  ChevronRight,
-  Newspaper,
-} from "lucide-react";
-import { io } from "socket.io-client";
-import { useAuth } from "../contexts/AuthContext";
-const socket = io("http://localhost:5000/");
+import { Calendar, BookOpen, Newspaper } from "lucide-react";
 
 const HomePage = () => {
-  const { user } = useAuth();
-
-  useEffect(() => {
-    if (user?.school) {
-      socket.emit("join-class", {
-        className: user.className,
-        school: user.school,
-      });
-    }
-  }, [user?.school]);
-
   const calendarDays = [
     ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     [28, 29, 30, 31, 1, 2, 3],
