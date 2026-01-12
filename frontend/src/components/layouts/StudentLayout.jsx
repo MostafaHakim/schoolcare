@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header";
-import MobileBottomNav from "../BottomNav/TeacherMobileBottomNav";
-import TeacherSidebar from "../sidebars/StudentSidebar";
+import StudentMobileBottomNav from "../BottomNav/StudentMobileBottomNav";
 import StudentSidebar from "../sidebars/StudentSidebar";
 
 const StudentLayout = () => {
@@ -16,7 +15,7 @@ const StudentLayout = () => {
           <Outlet />
         </main>
 
-        <MobileBottomNav />
+        <StudentMobileBottomNav />
       </div>
     </div>
   );

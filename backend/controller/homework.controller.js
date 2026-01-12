@@ -1,6 +1,6 @@
 const cloudinary = require("../config/cloudinary");
 const Homework = require("../models/homework.model");
-
+const Notification = require("../models/notification.model");
 const createHomeWork = async (req, res) => {
   try {
     const { subject, details, teacher, className, school } = req.body;
@@ -27,6 +27,15 @@ const createHomeWork = async (req, res) => {
       className,
       school,
     });
+
+    const notification = await Notification.create({
+      school,
+      title: "📚 New Homework",
+      message: `${subject} homework added`,
+      type: "homework",
+    });
+
+    global.io.to(school).emit("new-notification", notification);
 
     res.status(201).json(homework);
   } catch (err) {

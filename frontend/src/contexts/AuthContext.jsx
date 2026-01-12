@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      console.log(formData);
       const data = await res.json().catch(() => ({}));
 
       if (!res.ok) {

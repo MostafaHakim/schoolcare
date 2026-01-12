@@ -1,6 +1,7 @@
-import { Bell, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import NotificationBell from "./NotificationBell";
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -19,14 +20,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => navigate("/notice")}
-            className="relative p-2 rounded-lg hover:bg-gray-100"
-          >
-            <Bell size={22} />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
-          </button>
-
+          <NotificationBell />
           <button
             onClick={() => navigate("/profile")}
             className="relative p-2 rounded-lg hover:bg-gray-100"

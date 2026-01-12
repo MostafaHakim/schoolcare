@@ -31,7 +31,7 @@ const LoginPage = () => {
     e.preventDefault();
     const u = await login(formData);
     if (!u) return;
-
+    console.log(u);
     if (u.userRole === "teacher") navigate("/teacher", { replace: true });
     else navigate("/student", { replace: true });
   };
