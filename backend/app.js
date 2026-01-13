@@ -36,7 +36,8 @@ const classRouter = require("./router/class.route");
 const homeworkRouter = require("./router/homework.route");
 const announcemantRoute = require("./router/anouncement.route");
 const attendanceRoute = require("./router/attendance.route");
-
+const notificationRoute = require("./router/nottification.route");
+const notificationReadRoute = require("./router/notificationread.route");
 // ===================MiddleWere=====================
 app.use(
   cors({
@@ -52,16 +53,12 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 io.on("connection", (socket) => {
-  console.log("Client connected:", socket.id);
-
   socket.on("join-school", ({ school }) => {
     socket.join(school);
     console.log(`Socket ${socket.id} joined school: ${school}`);
   });
 
-  socket.on("disconnect", () => {
-    console.log("Client disconnected:", socket.id);
-  });
+  socket.on("disconnect", () => {});
 });
 
 app.get("/", (req, res) => {
@@ -74,5 +71,7 @@ app.use("/api/classes", classRouter);
 app.use("/api/homework", homeworkRouter);
 app.use("/api/announcemant", announcemantRoute);
 app.use("/api/attendance", attendanceRoute);
+app.use("/api/notification", notificationRoute);
+app.use("/api/notifyread", notificationReadRoute);
 
 module.exports = server;

@@ -1,6 +1,10 @@
 const cloudinary = require("../config/cloudinary");
 const Homework = require("../models/homework.model");
 const Notification = require("../models/notification.model");
+const NotificationRead = require("../models/notificationRead.model");
+const User = require("../models/user.model");
+const Student = require("../models/student.model");
+
 const createHomeWork = async (req, res) => {
   try {
     const { subject, details, teacher, className, school } = req.body;
@@ -28,12 +32,28 @@ const createHomeWork = async (req, res) => {
       school,
     });
 
+    // 🔔 create notification
     const notification = await Notification.create({
       school,
-      title: "📚 New Homework",
-      message: `${subject} homework added`,
+      title: "New Homework",
+      message: `Homework added for class ${className} in ${subject}`,
       type: "homework",
     });
+
+    // 👥 get all users of this school
+    const teachers = await User.find({ school });
+    const students = await Student.find({ school });
+
+    const users = [...teachers, ...students];
+
+    // 📌 create read records for ALL users
+    const readDocs = users.map((user) => ({
+      notification: notification._id,
+      user: user._id,
+      isRead: false,
+    }));
+
+    await NotificationRead.insertMany(readDocs);
 
     global.io.to(school).emit("new-notification", notification);
 

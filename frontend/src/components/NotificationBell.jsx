@@ -2,13 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import { Bell } from "lucide-react";
 import { useNotification } from "../contexts/NotificationContext";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const NotificationBell = () => {
+  const { user } = useAuth();
+
   const { notifications, unreadCount, markAllRead, markAsRead } =
     useNotification();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef();
-
   // Click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -57,9 +59,13 @@ const NotificationBell = () => {
             )}
             {notifications.map((n) => (
               <Link
-                to="/teacher/notice"
-                key={n.id}
-                onClick={() => markAsRead(n.id)}
+                to={
+                  user.userRole === "teacher"
+                    ? "/teacher/notice"
+                    : "/student/notice"
+                }
+                key={n._id}
+                onClick={() => markAsRead(n._id)}
                 className={`p-3 border-b hover:bg-gray-100 cursor-pointer flex justify-between items-start ${
                   n.isRead ? "bg-gray-50" : "bg-white"
                 }`}

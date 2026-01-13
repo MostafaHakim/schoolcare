@@ -26,7 +26,7 @@ const createNewClass = async (req, res) => {
 const getAllClass = async (req, res) => {
   try {
     let { school } = req.query;
-    console.log(school);
+
     school = school?.trim();
 
     const allClass = await Class.find({ school });

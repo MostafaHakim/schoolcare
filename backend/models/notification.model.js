@@ -9,10 +9,6 @@ const notificationSchema = new mongoose.Schema(
       type: String,
       enum: ["homework", "announcement"],
     },
-    isRead: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 );

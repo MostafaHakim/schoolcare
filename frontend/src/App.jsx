@@ -147,7 +147,7 @@ function App() {
                               element={<ComingSoonPage />}
                             />
                             <Route path="chat" element={<ComingSoonPage />} />
-                            <Route path="notice" element={<Notice />} />
+                            <Route path="notice" element={<ComingSoonPage />} />
 
                             <Route
                               path="profile"
@@ -180,6 +180,10 @@ function App() {
                             />
                             <Route
                               path="finance"
+                              element={<ComingSoonPage />}
+                            />
+                            <Route
+                              path="/student/notice"
                               element={<ComingSoonPage />}
                             />
                             <Route
