@@ -1,11 +1,321 @@
 import React from "react";
+import {
+  Calendar,
+  EyeOff,
+  Trash2,
+  Eye,
+  ChevronRight,
+  Heart,
+} from "lucide-react";
 
+import StudentImage from "../../assets/students.png";
+import { useHomework } from "../../contexts/HomeworkContext";
+import { useAnouncement } from "../../contexts/AnoucementContext";
+import Notice from "../../assets/notice.png";
+import NotificationBell from "../../components/NotificationBell";
 const StudentDashboard = () => {
+  const { homework } = useHomework();
+  const { anouncements } = useAnouncement();
+  const calendarDays = [
+    ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    [28, 29, 30, 31, 1, 2, 3],
+    [4, 5, 6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15, 16, 17],
+    [18, 19, 20, 21, 22, 23, 24],
+    [25, 26, 27, 28, 29, 30, 31],
+    [1, 2, 3, 4, 5, 6, 7],
+  ];
+  console.log(homework);
   return (
-    <div>
-      <h2>Student Dashboad</h2>
+    <div className="space-y-6 bg-white p-2 lg:p-8 rounded-xl">
+      <div className="flex flex-row item-center justify-between lg:flex-col lg:space-y-2   ">
+        <div className="flex flex-col space-y-2">
+          <h1 className="text-2xl lg:text-3xl  text-textc1-700 font-lexend">
+            Good Morning!
+          </h1>
+          <p className="text-sm lg:text-md font-sans text-textc3-700">
+            Let's get ready to go to your school
+          </p>
+        </div>
+        <div>
+          <NotificationBell />
+        </div>
+      </div>
+      {/* Top Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Average Performance */}
+        <div className="h-full bg-white rounded-3xl border  border-gray-100 overflow-hidden lg:relative">
+          <img
+            className="hidden lg:flex w-full h-1/2"
+            src={StudentImage}
+            alt=""
+          />
+
+          {/*=================== Average Performance Progress =======================*/}
+          <div className="flex flex-col  space-y-4 p-2 lg:p-4 bg-white lg:absolute left-0 right-0 lg:-mt-10 rounded-2xl">
+            {/* Today | Present */}
+            <div className="flex items-center justify-between border rounded-2xl px-4 py-3 mt-4 lg:mt-0 order-2 lg:order-1">
+              <span className="text-gray-700 font-medium">Today</span>
+
+              <span className="w-px h-5 bg-gray-300"></span>
+
+              <span className="flex items-center gap-2 font-medium text-gray-700">
+                <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+                Present
+              </span>
+            </div>
+            <div className="p-4 border rounded-2xl space-y-4 order-1 lg:order-2">
+              <div className="flex items-center flex-row justify-between text-sm ">
+                <span className="font-medium text-gray-800">
+                  Average performance
+                </span>
+
+                <span className="flex items-center gap-2 text-red-500 font-medium">
+                  <span className="text-purple-500 tracking-widest">
+                    ············→
+                  </span>
+                  Bad
+                </span>
+              </div>
+
+              {/* Progress bar */}
+              <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full"
+                  style={{
+                    width: "34%",
+                    background:
+                      "linear-gradient(90deg, #22c55e, #facc15, #fb7185)",
+                  }}
+                />
+              </div>
+
+              {/* Percent */}
+              <div className="flex justify-between text-xs">
+                <span className="text-red-500 font-medium">34%</span>
+                <span className="text-purple-500 font-medium">100%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Monthly Status */}
+        <div className="bg-white rounded-3xl p-5 border border-gray-100 space-y-4">
+          {/* Title */}
+          <h3 className="text-base font-semibold text-gray-800">This Month</h3>
+
+          {/* ===== Present ===== */}
+          <div className="border rounded-2xl p-4 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center">
+              <div className="w-4 h-4 bg-gradient-to-br from-gray-300 to-yellow-400 rounded-full" />
+            </div>
+
+            <div className="flex-1">
+              <div className="flex justify-between mb-2">
+                <span className="text-green-600 font-medium">Present</span>
+                <span className="text-gray-700">20 Days</span>
+              </div>
+              <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full w-[70%] bg-green-600 rounded-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* ===== Late ===== */}
+          <div className="border rounded-2xl p-4 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-yellow-50 flex items-center justify-center">
+              <div className="w-4 h-4 bg-yellow-400 rounded-sm" />
+            </div>
+
+            <div className="flex-1">
+              <div className="flex justify-between mb-2">
+                <span className="text-yellow-500 font-medium">Late</span>
+                <span className="text-gray-700">02 Days</span>
+              </div>
+              <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full w-[15%] bg-yellow-400 rounded-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* ===== Absent ===== */}
+          <div className="border rounded-2xl p-4 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center">
+              <div className="w-4 h-4 bg-red-500 rotate-45 rounded-sm" />
+            </div>
+
+            <div className="flex-1">
+              <div className="flex justify-between mb-2">
+                <span className="text-red-500 font-medium">Absent</span>
+                <span className="text-gray-700">02 Days</span>
+              </div>
+              <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full w-[15%] bg-red-500 rounded-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Calendar */}
+        <div className="bg-white rounded-2xl p-5 border border-gray-100">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-sm font-semibold text-gray-700">August 2025</h3>
+            <Calendar size={18} />
+          </div>
+
+          <div className="grid grid-cols-7 gap-2 text-center">
+            {calendarDays.flat().map((day, i) => (
+              <div
+                key={i}
+                className={`w-8 h-8 flex items-center justify-center text-sm rounded-full
+                ${
+                  day === 14
+                    ? "bg-[#6C5DD3] text-white"
+                    : "text-gray-600 hover:bg-[#F1EDFF]"
+                }`}
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="flex flex-col space-y-4">
+        {/* Homework */}
+        <div className="flex flex-col  bg-white rounded-2xl p-5 border border-gray-100 relative">
+          <div className="flex justify-between mb-3">
+            <h3 className="font-semibold text-2xl text-textc1-700">
+              Homework today
+            </h3>
+
+            <span className="text-2xl text-primary-700">See All</span>
+          </div>
+          <button className="absolute p-2 rounded-full bg-primary-700/80 text-white right-20 top-1/2">
+            <ChevronRight />
+          </button>
+          <div className="grid grid-cols-3 gap-4 overflow-x-auto">
+            {homework.map((s, i) => (
+              <div
+                key={i}
+                className="flex flex-col space-y-4 rounded-xl hover:bg-gray-50 p-4 border boder-gray-100"
+              >
+                <img className="rounded-2xl" src={s.image} alt="" />
+                <div className="flex flex-col space-y-1">
+                  <p className="text-xl text-textc1-700 font-medium">
+                    {s.subject}
+                  </p>
+                  <p className="text-sm textc2-700 text-gray-400 capitalize">
+                    {s.teacher}
+                  </p>
+                  <p className="text-xs textc3-700 text-gray-400 capitalize">
+                    {new Date(s.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Notice */}
+        <div className="flex flex-col  bg-white rounded-2xl p-5 border border-gray-100 relative">
+          <div className="flex justify-between mb-3">
+            <h3 className="font-semibold text-2xl text-textc1-700">
+              Importent Notice
+            </h3>
+
+            <span className="text-2xl text-primary-700">See All</span>
+          </div>
+          <button className="absolute p-2 rounded-full bg-primary-700/80 text-white right-20 top-1/2">
+            <ChevronRight />
+          </button>
+          <div className="grid grid-cols-3 gap-4 overflow-x-auto">
+            {anouncements.map((anouncement) => (
+              <NoticeAnnouncement
+                title={anouncement.title}
+                descriptions={anouncement.descriptions}
+                like={anouncement.like}
+                teacher={anouncement.teacher}
+                comment={anouncement.conmment}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Popular News */}
+        <div className="bg-white rounded-2xl p-5 border border-gray-100">
+          <div className="flex justify-between mb-3">
+            <h3 className="font-semibold text-2xl text-textc1-700">
+              Popular News
+            </h3>
+
+            <span className="text-2xl text-primary-700">See All</span>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            {homework.map((s, i) => (
+              <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
+                <img className="rounded-2xl" src={s.image} alt="" />
+                <p className="text-xs text-textc3-700">12 january</p>
+                <p className="text-textc2-700 text-sm">
+                  You are requested to Lorem ipsum dolor sit amet Lorem, ipsum
+                  dolor..{" "}
+                  <span className="text-primary-700 text-sm font-sans">
+                    Read more..
+                  </span>
+                </p>
+                <div className="grid grid-cols-2 border border-blue-100 p-3 rounded-lg ">
+                  <span className="col-span-1 text-center flex items-center justify-center">
+                    <Eye /> <span className="pl-1">0</span>
+                  </span>
+                  <span className="col-span-1 flex items-center justify-center">
+                    <Heart /> <span className="pl-1">0</span>
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default StudentDashboard;
+
+const NoticeAnnouncement = ({
+  title,
+  descriptions,
+  like,
+  teacher,
+  comment,
+}) => {
+  return (
+    <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
+      <div className="flex flex-row items-center justify-between border border-blue-100 rounded-2xl p-2">
+        <div className="flex flex-row items-center justidy-start space-y-2">
+          <img className="w-1/3" src={Notice} alt="" />
+          <div>
+            <h2 className="text-xl font-lexend">Announcement</h2>
+            <h2 className="text-lg text-gray-500 capitalize">{teacher}</h2>
+            <p className="text-md text-gray-400">30/12/25</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col space-y-2">
+        <h2 className="text-xl font-semibold">{title}</h2>
+        <p className="text-lg text-gray-500 ">
+          <span className="line-clamp-2">{descriptions}</span>
+          <span className="text-[#9542E7]">Read More..</span>
+        </p>
+      </div>
+      <div className="grid grid-cols-2 border border-blue-100 p-3 rounded-lg ">
+        <span className="col-span-1 text-center flex items-center justify-center">
+          <Eye /> <span className="pl-1">{like}</span>
+        </span>
+        <span className="col-span-1 flex items-center justify-center">
+          <Heart /> <span className="pl-1">{comment?.length}</span>
+        </span>
+      </div>
+    </div>
+  );
+};

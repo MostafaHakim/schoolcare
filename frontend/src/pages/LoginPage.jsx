@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import SplashIcon from "../assets/splash.png";
 
 const LoginPage = () => {
   const { user, userRole, login } = useAuth();
@@ -36,9 +37,9 @@ const LoginPage = () => {
     else navigate("/student", { replace: true });
   };
   return (
-    <div className="min-h-screen bg-gradient-to-t from-gray-400 via-blue-200 to-gray-400 flex items-center justify-center p-3 sm:p-6 relative">
+    <div className="min-h-screen bg-gradient-to-t bg-white flex items-center justify-center p-3 sm:p-6 relative">
       {/* White Canvas */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
+
       <div className="relative w-full max-w-6xl bg-white rounded-2xl overflow-hidden">
         {/* Decorative SVG (hide on mobile) */}
         <svg
@@ -61,26 +62,19 @@ const LoginPage = () => {
 
         {/* Login Card */}
         <div className="relative z-10 flex items-center justify-center min-h-[520px] px-4">
-          <div className="w-full max-w-sm bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+          <div className="w-full max-w-sm bg-white rounded-2xl  sm:p-8">
             {/* Logo */}
-            <div className="text-center mb-6">
-              <div className="flex justify-center mb-3">
-                <div className="w-10 h-10 flex flex-wrap gap-1">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <span
-                      key={i}
-                      className="w-3 h-3 bg-purple-500 rounded-full"
-                    />
-                  ))}
-                </div>
+            <div className="flex flex-col space-y-3 mb-6">
+              <div className="flex justify-start w-3/5">
+                <img src={SplashIcon} alt="" />
               </div>
-              <h1 className="text-2xl font-semibold text-purple-600">
-                School Care
+              <h1 className="text-[10px]  text-textc3-700">
+                Do not share your password with anyone
               </h1>
             </div>
 
             {/* Role Switch */}
-            <div className="flex border rounded-lg overflow-hidden mb-4">
+            <div className="flex border font-sans rounded-lg overflow-hidden mb-4">
               {["student", "teacher"].map((r) => (
                 <button
                   key={r}
@@ -90,8 +84,8 @@ const LoginPage = () => {
                   }
                   className={`flex-1 py-2 text-sm font-medium ${
                     formData.userRole === r
-                      ? "bg-purple-600 text-white"
-                      : "bg-gray-100 text-gray-600"
+                      ? "bg-primary-700 text-white"
+                      : "bg-bgc-700 text-textc3-700"
                   }`}
                 >
                   {r === "student" ? "Student" : "Teacher"}
@@ -113,7 +107,7 @@ const LoginPage = () => {
                 placeholder={
                   formData.userRole === "teacher" ? "Teacher ID" : "Student ID"
                 }
-                className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-purple-500"
+                className="w-full px-4 text-textc3-700 py-3 rounded-lg border focus:ring-2 focus:ring-purple-500"
               />
 
               <input
@@ -134,12 +128,12 @@ const LoginPage = () => {
             </form>
 
             {/* Footer */}
-            <p className="mt-4 text-center text-xs text-gray-500">
-              By logging in you agree to school policies
-            </p>
           </div>
         </div>
       </div>
+      <p className="lg:hidden mt-4 text-center text-xs text-textc1-700 bottom-10 underline absolute">
+        Trams & Conditions
+      </p>
     </div>
   );
 };

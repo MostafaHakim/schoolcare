@@ -5,11 +5,31 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: "#eff6ff",
-          100: "#dbeafe",
-          500: "#3b82f6",
-          600: "#2563eb",
-          700: "#1d4ed8",
+          700: "#9542E7",
+        },
+        icon1: {
+          700: "#8F8F8F",
+        },
+        icon2: {
+          700: "#2B3F6C",
+        },
+        textc1: {
+          700: "#484848",
+        },
+        textc2: {
+          700: "#999999",
+        },
+        textc3: {
+          700: "#BABABA",
+        },
+        bgc: {
+          700: "#F7F8FA",
+        },
+        success: {
+          700: "#47A321",
+        },
+        pending: {
+          700: "#F18021",
         },
       },
       fontFamily: {

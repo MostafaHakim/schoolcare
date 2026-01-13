@@ -45,9 +45,24 @@ import ClassWiseAttendance from "./pages/ClassWiseAttendance";
 import { AttendanceProvider } from "./contexts/AttendanceContext";
 import { SocketProvider } from "./contexts/SocketContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-import Notice from "./components/Notice";
+
+import Splash from "./pages/Splash";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Splash loading={loading} setLoading={setLoading} />;
+  }
   return (
     <>
       {" "}
@@ -164,7 +179,7 @@ function App() {
                               </RoleBasedRoute>
                             }
                           >
-                            <Route index element={<HomePage />} />
+                            <Route index element={<StudentDashboard />} />
                             <Route
                               path="performance"
                               element={<PerformancePage />}
@@ -178,10 +193,7 @@ function App() {
                               path="results"
                               element={<ComingSoonPage />}
                             />
-                            <Route
-                              path="finance"
-                              element={<ComingSoonPage />}
-                            />
+                            <Route path="finance" element={<Splash />} />
                             <Route
                               path="/student/notice"
                               element={<ComingSoonPage />}

@@ -8,6 +8,9 @@ import {
   User,
   Settings,
   Bell,
+  MessageCircleMore,
+  BadgeQuestionMark,
+  CircleAlert,
 } from "lucide-react";
 
 const menu = [
@@ -16,20 +19,19 @@ const menu = [
   { path: "/student/homework", label: "Home work", icon: BookOpen },
   { path: "/student/results", label: "Results", icon: Award },
   { path: "/student/finance", label: "Finance", icon: DollarSign },
+  {
+    path: "/student/finance",
+    label: "Chat With Teacher",
+    icon: MessageCircleMore,
+  },
   { path: "/student/profile", label: "Profile", icon: User },
-  { path: "/student/settings", label: "Setting", icon: Settings },
+  { path: "/student/settings", label: "About Us", icon: BadgeQuestionMark },
+  { path: "/student/settings", label: "Terms & Condition", icon: CircleAlert },
 ];
 
 const StudentSidebar = () => {
   return (
-    <div className="hidden lg:flex w-64 bg-[#FBFBFD] border-r border-gray-100 flex-col">
-      <div className="p-6 flex items-center gap-3">
-        <div className="w-9 h-9 bg-[#6C5DD3] rounded-xl flex items-center justify-center text-white font-bold">
-          P
-        </div>
-        <span className="font-semibold">PixLab Solutions</span>
-      </div>
-
+    <div className="hidden lg:flex w-64 bg-[#FBFBFD] border-r border-gray-100 flex-row py-10">
       <nav className="flex-1 px-4 space-y-2">
         {menu.map((item) => (
           <NavLink
@@ -55,16 +57,6 @@ const StudentSidebar = () => {
           </NavLink>
         ))}
       </nav>
-
-      <div className="p-4 border-t">
-        <NavLink
-          to="/notice"
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-100"
-        >
-          <Bell size={18} />
-          Notification
-        </NavLink>
-      </div>
     </div>
   );
 };
