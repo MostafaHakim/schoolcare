@@ -17,7 +17,7 @@ const HomeWorkSubjectCard = ({ image, subject, teacher, date, _id }) => {
   return (
     <Link
       to={`${_id}`}
-      className="flex flex-row lg:flex-col space-x-4 lg:space-y-4 p-4 border border-blue-100 rounded-xl"
+      className="flex flex-row lg:flex-col space-x-4 lg:space-y-4 p-2 lg:p-4 border border-blue-100 rounded-xl"
     >
       <img className="w-1/3 lg:w-full rounded-xl" src={image} alt="" />
       <div className="flex flex-col space-y-2">

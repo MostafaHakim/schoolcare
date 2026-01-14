@@ -50,10 +50,12 @@ export const HomeworkProvider = ({ children }) => {
       setLoading(false);
     }
   };
+  // ======================Fetch Home Work By Class For Student==================
   /* ===== Fetch  homeworks By Class For Student ===== */
 
   const fetchHomeworksByClassForStudent = async (className, school) => {
     try {
+      console.log(className, school);
       const res = await fetch(
         `${
           import.meta.env.VITE_BASE_URL
@@ -63,7 +65,7 @@ export const HomeworkProvider = ({ children }) => {
       );
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
-
+      console.log(data);
       setStudentHomeworkByClass(data);
       return data;
     } catch (err) {

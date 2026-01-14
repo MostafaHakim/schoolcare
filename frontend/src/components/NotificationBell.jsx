@@ -83,7 +83,7 @@ const NotificationBell = () => {
                   </span>
                 </div>
                 {!n.read && (
-                  <span className="w-2 h-2 bg-red-500 rounded-full mt-1" />
+                  <span className="w-2 h-2 bg-primary-700 rounded-full mt-1" />
                 )}
               </Link>
             ))}

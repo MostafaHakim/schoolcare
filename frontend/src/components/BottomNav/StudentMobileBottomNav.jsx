@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Home, BarChart3, BookOpen, User } from "lucide-react";
-import NotificationBell from "../NotificationBell";
+import { BarChart3, Pencil, User, House } from "lucide-react";
 
 const nav = [
-  { path: "/student", label: "Home", icon: Home },
+  { path: "/student", label: "Home", icon: House },
   { path: "/student/performance", label: "Performance", icon: BarChart3 },
-  { path: "/student/homework", label: "Home work", icon: BookOpen },
+  { path: "/student/homework", label: "Home work", icon: Pencil },
   { path: "/student/profile", label: "Profile", icon: User },
 ];
 
@@ -28,7 +27,6 @@ const StudentMobileBottomNav = () => {
             {item.label}
           </NavLink>
         ))}
-        <NotificationBell />
       </div>
     </div>
   );
