@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Header from "../Header";
 import TeacherSidebar from "../sidebars/TeacherSidebar";
 import TeacherMobileBottomNav from "../BottomNav/TeacherMobileBottomNav";
+import TeacherHeader from "../TeacherHeader";
 
 const TeacherLayout = () => {
   return (
@@ -9,7 +9,7 @@ const TeacherLayout = () => {
       <TeacherSidebar />
 
       <div className="flex-1 flex flex-col">
-        <Header />
+        <TeacherHeader />
 
         <main className="flex-1 p-4 lg:p-6 pb-24 lg:pb-6">
           <Outlet />

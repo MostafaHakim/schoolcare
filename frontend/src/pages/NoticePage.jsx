@@ -1,107 +1,84 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { MoveLeft, EyeOff, Trash2, Eye } from "lucide-react";
+import { GoPlus } from "react-icons/go";
+import Notice from "../assets/notice2.png";
+import { Link } from "react-router-dom";
+import { useAnouncement } from "../contexts/AnoucementContext";
 
 const NoticePage = () => {
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const notices = [
-    {
-      id: 1,
-      date: "2025-10-30",
-      content:
-        "প্রিয় অভিভাবক, আশা করি আপনারা সবাই ভালো আছেন। আপনার সন্তানদের মাসিক পরীক্ষাসংক্রান্ত একটি গুরুত্বপূর্ণ নোটিশ জানানো হলো।",
-    },
-    {
-      id: 2,
-      date: "2025-10-30",
-      content:
-        "প্রিয় অভিভাবক, আশা করি আপনারা সবাই ভালো আছেন। আপনার সন্তানদের নিয়মিত উপস্থিতি নিশ্চিত করার জন্য অনুরোধ জানানো হচ্ছে।",
-    },
-    {
-      id: 3,
-      date: "2025-10-30",
-      content:
-        "প্রিয় অভিভাবক, আগামী সপ্তাহে অভিভাবক সভা অনুষ্ঠিত হবে। সকল অভিভাবকদের উপস্থিতি কাম্য।",
-    },
-  ];
-
-  const filteredNotices = searchTerm
-    ? notices.filter((n) =>
-        n.content.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : notices;
-
+  const { anouncements, loading } = useAnouncement();
+  console.log(anouncements);
   return (
-    <div className="p-4 sm:p-6 bg-gray-50 min-h-screen">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => navigate(-1)} className="text-xl text-gray-700">
-          ←
-        </button>
-        <h1 className="text-lg font-semibold text-gray-800">Notice</h1>
-      </div>
-
-      {/* Search */}
-      <div className="mb-6 max-w-sm">
-        <input
-          type="text"
-          placeholder="Search notice..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-        />
-      </div>
-
-      {/* Notice Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredNotices.map((notice) => (
-          <div
-            key={notice.id}
-            className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col"
-          >
-            {/* Header */}
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
-                <span className="text-[10px] font-bold text-yellow-700">
-                  NOTICE
-                </span>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-gray-800">
-                  Announcement
-                </h3>
-                <p className="text-xs text-gray-500">
-                  Teacher: Delwar hussan
-                </p>
-                <p className="text-xs text-gray-400">
-                  {notice.date}
-                </p>
-              </div>
-            </div>
-
-            {/* Content */}
-            <p className="text-sm text-gray-600 line-clamp-3 mb-3">
-              {notice.content}
-            </p>
-
-            <button
-              onClick={() => navigate(`/notice/${notice.id}`)}
-              className="text-sm text-blue-600 font-medium mb-4 self-start"
-            >
-              Read More...
-            </button>
-
-            {/* Footer */}
-            <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-              <span>👁 32</span>
-              <span>💬 54 Comment</span>
-            </div>
+    <div className="">
+      <div className=" ">
+        {/* ===== Header ===== */}
+        <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
+          <div className="flex flex-row items-start justify-start space-x-2">
+            <MoveLeft className="" />
+            <h1 className="text-lg font-semibold text-gray-800">Notice</h1>
           </div>
-        ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 bg-white p-4 lg:p-6">
+          {anouncements.map((anouncement) => (
+            <NoticeAnnouncement
+              id={anouncement._id}
+              title={anouncement.title}
+              descriptions={anouncement.descriptions}
+              like={anouncement.like}
+              teacher={anouncement.teacher}
+              comment={anouncement.conmment}
+            />
+          ))}
+        </div>
+        <div></div>
       </div>
     </div>
   );
 };
 
 export default NoticePage;
+
+// reuseable Component
+
+const NoticeAnnouncement = ({
+  title,
+  descriptions,
+  like,
+  teacher,
+  comment,
+  id,
+}) => {
+  return (
+    <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-3 rounded-2xl">
+      <div className="flex flex-row items-center justify-between border border-blue-100 rounded-2xl p-3">
+        <div className="flex flex-row items-center justidy-start space-x-2">
+          <img className="w-24" src={Notice} alt="" />
+          <div>
+            <h2 className="text-xl font-lexend">Notice</h2>
+            <h2 className="text-lg text-gray-500 capitalize">{teacher}</h2>
+            <p className="text-md text-gray-400">30/12/25</p>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col space-y-2">
+        <h2 className="text-xl font-semibold">{title}</h2>
+        <p className="text-md text-gray-500 line-clamp-6 text-justify">
+          {descriptions}
+        </p>
+        <Link to={id} className="text-[#9542E7]">
+          Read More..
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-2 border border-blue-100 p-3 rounded-2xl ">
+        <span className="col-span-1 text-center flex items-center justify-center">
+          <Eye /> <span className="pl-1">{like}</span>
+        </span>
+        <span className="col-span-1 flex items-center justify-center">
+          {comment.length} Comment
+        </span>
+      </div>
+    </div>
+  );
+};

@@ -36,5 +36,18 @@ const getAnnouncemant = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+const getAnnouncemantById = async (req, res) => {
+  try {
+    let { id } = req.params;
+    const announcemant = await Anouncement.findOne({ _id: id });
+    if (!announcemant) {
+      return res.status(401).json({ message: " No anouncemant Found yet" });
+    }
+    console.log(announcemant);
+    res.status(200).json(announcemant);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+};
 
-module.exports = { createAnouncement, getAnnouncemant };
+module.exports = { createAnouncement, getAnnouncemant, getAnnouncemantById };

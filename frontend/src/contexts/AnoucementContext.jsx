@@ -5,7 +5,8 @@ import { useAuth } from "./AuthContext";
 const AnouncementContext = createContext();
 
 export const AnouncementProvider = ({ children }) => {
-  const [anouncements, setAnouncements] = useState([]); // ✅ array
+  const [anouncements, setAnouncements] = useState([]);
+  const [anouncementsById, setAnouncementsById] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   //  fetch Anouncement
@@ -13,7 +14,7 @@ export const AnouncementProvider = ({ children }) => {
     if (!user?.school) {
       return;
     }
-
+    // =================School Wise Find Anousment=====================
     const fetchAnouncement = async () => {
       try {
         const res = await fetch(
@@ -36,6 +37,26 @@ export const AnouncementProvider = ({ children }) => {
 
     fetchAnouncement();
   }, [user?.school]);
+
+  // ===============Find Anouncement by Id=================
+
+  const fetchAnouncementById = async (id) => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/announcemant/${id}`
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch");
+
+      const data = await res.json();
+      setAnouncementsById(data);
+    } catch (err) {
+      setAnouncementsById([]);
+      toast.error("Failed to load classes");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   //  add new class
   const addAnouncement = async (formData) => {
@@ -69,7 +90,14 @@ export const AnouncementProvider = ({ children }) => {
 
   return (
     <AnouncementContext.Provider
-      value={{ anouncements, loading, addAnouncement }}
+      value={{
+        anouncements,
+        loading,
+        addAnouncement,
+        fetchAnouncementById,
+        setAnouncementsById,
+        anouncementsById,
+      }}
     >
       {children}
     </AnouncementContext.Provider>

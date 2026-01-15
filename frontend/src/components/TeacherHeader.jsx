@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import NotificationBell from "./NotificationBell";
 import SplashIcon from "../assets/splash.png";
 
-const Header = () => {
+const TeacherHeader = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -34,4 +34,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default TeacherHeader;

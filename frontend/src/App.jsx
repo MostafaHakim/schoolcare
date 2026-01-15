@@ -9,7 +9,7 @@ import Layout from "./components/Layout";
 import { ToastContainer } from "react-toastify";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/TeacherProfilePage";
+import ProfilePage from "./pages/ProfilePage";
 import PerformancePage from "./pages/PerformancePage";
 import NoticePage from "./pages/NoticePage";
 import NoticeDetailPage from "./pages/NoticeDetailPage";
@@ -36,7 +36,7 @@ import AdmissionForm from "./components/AdmissionForm";
 import StudentDashboard from "./pages/dashboards/StudentDashboard";
 import AuthorLayout from "./components/layouts/AuthorLayout";
 import { StudentProvider } from "./contexts/studentContext";
-import TeacherProfilePage from "./pages/TeacherProfilePage";
+import TeacherProfilePage from "./pages/ProfilePage";
 import Announcement from "./pages/Announcement";
 import AddAnouncement from "./components/AddAnouncement";
 import { AnouncementProvider } from "./contexts/AnoucementContext";
@@ -196,12 +196,13 @@ function App() {
                             <Route path="finance" element={<Splash />} />
                             <Route
                               path="/student/notice"
-                              element={<ComingSoonPage />}
+                              element={<NoticePage />}
                             />
                             <Route
-                              path="profile"
-                              element={<ComingSoonPage />}
+                              path="/student/notice/:id"
+                              element={<NoticeDetailPage />}
                             />
+                            <Route path="profile" element={<ProfilePage />} />
                             <Route path="settings" element={<ProfilePage />} />
                           </Route>
 

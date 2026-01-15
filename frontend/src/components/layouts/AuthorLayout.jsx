@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Header from "../Header";
+import Header from "../TeacherHeader";
 import MobileBottomNav from "../BottomNav/TeacherMobileBottomNav";
 import TeacherSidebar from "../sidebars/StudentSidebar";
 import StudentSidebar from "../sidebars/StudentSidebar";

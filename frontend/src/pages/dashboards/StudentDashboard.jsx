@@ -14,6 +14,7 @@ import { useAnouncement } from "../../contexts/AnoucementContext";
 import Notice from "../../assets/notice.png";
 import Notice2 from "../../assets/notice2.png";
 import NotificationBell from "../../components/NotificationBell";
+import { Link } from "react-router-dom";
 const StudentDashboard = () => {
   const { homework } = useHomework();
   const { anouncements } = useAnouncement();
@@ -220,9 +221,12 @@ const StudentDashboard = () => {
               Homework today
             </h3>
 
-            <span className="text-xl lg:text-2xl text-primary-700">
+            <Link
+              to="/student/homework"
+              className="text-xl lg:text-2xl text-primary-700"
+            >
               See All
-            </span>
+            </Link>
           </div>
           <button className="lg:absolute lg:block  hidden p-2 rounded-full bg-primary-700/80 text-white right-20 top-1/2">
             <ChevronRight />
@@ -260,7 +264,9 @@ const StudentDashboard = () => {
               Importent Notice
             </h3>
 
-            <span className="text-2xl text-primary-700">See All</span>
+            <Link to="notice" className="text-2xl text-primary-700">
+              See All
+            </Link>
           </div>
           <button className="absolute p-2 rounded-full bg-primary-700/80 text-white right-20 top-1/2">
             <ChevronRight />
@@ -284,9 +290,9 @@ const StudentDashboard = () => {
             <h3 className="font-semibold text-xl lg:text-2xl text-textc1-700">
               Importent Notice
             </h3>
-            <span className="text-xl lg:text-2xl text-primary-700">
+            <Link to="notice" className="text-xl lg:text-2xl text-primary-700">
               See All
-            </span>
+            </Link>
           </div>
           <div className="flex flex-col space-y-2 lg:grid lg:grid-cols-3 lg:gap-4 overflow-x-auto">
             {anouncements.map((anouncement) => (
@@ -385,7 +391,7 @@ const NoticeAnnouncement = ({
     <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
       <div className="flex flex-row items-center justify-between border border-blue-100 rounded-2xl p-2">
         <div className="flex flex-row items-center justidy-start space-y-2">
-          <img className="w-1/3" src={Notice} alt="" />
+          <img className="w-24" src={Notice} alt="" />
           <div>
             <h2 className="text-xl font-lexend">Announcement</h2>
             <h2 className="text-lg text-gray-500 capitalize">{teacher}</h2>
@@ -396,7 +402,7 @@ const NoticeAnnouncement = ({
       <div className="flex flex-col space-y-2">
         <h2 className="text-xl font-semibold">{title}</h2>
         <p className="text-lg text-gray-500 ">
-          <span className="line-clamp-2">{descriptions}</span>
+          <span className="1">{descriptions}</span>
           <span className="text-[#9542E7]">Read More..</span>
         </p>
       </div>

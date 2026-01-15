@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./sidebars/StudentSidebar";
-import Header from "./Header";
+import Header from "./TeacherHeader";
 import MobileBottomNav from "./BottomNav/TeacherMobileBottomNav";
 
 const Layout = () => {

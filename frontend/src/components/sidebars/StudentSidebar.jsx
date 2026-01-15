@@ -11,7 +11,9 @@ import {
   MessageCircleMore,
   BadgeQuestionMark,
   CircleAlert,
+  LogOut,
 } from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
 
 const menu = [
   { path: "/student", label: "Home", icon: Home },
@@ -30,8 +32,9 @@ const menu = [
 ];
 
 const StudentSidebar = () => {
+  const { logout } = useAuth();
   return (
-    <div className="hidden lg:flex w-64 bg-[#FBFBFD] border-r border-gray-100 flex-row py-10">
+    <div className="hidden lg:flex w-64 bg-[#FBFBFD] border-r border-gray-100 flex-col py-10 justify-between min-h-screen">
       <nav className="flex-1 px-4 space-y-2">
         {menu.map((item) => (
           <NavLink
@@ -57,6 +60,16 @@ const StudentSidebar = () => {
           </NavLink>
         ))}
       </nav>
+      <div className="p-4">
+        <div className="hidden lg:flex flex-row space-x-2 p-4  rounded-xl">
+          <button
+            className="flex text-primary-700 flex-row items-center justify-between"
+            onClick={() => logout()}
+          >
+            <LogOut /> Log Out
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
