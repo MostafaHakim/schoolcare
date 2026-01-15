@@ -48,6 +48,7 @@ import { NotificationProvider } from "./contexts/NotificationContext";
 
 import Splash from "./pages/Splash";
 import { useEffect, useState } from "react";
+import Notification from "./pages/Notification";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -193,10 +194,13 @@ function App() {
                               path="results"
                               element={<ComingSoonPage />}
                             />
-                            <Route path="finance" element={<Splash />} />
+                            <Route
+                              path="finance"
+                              element={<ComingSoonPage />}
+                            />
                             <Route
                               path="/student/notice"
-                              element={<NoticePage />}
+                              element={<Notification />}
                             />
                             <Route
                               path="/student/notice/:id"
@@ -204,6 +208,14 @@ function App() {
                             />
                             <Route path="profile" element={<ProfilePage />} />
                             <Route path="settings" element={<ProfilePage />} />
+                            <Route
+                              path="about-us"
+                              element={<ComingSoonPage />}
+                            />
+                            <Route
+                              path="terms-conditions"
+                              element={<ComingSoonPage />}
+                            />
                           </Route>
 
                           <Route

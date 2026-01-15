@@ -27,8 +27,12 @@ const menu = [
     icon: MessageCircleMore,
   },
   { path: "/student/profile", label: "Profile", icon: User },
-  { path: "/student/settings", label: "About Us", icon: BadgeQuestionMark },
-  { path: "/student/settings", label: "Terms & Condition", icon: CircleAlert },
+  { path: "/student/about-us", label: "About Us", icon: BadgeQuestionMark },
+  {
+    path: "/student/terms-conditions",
+    label: "Terms & Condition",
+    icon: CircleAlert,
+  },
 ];
 
 const StudentSidebar = () => {
