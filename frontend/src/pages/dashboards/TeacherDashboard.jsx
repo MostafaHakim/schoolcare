@@ -8,7 +8,7 @@ import { useStudent } from "../../contexts/studentContext";
 const TeacherDashboard = () => {
   const { students } = useStudent();
   return (
-    <div className="p-4 sm:p-6 space-y-8 bg-white/90">
+    <div className="p-4 sm:p-6 space-y-4 bg-white/90">
       <div className="lg:hidden">
         <SectionHeader
           title="Good Morning!"

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MoveLeft, Camera } from "lucide-react";
-import { useClass } from "../contexts/classContext";
+import { useClass } from "../contexts/ClassContext";
 import { toast } from "react-toastify";
 import { useAuth } from "../contexts/AuthContext";
 import { useStudent } from "../contexts/studentContext";

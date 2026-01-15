@@ -28,7 +28,6 @@ const TeacherMobileBottomNav = () => {
             {item.label}
           </NavLink>
         ))}
-        <NotificationBell />
       </div>
     </div>
   );

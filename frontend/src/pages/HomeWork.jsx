@@ -1,14 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { MoveRight, BookOpen, MoveLeft } from "lucide-react";
+import { MoveRight, BookOpen, MoveLeft, Trash2 } from "lucide-react";
 import { GoPlus } from "react-icons/go";
 import ClassAddModal from "../components/ClassAddModal";
-import { useClass } from "../contexts/classContext";
+import { useStudent } from "../contexts/studentContext";
+import ClassDeleteModal from "../components/ClassDeleteModal";
+import { toast } from "react-toastify";
+import { useClass } from "../contexts/ClassContext";
 
 const HomeWork = () => {
-  const { classes } = useClass();
-
+  const { classes, deleteClass } = useClass();
+  const { students } = useStudent();
   const [open, setOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
+  const filterStudent = (cls) =>
+    students.filter((student) => student.classId === cls).length;
+
+  const handleDelete = async () => {
+    try {
+      await deleteClass(deleteId);
+      setDeleteModal(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="">
@@ -35,18 +52,28 @@ const HomeWork = () => {
               className="col-span-1 flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 border border-blue-100 rounded-2xl space-x-4"
             >
               <div className="flex flex-col items-start justify-between w-full space-y-6">
-                <span className="text-lg ">Class</span>
+                <span className="text-lg ">
+                  Class{" "}
+                  <span className="px-2 text-textc2-700">
+                    {filterStudent(classItem.name)}
+                  </span>
+                </span>
                 <div className="text-2xl lg:text-3xl font-semibold lg:font-bold  text-gray-800">
                   {classItem.name}
                 </div>
               </div>
               <div className="flex flex-col items-end justify-between w-full space-y-4">
-                <h2 className="text-[#7efff5] bg-[#7efff5]/20 p-3  rounded-full hidden lg:flex">
-                  <BookOpen />
-                </h2>
+                <button
+                  onClick={() => {
+                    setDeleteModal(true), setDeleteId(classItem._id);
+                  }}
+                  className="text-rose-500 bg-rose-500/20 p-3  rounded-xl flex"
+                >
+                  <Trash2 />
+                </button>
                 <Link
                   to={`${classItem.name}`}
-                  className="text-gray-900 p-3 border border-gray-300 rounded-full"
+                  className="text-gray-900 p-2 border border-gray-300 rounded-xl"
                 >
                   <MoveRight />
                 </Link>
@@ -80,6 +107,29 @@ const HomeWork = () => {
             </div>
 
             <ClassAddModal setOpen={setOpen} />
+          </div>
+        </div>
+      )}
+      {deleteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Overlay */}
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setDeleteModal(false)}
+          />
+
+          {/* Modal box */}
+          <div className="relative bg-white w-[90%] max-w-md rounded-xl p-2 lg:p-6 z-10">
+            <div className="flex items-center justify-end mb-2">
+              <button className="text-lg" onClick={() => setDeleteModal(false)}>
+                ✕
+              </button>
+            </div>
+
+            <ClassDeleteModal
+              setDeleteModal={setDeleteModal}
+              handleDelete={handleDelete}
+            />
           </div>
         </div>
       )}

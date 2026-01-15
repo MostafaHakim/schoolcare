@@ -18,7 +18,7 @@ const ClassWiseHomeWork = () => {
       return;
     }
     await fetchHomeworksByClass(name, user.username);
-  }, [name, user?.username, fetchHomeworksByClass]);
+  }, [name, user?.username]);
 
   useEffect(() => {
     fetchData();

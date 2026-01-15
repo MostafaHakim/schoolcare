@@ -27,7 +27,7 @@ import HomeWork from "./pages/HomeWork";
 import ClassWiseHomeWork from "./pages/ClassWiseHomeWork";
 import AddHomeWork from "./components/AddHomeWork";
 import TeacherHomeworkDetailPage from "./components/TeacherHomeworkDetailPage";
-import { ClassProvider } from "./contexts/classContext";
+import { ClassProvider } from "./contexts/ClassContext";
 import { HomeworkProvider } from "./contexts/HomeworkContext";
 import Admission from "./pages/Admission";
 import AllStudents from "./pages/AllStudents";

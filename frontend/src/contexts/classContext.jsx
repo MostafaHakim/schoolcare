@@ -6,8 +6,9 @@ const ClassContext = createContext();
 
 export const ClassProvider = ({ children }) => {
   const [classes, setClasses] = useState([]); // ✅ array
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+
   // ✅ fetch classes
   useEffect(() => {
     if (!user?.school) {
@@ -64,8 +65,30 @@ export const ClassProvider = ({ children }) => {
     }
   };
 
+  const deleteClass = async (id) => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/classes/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to Delete");
+      setClasses((prev) => prev.filter((cls) => cls._id !== id));
+      const data = await res.json();
+
+      toast.success("Class Delete Successfully");
+    } catch (err) {
+      setClasses([]);
+      toast.error("Failed to load classes");
+    }
+  };
+
   return (
-    <ClassContext.Provider value={{ classes, loading, addNewClass }}>
+    <ClassContext.Provider
+      value={{ classes, loading, addNewClass, deleteClass }}
+    >
       {children}
     </ClassContext.Provider>
   );

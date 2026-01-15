@@ -6,8 +6,6 @@ import {
   Award,
   DollarSign,
   User,
-  Settings,
-  Bell,
   MessageCircleMore,
   BadgeQuestionMark,
   CircleAlert,

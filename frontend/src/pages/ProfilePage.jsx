@@ -1,11 +1,12 @@
 import { ArrowLeft, Bell, Wallet, Info, LogOut } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
-import { useClass } from "../contexts/classContext";
+import { useClass } from "../contexts/ClassContext";
 import ProfileIcon from "../assets/profileshadow.png";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
+import { useState } from "react";
 const ProfilePage = () => {
   const { user, logout } = useAuth();
-
+  const [notificatinToggle, setNotificatinToggle] = useState(false);
   return (
     <div className="space-y-4 lg:bg-white  lg:p-4">
       {/* ===== Header ===== */}
@@ -88,25 +89,38 @@ const ProfilePage = () => {
                 <div className="flex flex-row w-full items-center justify-between p-4 border boder-gray-100 rounded-xl text-textc2-700">
                   <div className="flex items-center gap-2">
                     <Bell size={20} />
-                    <span className="text-xl text-textc1-700">
+                    <span className="text-lg lg:text-xl text-textc1-700">
                       Notification
                     </span>
                   </div>
-                  <div className="w-10 h-5 bg-purple-600 rounded-full relative">
-                    <div className="w-4 h-4 bg-white rounded-full absolute right-1 top-0.5"></div>
+                  <div
+                    className={`w-10 h-5 rounded-full relative ${
+                      notificatinToggle ? "bg-purple-600 " : "bg-gray-400"
+                    }`}
+                  >
+                    <button
+                      onClick={() => setNotificatinToggle(!notificatinToggle)}
+                      className={`w-4 h-4 bg-white rounded-full absolute ${
+                        notificatinToggle ? "right-1" : "left-1"
+                      } top-0.5`}
+                    ></button>
                   </div>
                 </div>
                 <div className="flex  w-full items-center gap-2 p-4 border border-gray-100 rounded-xl text-textc2-700">
                   <Wallet size={20} />
-                  <span className="text-xl text-textc1-700">Finance</span>
+                  <span className="text-lg lg:text-xl text-textc1-700">
+                    Finance
+                  </span>
                 </div>
                 <div className="flex  w-full items-center gap-2 p-4 border border-gray-100 rounded-xl text-textc2-700">
                   <Info size={20} />
-                  <span className="text-xl text-textc1-700">About Us</span>
+                  <span className="text-lg lg:text-xl text-textc1-700">
+                    About Us
+                  </span>
                 </div>
                 <div className="flex  w-full items-center gap-2 p-4 border border-gray-100 rounded-xl text-textc2-700">
                   <Info size={20} />
-                  <span className="text-xl text-textc1-700">
+                  <span className="text-lg lg:text-xl text-textc1-700">
                     Terms & Conditions
                   </span>
                 </div>

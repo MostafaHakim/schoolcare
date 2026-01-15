@@ -11,7 +11,7 @@ const TeacherHomeworkDetailPage = () => {
 
   const { id } = useParams();
   const { fetchHomeworksById, homeworkById } = useHomework();
-  console.log(homeworkById);
+
   useEffect(() => {
     fetchHomeworksById(id);
   }, [id]);
