@@ -169,18 +169,20 @@ const StudentDashboard = () => {
           <h2 className="text-textc1-700 font-semibold text-[17px] font-lexend">
             This month
           </h2>
-          <div className="grid grid-cols-3 p-4 border border-gray-100 rounded-2xl divide-x-2 text-sm">
-            <div className="flex flex-col items-center justify-between   space-y-2 text-center">
-              <h2 className="text-green-500 text-center text-sm">Present</h2>
-              <p className="text-textc1-700 text-center text-lg">20 Days</p>
+          <div className="grid grid-cols-3 p-2 lg:p-4 border border-gray-100 rounded-2xl divide-x-2 text-sm">
+            <div className="flex flex-col items-center justify-center space-y-2  text-center">
+              <h2 className="text-green-500 text-center text-[14px]">
+                Present
+              </h2>
+              <p className="text-textc1-700 text-center text-[17px]">20 Days</p>
             </div>
-            <div className="flex flex-col items-center justify-between  space-y-2 text-center">
-              <h2 className="text-red-500 text-center text-sm">Absent</h2>
-              <p className="text-textc1-700 text-center text-lg ">02 Days</p>
+            <div className="flex flex-col items-center justify-center space-y-2  text-center">
+              <h2 className="text-red-500 text-center text-[14px]">Absent</h2>
+              <p className="text-textc1-700 text-center text-[17px]">02 Days</p>
             </div>
-            <div className="flex flex-col items-center justify-between text-lg space-y-2 text-center">
-              <h2 className="text-yellow-500 text-center text-sm">Late</h2>
-              <p className="text-textc1-700 text-center text-lg ">02 Days</p>
+            <div className="flex flex-col items-center justify-center space-y-2  text-center">
+              <h2 className="text-yellow-500 text-center text-[14px]">Late</h2>
+              <p className="text-textc1-700 text-center text-[17px]">02 Days</p>
             </div>
           </div>
         </div>
@@ -241,7 +243,7 @@ const StudentDashboard = () => {
                   alt=""
                 />
                 <div className="flex flex-col  justify-start space-y-1 lg:space-y-0">
-                  <p className="text-[17px] lg:text-2xl text-textc1-700 font-medium">
+                  <p className="text-[17px] lg:text-2xl text-textc1-700  font-kalpurush">
                     {s.subject}
                   </p>
                   <p className="text-[12px] lg:text-[14px] textc2-700 text-gray-400 capitalize">
@@ -327,9 +329,10 @@ const StudentDashboard = () => {
               <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
                 <img className="rounded-2xl" src={s.image} alt="" />
                 <p className="text-sm text-textc3-700">12 january</p>
-                <p className="text-textc2-700 text-md">
-                  You are requested to Lorem ipsum dolor sit amet Lorem, ipsum
-                  dolor..{" "}
+                <p className="text-textc2-700 text-md font-kalpurush">
+                  সমস্ত অভিভাবকগণকে অবগতির জন্য জানানো যাচ্ছে যে, আগামী
+                  বৃহস্পতিবার (১৮ জানুয়ারি ২০২৬) সকাল ১০:০০ ঘটিকায় আমাদের
+                  স্কুলে অভিভাবক-শিক্ষক সভা অনুষ্ঠিত হবে।.{" "}
                   <span className="text-primary-700 text-md font-sans">
                     Read more..
                   </span>
@@ -371,9 +374,9 @@ const StudentDashboard = () => {
                 />
 
                 <div className="flex flex-col items-start justify-start space-y-1 lg:space-y-4">
-                  <p className="text-textc1-700 text-[12px] lg:text-[17px] line-clamp-2">
-                    You are requested to Lorem ipsum dolor sit amet Lorem, ipsum
-                    dolor..
+                  <p className="text-gray-700 text-[12px] lg:text-[17px] line-clamp-2 font-kalpurush">
+                    সমস্ত অভিভাবকগণকে অবগতির জন্য জানানো যাচ্ছে যে, আগামী
+                    বৃহস্পতিবার (১৮ জানুয়ারি ২০২৬)
                   </p>
                   <div className="flex flex-row items-start justify-start text-[12px]   rounded-lg space-x-6 text-textc2-700 lg:text-[14px]">
                     <span className="col-span-1 text-center flex items-center justify-center text-[12px] lg:text-[14px]">
@@ -409,10 +412,10 @@ const NoticeAnnouncement = ({
   return (
     <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
       <div className="flex flex-row items-center justify-between border border-blue-100 rounded-2xl p-2">
-        <div className="flex flex-row items-center justidy-start space-y-2">
+        <div className="flex flex-row items-center justidy-start space-x-2">
           <img
             className="w-[65px] h-[67px] lg:w-[54px] lg:h-[56px]"
-            src={Notice}
+            src={Notice2}
             alt=""
           />
           <div>
@@ -423,9 +426,9 @@ const NoticeAnnouncement = ({
         </div>
       </div>
       <div className="flex flex-col space-y-2">
-        <h2 className="text-xl font-semibold">{title}</h2>
+        <h2 className="text-xl font-semibold font-kalpurush">{title}</h2>
         <p className="text-lg text-gray-500 ">
-          <span className="1">{descriptions}</span>
+          <span className="font-kalpurush">{descriptions}</span>
           <span className="text-[#9542E7]">Read More..</span>
         </p>
       </div>
@@ -458,8 +461,10 @@ const NoticeAnnouncementMobile = ({
               <TiPin />
             </div>
           </div>
-          <h2 className="text-[12px]  text-gray-500 capitalize">{title}</h2>
-          <p className="text-[12px] text-gray-400 line-clamp-1">
+          <h2 className="text-[12px]  text-gray-500 capitalize font-kalpurush">
+            {title}
+          </h2>
+          <p className="text-[12px] text-gray-400 line-clamp-1 font-kalpurush">
             {descriptions}
           </p>
         </div>

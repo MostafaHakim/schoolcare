@@ -36,6 +36,7 @@ export default {
         sans: ["Inter", "system-ui", "sans-serif"],
         lexend: ["Lexend", "sans-serif"],
         quicksand: ["Quicksand", "sans-serif"],
+        kalpurush: ["Kalpurush", "sans-serif"],
       },
     },
   },
