@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { MoveLeft, EyeOff, Trash2, Eye } from "lucide-react";
 import { GoPlus } from "react-icons/go";
 import Notice from "../assets/notice.png";

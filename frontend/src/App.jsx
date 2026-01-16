@@ -43,10 +43,11 @@ import ClassWiseAttendance from "./pages/ClassWiseAttendance";
 import { AttendanceProvider } from "./contexts/AttendanceContext";
 import { SocketProvider } from "./contexts/SocketContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-import { ClassProvider } from "./contexts/ClassContext.jsx";
+
 import Splash from "./pages/Splash";
 import { useEffect, useState } from "react";
 import Notification from "./pages/Notification";
+import { ClassProvider } from "./contexts/classContext";
 
 function App() {
   const [loading, setLoading] = useState(true);

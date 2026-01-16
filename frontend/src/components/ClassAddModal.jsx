@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useClass } from "../contexts/ClassContext";
+import { useClass } from "../contexts/classContext";
 
 const ClassAddModal = ({ setOpen, editingClass = null }) => {
   const { addNewClass } = useClass();

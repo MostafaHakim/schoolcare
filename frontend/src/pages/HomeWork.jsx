@@ -6,7 +6,7 @@ import ClassAddModal from "../components/ClassAddModal";
 import { useStudent } from "../contexts/studentContext";
 import ClassDeleteModal from "../components/ClassDeleteModal";
 import { toast } from "react-toastify";
-import { useClass } from "../contexts/ClassContext";
+import { useClass } from "../contexts/classContext";
 
 const HomeWork = () => {
   const { classes, deleteClass } = useClass();

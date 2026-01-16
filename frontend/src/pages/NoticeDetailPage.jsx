@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { MoveLeft, EyeOff, Trash2, Eye } from "lucide-react";
-import { GoPlus } from "react-icons/go";
 import Notice from "../assets/notice2.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAnouncement } from "../contexts/AnoucementContext";

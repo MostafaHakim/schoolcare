@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MoveRight, BookOpen, MoveLeft, UsersRound } from "lucide-react";
-import { useClass } from "../contexts/ClassContext";
+import { useClass } from "../contexts/classContext";
 
 const Attendance = () => {
   const { classes } = useClass();
