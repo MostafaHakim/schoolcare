@@ -19,7 +19,6 @@ import ComingSoonPage from "./pages/ComingSoonPage";
 
 import TeacherDashboard from "./pages/dashboards/TeacherDashboard";
 import AdminDashboard from "./pages/dashboards/AdminDashboard";
-import Classes from "./pages/HomeWork";
 import RoleBasedRoute from "./middleware/roleBaseRoutes";
 import TeacherLayout from "./components/layouts/TeacherLayout";
 import StudentLayout from "./components/layouts/StudentLayout";
@@ -27,7 +26,6 @@ import HomeWork from "./pages/HomeWork";
 import ClassWiseHomeWork from "./pages/ClassWiseHomeWork";
 import AddHomeWork from "./components/AddHomeWork";
 import TeacherHomeworkDetailPage from "./components/TeacherHomeworkDetailPage";
-import { ClassProvider } from "./contexts/ClassContext";
 import { HomeworkProvider } from "./contexts/HomeworkContext";
 import Admission from "./pages/Admission";
 import AllStudents from "./pages/AllStudents";
@@ -49,6 +47,7 @@ import { NotificationProvider } from "./contexts/NotificationContext";
 import Splash from "./pages/Splash";
 import { useEffect, useState } from "react";
 import Notification from "./pages/Notification";
+import { ClassProvider } from "./contexts/ClassContext";
 
 function App() {
   const [loading, setLoading] = useState(true);
