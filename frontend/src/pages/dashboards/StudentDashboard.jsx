@@ -259,10 +259,10 @@ const StudentDashboard = () => {
             ))}
           </div>
         </div>
-        {/* Notice */}
-        <div className="hidden lg:flex flex-col  bg-white rounded-2xl p-5 border border-gray-100 relative">
+        {/* ========================Notice=================================== */}
+        <div className="hidden lg:flex flex-col  bg-white rounded-2xl lg:p-5 border border-gray-100 relative">
           <div className="flex justify-between mb-3">
-            <h3 className="font-semibold text-[17px] lg:text-2xl text-textc1-700 font-lexend font-semibold">
+            <h3 className="font-semibold text-[17px] lg:text-2xl text-textc1-700 font-lexend">
               Importent Notice
             </h3>
 
@@ -290,7 +290,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* ===========Mobile================== */}
-        <div className="lg:hidden flex flex-col   lg:bg-white rounded-2xl p-2 border border-gray-100 ">
+        <div className="lg:hidden flex flex-col   lg:bg-white rounded-2xl lg:p-2 border border-gray-100 ">
           <div className="flex justify-between mb-3">
             <h3 className="font-semibold text-[17px] font-lexend lg:text-2xl text-textc1-700">
               Importent Notice
@@ -316,7 +316,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* Popular News */}
-        <div className="hidden lg:flex flex-col bg-white rounded-2xl p-5 border border-gray-100">
+        <div className="hidden lg:flex flex-col bg-white rounded-2xl lg:p-5 border border-gray-100">
           <div className="flex justify-between mb-3">
             <h3 className="font-semibold text-[17px] font-lexend lg:text-2xl text-textc1-700">
               Popular News
@@ -355,7 +355,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* Popular News Mobile*/}
-        <div className="lg:hidden flex flex-col  rounded-2xl p-2 border border-gray-100">
+        <div className="lg:hidden flex flex-col  rounded-2xl  border border-gray-100">
           <div className="flex justify-between mb-3">
             <h3 className="font-semibold text-[17px] lg:text-2xl text-textc1-700">
               Popular News
