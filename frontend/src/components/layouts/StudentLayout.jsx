@@ -9,7 +9,7 @@ const StudentLayout = () => {
       <StudentHeader />
       <div className=" flex flex-row">
         <StudentSidebar />
-        <main className="flex-1 p-2 lg:p-4 pb-24 lg:pb-6">
+        <main className="flex-1 lg:p-4 pb-24 lg:pb-6">
           <Outlet />
         </main>
 

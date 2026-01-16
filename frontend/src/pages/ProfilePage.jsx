@@ -8,7 +8,7 @@ const ProfilePage = () => {
   const { user, logout } = useAuth();
   const [notificatinToggle, setNotificatinToggle] = useState(false);
   return (
-    <div className="space-y-4 lg:bg-white  lg:p-4">
+    <div className="space-y-4 lg:bg-white  lg:p-4 p-2">
       {/* ===== Header ===== */}
       <div className="flex items-center lg:p-6 space-x-4 pt-4 ">
         <ArrowLeft className="text-gray-600 size-5" />
@@ -149,7 +149,7 @@ const ProfilePage = () => {
             <LogOut /> <h2>Log out</h2>
           </button>
         </div>
-        <button className="a-full flex flex-row items-center space-x-2 justify-center lg:hidden  w-full py-4 bg-primary-700 text-white capitalize rounded-xl text-xl font-lexend">
+        <button className="a-full flex flex-row items-center space-x-2 justify-center lg:hidden  w-full py-3 bg-primary-700 text-white capitalize rounded-xl text-xl font-lexend">
           {" "}
           <IoChatbubbleEllipsesOutline />
           <h2 className="text-[14px]">contact with school teacher</h2>

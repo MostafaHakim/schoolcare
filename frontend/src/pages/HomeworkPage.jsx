@@ -26,7 +26,7 @@ const HomeworkPage = () => {
   }, [fetchData]);
   console.log(studentHomeworkByClass);
   return (
-    <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen">
+    <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen p-2">
       {/* ===== Header ===== */}
       <Header />
 

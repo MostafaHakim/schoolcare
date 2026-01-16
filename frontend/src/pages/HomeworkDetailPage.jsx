@@ -17,7 +17,7 @@ const TeacherHomeworkDetailPage = () => {
   }, [id]);
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center  lg:p-4">
-      <div className="w-full flex flex-col lg:space-y-4  bg-white rounded-xl overflow-hidden">
+      <div className="w-full flex flex-col lg:space-y-4  bg-white  overflow-hidden">
         {/* Header */}
         <div className="hidden lg:flex items-center lg:gap-3  border-b p-8">
           <button onClick={() => navigate(-1)}>
@@ -40,7 +40,7 @@ const TeacherHomeworkDetailPage = () => {
             <img
               src={homeworkById[0]?.image}
               alt="Homework"
-              className="w-full h-52 lg:h-72 sm:h-64 object-cover rounded-t-2xl lg:rounded-2xl"
+              className="w-full h-52 lg:h-72 sm:h-64 object-cover  lg:rounded-2xl"
             />
 
             <div className="absolute p-2 bg-white rounded-2xl bottom-[-100px] left-2 right-2 md:hidden">

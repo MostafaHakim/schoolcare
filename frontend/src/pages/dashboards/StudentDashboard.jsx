@@ -29,7 +29,7 @@ const StudentDashboard = () => {
   ];
   console.log(homework);
   return (
-    <div className="space-y-2 lg:space-y-6 bg-bgc-700 p-1 lg:p-8 rounded-xl">
+    <div className="space-y-2 lg:space-y-6 bg-bgc-700 p-1 lg:p-8 rounded-xl p-2">
       <div className="flex flex-row item-center justify-between lg:flex-col lg:space-y-2 mt-4 lg:mt-0">
         <div className="flex flex-col space-y-2">
           <h1 className="text-2xl lg:text-3xl  text-textc1-700 font-lexend ">
