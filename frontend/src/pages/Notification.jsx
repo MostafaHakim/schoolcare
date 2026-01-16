@@ -5,7 +5,7 @@ const Notification = () => {
   const { user, logout } = useAuth();
 
   return (
-    <div className="space-y-2 lg:bg-white  lg:p-4">
+    <div className="space-y-2 lg:bg-white p-2  lg:p-4">
       {/* ===== Header ===== */}
       <div className="flex items-center lg:p-6 space-x-4">
         <ArrowLeft className="text-gray-600" />

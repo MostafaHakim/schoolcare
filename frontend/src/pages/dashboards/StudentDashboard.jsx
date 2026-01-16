@@ -1,12 +1,4 @@
-import React from "react";
-import {
-  Calendar,
-  EyeOff,
-  Trash2,
-  Eye,
-  ChevronRight,
-  Heart,
-} from "lucide-react";
+import { Calendar, Eye, ChevronRight, Heart } from "lucide-react";
 import { TiPin } from "react-icons/ti";
 import StudentImage from "../../assets/students.png";
 import { useHomework } from "../../contexts/HomeworkContext";
@@ -15,9 +7,11 @@ import Notice from "../../assets/notice.png";
 import Notice2 from "../../assets/notice2.png";
 import NotificationBell from "../../components/NotificationBell";
 import { Link } from "react-router-dom";
+
 const StudentDashboard = () => {
   const { homework } = useHomework();
   const { anouncements } = useAnouncement();
+
   const calendarDays = [
     ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     [28, 29, 30, 31, 1, 2, 3],
@@ -27,7 +21,7 @@ const StudentDashboard = () => {
     [25, 26, 27, 28, 29, 30, 31],
     [1, 2, 3, 4, 5, 6, 7],
   ];
-  console.log(homework);
+
   return (
     <div className="space-y-2 lg:space-y-6 bg-bgc-700 p-1 lg:p-8 rounded-xl p-2">
       <div className="flex flex-row item-center justify-between lg:flex-col lg:space-y-2 mt-4 lg:mt-0">
@@ -172,7 +166,9 @@ const StudentDashboard = () => {
               Present
             </span>
           </div>
-          <h2 className="text-textc1-700 font-semibold">This month</h2>
+          <h2 className="text-textc1-700 font-semibold text-[17px] font-lexend">
+            This month
+          </h2>
           <div className="grid grid-cols-3 p-4 border border-gray-100 rounded-2xl divide-x-2 text-sm">
             <div className="flex flex-col items-center justify-between   space-y-2 text-center">
               <h2 className="text-green-500 text-center text-sm">Present</h2>
