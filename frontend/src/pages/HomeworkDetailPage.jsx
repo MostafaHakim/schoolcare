@@ -1,6 +1,5 @@
-import { ArrowLeft, Eye, MessageCircle, Send, Download } from "lucide-react";
+import { ArrowLeft, Eye, MessageCircle } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BiSolidEditAlt } from "react-icons/bi";
 import HomeWorkSubjectCard from "../components/HomeWorkSubjectCard";
 import { useHomework } from "../contexts/HomeworkContext";
 import { useEffect } from "react";

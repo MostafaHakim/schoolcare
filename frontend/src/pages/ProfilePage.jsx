@@ -1,6 +1,5 @@
 import { ArrowLeft, Bell, Wallet, Info, LogOut } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
-import { useClass } from "../contexts/ClassContext";
 import ProfileIcon from "../assets/profileshadow.png";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { useState } from "react";

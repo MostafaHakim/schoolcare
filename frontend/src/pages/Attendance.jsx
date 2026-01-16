@@ -1,10 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MoveRight, BookOpen, MoveLeft, UsersRound } from "lucide-react";
-import { GoPlus } from "react-icons/go";
-import ClassAddModal from "../components/ClassAddModal";
 import { useClass } from "../contexts/ClassContext";
-import { useStudent } from "../contexts/studentContext";
 
 const Attendance = () => {
   const { classes } = useClass();

@@ -1,6 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MoveLeft } from "lucide-react";
-import { GoPlus } from "react-icons/go";
+
 import CalendarHeader from "../components/CalendarHeader";
 import HomeWorkSubjectCard from "../components/HomeWorkSubjectCard";
 import { useHomework } from "../contexts/HomeworkContext";
@@ -24,7 +24,7 @@ const HomeworkPage = () => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-  console.log(studentHomeworkByClass);
+
   return (
     <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen p-2">
       {/* ===== Header ===== */}
