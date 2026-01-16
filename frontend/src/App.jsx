@@ -43,7 +43,7 @@ import ClassWiseAttendance from "./pages/ClassWiseAttendance";
 import { AttendanceProvider } from "./contexts/AttendanceContext";
 import { SocketProvider } from "./contexts/SocketContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-import { ClassProvider } from "./contexts/ClassContext";
+import { ClassProvider } from "./contexts/ClassContext.jsx";
 import Splash from "./pages/Splash";
 import { useEffect, useState } from "react";
 import Notification from "./pages/Notification";
