@@ -18,22 +18,27 @@ const StudentDashboard = () => {
   ];
   console.log(homework);
   return (
-    <div className="space-y-2 lg:space-y-6 lg:bg-white rounded-xl">
+    <div className="space-y-1 lg:space-y-6 lg:bg-white rounded-xl">
       {/* Top Cards */}
-      <div className="flex flex-row items-center justify-between lg:bg-white px-4 pt-4  rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
+      <div className="flex flex-row items-center justify-between lg:bg-white p-4  rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
         <div className="flex flex-row items-center space-x-3 border-0">
           <Link to="/">
             <MoveLeft className="" />
           </Link>
-          <h1 className="text-xl lg:text-2xl font-semibold text-gray-800">
+          <h1 className="text-[14px] lg:text-2xl font-semibold text-gray-800">
             Performance{" "}
           </h1>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-6 p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-6 lg:p-4">
         {/* Average Performance */}
-        <div className="h-full bg-white rounded-3xl lg:border  border-gray-100 overflow-hidden lg:relative">
+        <div className="h-full bg-white rounded-lg lg:rounded-2xl lg:border  border-gray-100 overflow-hidden lg:relative">
+          <img
+            className="hidden lg:flex w-full h-1/2"
+            src={StudentImage}
+            alt=""
+          />
           <img
             className="hidden lg:flex w-full h-1/2"
             src={StudentImage}
@@ -53,7 +58,7 @@ const StudentDashboard = () => {
                 Present
               </span>
             </div>
-            <div className="p-2 lg:p-4 lg:border rounded-2xl space-y-4 order-1 lg:order-2">
+            <div className=" lg:p-4 lg:border rounded-2xl space-y-4 order-1 lg:order-2">
               <div className="flex items-center flex-row justify-between text-sm ">
                 <span className="font-medium text-gray-800">
                   Average performance

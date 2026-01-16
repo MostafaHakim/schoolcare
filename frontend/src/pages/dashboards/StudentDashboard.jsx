@@ -29,10 +29,10 @@ const StudentDashboard = () => {
   ];
   console.log(homework);
   return (
-    <div className="space-y-2 lg:space-y-6 bg-bgc-700 p-2 lg:p-8 rounded-xl">
-      <div className="flex flex-row item-center justify-between lg:flex-col lg:space-y-2   ">
+    <div className="space-y-2 lg:space-y-6 bg-bgc-700 p-1 lg:p-8 rounded-xl">
+      <div className="flex flex-row item-center justify-between lg:flex-col lg:space-y-2 mt-4 lg:mt-0">
         <div className="flex flex-col space-y-2">
-          <h1 className="text-2xl lg:text-3xl  text-textc1-700 font-lexend">
+          <h1 className="text-2xl lg:text-3xl  text-textc1-700 font-lexend ">
             Good Morning!
           </h1>
           <p className="text-sm lg:text-md font-sans text-textc3-700">
@@ -67,16 +67,16 @@ const StudentDashboard = () => {
               </span>
             </div>
             <div className="p-2 lg:p-4 lg:border rounded-2xl space-y-4 order-1 lg:order-2">
-              <div className="flex items-center flex-row justify-between text-sm ">
+              <div className="flex items-center flex-row justify-between text-sm lg:text-base">
                 <span className="font-medium text-gray-800">
                   Average performance
                 </span>
 
-                <span className="flex items-center gap-2 text-red-500 font-medium">
+                <span className="flex items-center gap-2 text-red-500 font-medium text-sm lg:text-base">
                   <span className="text-purple-500 tracking-widest">
                     ············→
                   </span>
-                  Bad
+                  <span className="text-sm lg:text-base">Bad</span>
                 </span>
               </div>
 
@@ -104,7 +104,9 @@ const StudentDashboard = () => {
         {/* Monthly Status */}
         <div className="hidden lg:block bg-white rounded-3xl lg:p-4 border border-gray-100 space-y-4">
           {/* Title */}
-          <h3 className="text-base font-semibold text-gray-800">This Month</h3>
+          <h3 className=" font-semibold text-gray-800 text-[17px] font-lexend">
+            This Month
+          </h3>
 
           {/* ===== Present Desktop ===== */}
           <div className="border rounded-2xl p-4 flex items-center gap-4">
@@ -213,17 +215,17 @@ const StudentDashboard = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="flex flex-col space-y-2 lg:space-y-4">
+      <div className="flex flex-col space-y-1 lg:space-y-4">
         {/* Homework */}
-        <div className="flex flex-col  lg:bg-white rounded-2xl p-2 lg:p-5 border border-gray-100 relative">
-          <div className="flex justify-between mb-3">
-            <h3 className="font-semibold text-xl lg:text-2xl text-textc1-700">
+        <div className="flex flex-col  lg:bg-white rounded-2xl  lg:p-5 border border-gray-100 relative">
+          <div className="flex justify-between mb-1">
+            <h3 className="font-lexend font-semibold text-[17px] lg:text-2xl text-textc1-700">
               Homework today
             </h3>
 
             <Link
               to="/student/homework"
-              className="text-xl lg:text-2xl text-primary-700"
+              className="text-[17px] lg:text-2xl text-primary-700"
             >
               See All
             </Link>
@@ -235,21 +237,21 @@ const StudentDashboard = () => {
             {homework.map((s, i) => (
               <div
                 key={i}
-                className="flex flex-row lg:flex-col space-x-2 items-start lg:space-y-4 rounded-xl hover:bg-gray-50 p-2 lg:p-4 border boder-gray-100"
+                className="flex bg-white flex-row lg:flex-col space-x-2 items-start lg:space-y-4 rounded-xl hover:bg-gray-50 p-2 lg:p-4 border boder-gray-100"
               >
                 <img
-                  className="rounded-2xl w-24 h-24 lg:w-auto lg:h-auto"
+                  className="rounded-2xl w-[76px] h-[76px] lg:w-auto lg:h-auto"
                   src={s.image}
                   alt=""
                 />
                 <div className="flex flex-col  justify-start space-y-1 lg:space-y-0">
-                  <p className="text-2xl text-textc1-700 font-medium">
+                  <p className="text-[17px] lg:text-2xl text-textc1-700 font-medium">
                     {s.subject}
                   </p>
-                  <p className="text-md textc2-700 text-gray-400 capitalize">
+                  <p className="text-[12px] lg:text-[14px] textc2-700 text-gray-400 capitalize">
                     {s.teacher}
                   </p>
-                  <p className="text-sm textc3-700 text-gray-400 capitalize">
+                  <p className="text-[12px]  textc3-700 text-gray-400 capitalize">
                     {new Date(s.createdAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -260,11 +262,14 @@ const StudentDashboard = () => {
         {/* Notice */}
         <div className="hidden lg:flex flex-col  bg-white rounded-2xl p-5 border border-gray-100 relative">
           <div className="flex justify-between mb-3">
-            <h3 className="font-semibold text-2xl text-textc1-700">
+            <h3 className="font-semibold text-[17px] lg:text-2xl text-textc1-700 font-lexend font-semibold">
               Importent Notice
             </h3>
 
-            <Link to="notice" className="text-2xl text-primary-700">
+            <Link
+              to="notice"
+              className="text-[17px] lg:text-2xl text-primary-700"
+            >
               See All
             </Link>
           </div>
@@ -287,10 +292,13 @@ const StudentDashboard = () => {
         {/* ===========Mobile================== */}
         <div className="lg:hidden flex flex-col   lg:bg-white rounded-2xl p-2 border border-gray-100 ">
           <div className="flex justify-between mb-3">
-            <h3 className="font-semibold text-xl lg:text-2xl text-textc1-700">
+            <h3 className="font-semibold text-[17px] font-lexend lg:text-2xl text-textc1-700">
               Importent Notice
             </h3>
-            <Link to="notice" className="text-xl lg:text-2xl text-primary-700">
+            <Link
+              to="notice"
+              className="text-[17px] lg:text-2xl text-primary-700"
+            >
               See All
             </Link>
           </div>
@@ -310,11 +318,13 @@ const StudentDashboard = () => {
         {/* Popular News */}
         <div className="hidden lg:flex flex-col bg-white rounded-2xl p-5 border border-gray-100">
           <div className="flex justify-between mb-3">
-            <h3 className="font-semibold text-2xl text-textc1-700">
+            <h3 className="font-semibold text-[17px] font-lexend lg:text-2xl text-textc1-700">
               Popular News
             </h3>
 
-            <span className="text-2xl text-primary-700">See All</span>
+            <span className="text-[17px] lg:text-2xl text-primary-700">
+              See All
+            </span>
           </div>
           <div className="grid grid-cols-3 gap-4">
             {homework.map((s, i) => (
@@ -329,11 +339,14 @@ const StudentDashboard = () => {
                   </span>
                 </p>
                 <div className="grid grid-cols-2 border border-blue-100 p-3 rounded-lg ">
-                  <span className="col-span-1 text-center flex items-center justify-center">
-                    <Eye /> <span className="pl-1">0</span>
+                  <span className="col-span-1 flex items-center justify-center gap-1 text-textc1-700">
+                    <Eye className="w-4 h-4" />
+                    <span className="text-sm">0</span>
                   </span>
-                  <span className="col-span-1 flex items-center justify-center">
-                    <Heart /> <span className="pl-1">0</span>
+
+                  <span className="col-span-1 flex items-center justify-center gap-1 text-textc1-700">
+                    <Heart className="w-4 h-4" />
+                    <span className="text-sm">0</span>
                   </span>
                 </div>
               </div>
@@ -344,28 +357,38 @@ const StudentDashboard = () => {
         {/* Popular News Mobile*/}
         <div className="lg:hidden flex flex-col  rounded-2xl p-2 border border-gray-100">
           <div className="flex justify-between mb-3">
-            <h3 className="font-semibold text-xl text-textc1-700">
+            <h3 className="font-semibold text-[17px] lg:text-2xl text-textc1-700">
               Popular News
             </h3>
 
-            <span className="text-xl text-primary-700">See All</span>
+            <span className="text-[17px] text-primary-700 lg:text-2xl">
+              See All
+            </span>
           </div>
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col items-center justify-center space-y-2">
             {homework.map((s, i) => (
-              <div className=" flex flex-row space-x-4 border border-blue-100 p-2 rounded-2xl bg-white">
-                <img className="rounded-2xl w-24 h-24" src={s.image} alt="" />
+              <div className=" flex flex-row items-center justify-start space-x-4 border border-blue-100 p-2 rounded-2xl bg-white">
+                <img
+                  className="rounded-2xl w-[76px] h-[76px]"
+                  src={s.image}
+                  alt=""
+                />
 
-                <div className="flex flex-col space-y-4">
-                  <p className="text-textc2-700 text-md line-clamp-2">
+                <div className="flex flex-col items-start justify-start space-y-1 lg:space-y-4">
+                  <p className="text-textc1-700 text-[12px] lg:text-[17px] line-clamp-2">
                     You are requested to Lorem ipsum dolor sit amet Lorem, ipsum
                     dolor..
                   </p>
-                  <div className="flex flex-row items-center justify-start   rounded-lg space-x-6 text-textc3-700">
-                    <span className="col-span-1 text-center flex items-center justify-center">
-                      <Eye /> <span className="pl-1">0</span>
+                  <div className="flex flex-row items-start justify-start text-[12px]   rounded-lg space-x-6 text-textc2-700 lg:text-[14px]">
+                    <span className="col-span-1 text-center flex items-center justify-center text-[12px] lg:text-[14px]">
+                      <Eye size={18} />
+
+                      <span className="pl-1 text-[14px] ">32</span>
                     </span>
-                    <span className="col-span-1 flex items-center justify-center">
-                      <Heart /> <span className="pl-1">0</span>
+                    <span className="col-span-1 flex items-center justify-center text-[12px] lg:text-[14px]">
+                      <Heart size={18} />
+
+                      <span className="pl-1 text-[14px] ">2K</span>
                     </span>
                   </div>
                 </div>
@@ -391,11 +414,15 @@ const NoticeAnnouncement = ({
     <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
       <div className="flex flex-row items-center justify-between border border-blue-100 rounded-2xl p-2">
         <div className="flex flex-row items-center justidy-start space-y-2">
-          <img className="w-24" src={Notice} alt="" />
+          <img
+            className="w-[65px] h-[67px] lg:w-[54px] lg:h-[56px]"
+            src={Notice}
+            alt=""
+          />
           <div>
-            <h2 className="text-xl font-lexend">Announcement</h2>
-            <h2 className="text-lg text-gray-500 capitalize">{teacher}</h2>
-            <p className="text-md text-gray-400">30/12/25</p>
+            <h2 className="text-[14px] font-lexend">Announcement</h2>
+            <h2 className="text-[12px] text-gray-500 capitalize">{teacher}</h2>
+            <p className="text-[12px] text-gray-400">30/12/25</p>
           </div>
         </div>
       </div>
@@ -430,15 +457,13 @@ const NoticeAnnouncementMobile = ({
         <img className="w-36" src={Notice2} alt="" />
         <div className="flex flex-col items-start ">
           <div className="flex flex-row items-center justify-between w-full">
-            <h2 className="text-lg lg:text-xl font-lexend">Announcement</h2>
+            <h2 className="text-[14px] font-lexend">Announcement</h2>
             <div className="text-textc2-700">
               <TiPin />
             </div>
           </div>
-          <h2 className="text-md lg:text-lg text-gray-500 capitalize">
-            {title}
-          </h2>
-          <p className="text-sm lg:text-md text-gray-400 line-clamp-1">
+          <h2 className="text-[12px]  text-gray-500 capitalize">{title}</h2>
+          <p className="text-[12px] text-gray-400 line-clamp-1">
             {descriptions}
           </p>
         </div>

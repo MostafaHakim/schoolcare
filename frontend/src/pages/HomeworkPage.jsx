@@ -8,7 +8,6 @@ import { useEffect, useCallback } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 const HomeworkPage = () => {
-  console.log(name);
   const { loading, studentHomeworkByClass, fetchHomeworksByClassForStudent } =
     useHomework();
 
@@ -29,7 +28,7 @@ const HomeworkPage = () => {
   return (
     <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen">
       {/* ===== Header ===== */}
-      <Header name={name} />
+      <Header />
 
       {/* ===== Date Selector ===== */}
       <div className="p-2 lg:p-4">
@@ -57,13 +56,13 @@ const HomeworkPage = () => {
 export default HomeworkPage;
 
 /* ===== Helper Components ===== */
-const Header = ({ name }) => (
+const Header = () => (
   <div className="flex flex-row items-center justify-between lg:bg-white px-4 pt-4  rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
     <div className="flex flex-row items-center space-x-3 border-0">
       <Link to="/">
         <MoveLeft className="" />
       </Link>
-      <h1 className="text-xl lg:text-2xl font-semibold text-gray-800">
+      <h1 className="text-[14px] lg:text-2xl font-semibold text-gray-800">
         Homework{" "}
       </h1>
     </div>

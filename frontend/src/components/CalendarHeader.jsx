@@ -198,7 +198,7 @@ const CalendarHeader = ({ selectedDate, setSelectedDate }) => {
   return (
     <div className="bg-white rounded-2xl border shadow-sm px-4 py-4 grid grid-cols-2 lg:flex flex-col  lg:flex-row gap-4 lg:items-center lg:justify-between">
       {/* Month */}
-      <h2 className="text-md lg:text-lg font-semibold text-gray-800 whitespace-nowrap col-span-1 order-1">
+      <h2 className="text-[17px] lg:text-lg font-semibold text-gray-800 whitespace-nowrap col-span-1 order-1">
         {format(normalizedDate, "MMMM yyyy")}
       </h2>
 
@@ -241,14 +241,14 @@ const CalendarHeader = ({ selectedDate, setSelectedDate }) => {
                 title={!isSelectable ? "Future dates cannot be selected" : ""}
               >
                 <span
-                  className={`font-medium ${isActive ? "font-semibold" : ""} ${
-                    !isSelectable ? "opacity-50" : ""
-                  }`}
+                  className={`font-medium text-[14px] ${
+                    isActive ? "font-semibold" : ""
+                  } ${!isSelectable ? "opacity-50" : ""}`}
                 >
                   {format(date, "dd")}
                 </span>
                 <span
-                  className={`text-xs ${
+                  className={`text-[10px] ${
                     isActive ? "opacity-90" : "opacity-70"
                   } ${!isSelectable ? "opacity-50" : ""}`}
                 >
@@ -289,7 +289,7 @@ const CalendarHeader = ({ selectedDate, setSelectedDate }) => {
 
         <button
           onClick={handleToday}
-          className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition-colors"
+          className="px-4 py-2 text-[17px] rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition-colors"
         >
           Today
         </button>
