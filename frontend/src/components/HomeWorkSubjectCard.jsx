@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Homeworkicon from "../assets/homeworkicon.png";
+import { ChevronRight } from "lucide-react";
 const HomeWorkSubjectCard = ({ image, subject, teacher, date, _id }) => {
   function formatDateToDDMMMYY(date) {
     const options = {
@@ -17,7 +18,7 @@ const HomeWorkSubjectCard = ({ image, subject, teacher, date, _id }) => {
   return (
     <Link
       to={`${_id}`}
-      className="flex flex-row  items-center lg:items-start p-2 lg:flex-col lg:space-y-2  lg:p-4 border border-gray-100 rounded-xl space-x-2"
+      className="flex flex-row  items-center lg:items-start p-2 lg:flex-col lg:space-y-2  lg:p-4 border border-gray-100 rounded-xl space-x-2 relative"
     >
       <div className="p-2 border border-gray-100 rounded-lg">
         <img className="hidden lg:block w-full rounded-xl" src={image} alt="" />
@@ -31,6 +32,9 @@ const HomeWorkSubjectCard = ({ image, subject, teacher, date, _id }) => {
         <h2 className="text-[14px] lg:text-2xl">{subject}</h2>
         <span className="text-[12px] lg:text-sm text-gray-700">{teacher}</span>
         <p className="text-[12px] text-gray-500">{formatDateToDDMMMYY(date)}</p>
+      </div>
+      <div className="absolute right-4 top-[40%] text-textc3-700">
+        <ChevronRight />
       </div>
     </Link>
   );
