@@ -26,11 +26,7 @@ const HomeworkPage = () => {
   }, [fetchData]);
 
   return (
-<<<<<<< HEAD
     <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen p-2 pb-20">
-=======
-    <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen p-2">
->>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
       {/* ===== Header ===== */}
       <Header />
 
@@ -61,11 +57,7 @@ export default HomeworkPage;
 
 /* ===== Helper Components ===== */
 const Header = () => (
-<<<<<<< HEAD
   <div className="flex flex-row items-center justify-between lg:bg-white px-4 pt-4 rounded-lg  lg:rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
-=======
-  <div className="flex flex-row items-center justify-between lg:bg-white px-4 pt-4  rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
->>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
     <div className="flex flex-row items-center space-x-3 border-0">
       <Link to="/">
         <MoveLeft className="" />
