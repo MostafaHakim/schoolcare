@@ -23,7 +23,7 @@ const StudentDashboard = () => {
   ];
 
   return (
-    <div className="space-y-2 lg:space-y-6 bg-bgc-700  lg:p-4 rounded-xl p-2 pb-20">
+    <div className="space-y-2 lg:space-y-6 bg-bgc-700  lg:p-4 rounded-xl p-4 pb-20">
       <div className="flex flex-row item-center justify-between lg:flex-col lg:space-y-2 mt-4 lg:mt-0">
         <div className="flex flex-col space-y-1 lg:space-y-2">
           <h1 className="text-xl lg:text-3xl  text-textc1-700 font-lexend ">
@@ -215,7 +215,7 @@ const StudentDashboard = () => {
       {/* Bottom Section */}
       <div className="flex flex-col space-y-1 lg:space-y-4">
         {/* Homework */}
-        <div className="flex flex-col  lg:bg-white   lg:p-5 relative">
+        <div className="flex flex-col lg:rounded-2xl  lg:bg-white   lg:p-5 relative">
           <div className="flex justify-between mb-1">
             <h3 className="font-lexend font-semibold text-[17px] lg:text-2xl text-textc1-700">
               Homework today

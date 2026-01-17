@@ -7,7 +7,7 @@ const ProfilePage = () => {
   const { user, logout } = useAuth();
   const [notificatinToggle, setNotificatinToggle] = useState(false);
   return (
-    <div className="space-y-4 lg:bg-white  lg:p-4 p-2 pb-20">
+    <div className="space-y-4 lg:bg-white  p-4 pb-20">
       {/* ===== Header ===== */}
       <div className="flex items-center lg:p-6 space-x-4 pt-4 ">
         <ArrowLeft className="text-gray-600 size-5" />

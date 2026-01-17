@@ -26,7 +26,7 @@ const HomeworkPage = () => {
   }, [fetchData]);
 
   return (
-    <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen p-2 pb-20">
+    <div className="bg-white/90 flex flex-col space-y-0 lg:space-y-4 min-h-screen p-4 pb-20">
       {/* ===== Header ===== */}
       <Header />
 

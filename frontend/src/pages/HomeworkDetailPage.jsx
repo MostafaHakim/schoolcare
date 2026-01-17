@@ -14,7 +14,7 @@ const TeacherHomeworkDetailPage = () => {
     fetchHomeworksById(id);
   }, [id]);
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center  lg:p-4">
+    <div className="min-h-screen bg-gray-50 flex justify-center p-4  lg:p-4">
       <div className="w-full flex flex-col lg:space-y-4  bg-white  overflow-hidden">
         {/* Header */}
         <div className="hidden lg:flex items-center lg:gap-3  border-b p-8">
@@ -90,7 +90,7 @@ export const HomeWorkSubjectCard = ({ image, subject, teacher, date, _id }) => {
     };
 
     const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
-      date
+      date,
     );
     return formattedDate.replace(/\//g, "-");
   }
