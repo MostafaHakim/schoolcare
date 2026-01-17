@@ -9,7 +9,9 @@ import {
   DollarSign,
   MessageCircle,
   User,
+  LogOut,
 } from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
 
 const navItems = [
   { to: "/teacher", label: "Home", icon: Home },
@@ -24,6 +26,7 @@ const navItems = [
 ];
 
 const TeacherSidebar = () => {
+  const { logout } = useAuth();
   return (
     <aside className="hidden lg:block w-64 bg-white border-r min-h-screen px-4 py-6">
       {/* Logo */}
@@ -52,6 +55,17 @@ const TeacherSidebar = () => {
           </NavLink>
         ))}
       </nav>
+
+      <div className="p-4">
+        <div className="flex flex-row space-x-2 p-4 rounded-xl">
+          <button
+            className="flex text-primary-700 flex-row items-center justify-between gap-2"
+            onClick={() => logout()}
+          >
+            <LogOut size={18} /> Log Out
+          </button>
+        </div>
+      </div>
     </aside>
   );
 };
