@@ -48,7 +48,10 @@ import Splash from "./pages/Splash";
 import { useEffect, useState } from "react";
 import Notification from "./pages/Notification";
 import { ClassProvider } from "./contexts/classContext";
+<<<<<<< HEAD
 import StudentAnnouncenmect from "./pages/StudentAnnouncement";
+=======
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -195,10 +198,13 @@ function App() {
                               element={<ComingSoonPage />}
                             />
                             <Route
+<<<<<<< HEAD
                               path="announcement/:id"
                               element={<StudentAnnouncenmect />}
                             />
                             <Route
+=======
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
                               path="finance"
                               element={<ComingSoonPage />}
                             />
@@ -222,10 +228,17 @@ function App() {
                             />
                           </Route>
 
+<<<<<<< HEAD
                           {/* <Route
                             path="*"
                             element={<Navigate to="/login" replace />}
                           /> */}
+=======
+                          <Route
+                            path="*"
+                            element={<Navigate to="/login" replace />}
+                          />
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
                         </Routes>
                       </NotificationProvider>
                     </SocketProvider>

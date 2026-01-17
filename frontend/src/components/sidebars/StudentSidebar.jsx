@@ -114,7 +114,6 @@ const menu = [
 
 const StudentSidebar = () => {
   const { logout } = useAuth();
-
   return (
     <div className="hidden lg:flex w-64 bg-[#FBFBFD] border-r border-gray-100 flex-col py-10 justify-between min-h-screen">
       <nav className="flex-1 px-4 space-y-2">

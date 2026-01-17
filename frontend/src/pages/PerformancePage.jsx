@@ -16,9 +16,15 @@ const StudentDashboard = () => {
     [25, 26, 27, 28, 29, 30, 31],
     [1, 2, 3, 4, 5, 6, 7],
   ];
+<<<<<<< HEAD
 
   return (
     <div className="space-y-1 lg:space-y-6 lg:bg-white rounded-lg lg:rounded-xl p-2  pb-20">
+=======
+  console.log(homework);
+  return (
+    <div className="space-y-1 lg:space-y-6 lg:bg-white rounded-xl p-2">
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
       {/* Top Cards */}
       <div className="flex flex-row items-center justify-between lg:bg-white p-4  rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
         <div className="flex flex-row items-center space-x-3 border-0">
@@ -39,6 +45,14 @@ const StudentDashboard = () => {
             src={StudentImage}
             alt=""
           />
+<<<<<<< HEAD
+=======
+          <img
+            className="hidden lg:flex w-full h-1/2"
+            src={StudentImage}
+            alt=""
+          />
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
 
           {/*=================== Average Performance Progress =======================*/}
           <div className="flex flex-col  lg:space-y-4 p-2 lg:p-4 bg-white lg:absolute left-0 right-0 lg:-mt-10 rounded-2xl">
@@ -53,8 +67,12 @@ const StudentDashboard = () => {
                 Present
               </span>
             </div>
+<<<<<<< HEAD
 
             <div className=" lg:p-4 lg:border rounded-lg lg:rounded-2xl space-y-4 order-1 lg:order-2">
+=======
+            <div className=" lg:p-4 lg:border rounded-2xl space-y-4 order-1 lg:order-2">
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
               <div className="flex items-center flex-row justify-between text-sm ">
                 <span className="font-medium text-gray-800">
                   Average performance
@@ -146,10 +164,17 @@ const StudentDashboard = () => {
           </div>
         </div>
 
+<<<<<<< HEAD
         <div className="flex lg:hidden flex-col space-y-2   rounded-lg">
           <h2 className="text-textc1-700 font-semibold">Present</h2>
           {/* Today | Present */}
           <div className="flex items-center justify-evenly border rounded-lg px-4 py-3  bg-white ">
+=======
+        <div className="flex lg:hidden flex-col space-y-2   rounded-2xl">
+          <h2 className="text-textc1-700 font-semibold">Present</h2>
+          {/* Today | Present */}
+          <div className="flex items-center justify-evenly border rounded-xl px-4 py-3  bg-white ">
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
             <span className="text-gray-700 font-medium">Today</span>
 
             <span className="w-px h-5 bg-gray-300"></span>
@@ -161,9 +186,15 @@ const StudentDashboard = () => {
           </div>
         </div>
         {/* ================Monthly Status Mobile================= */}
+<<<<<<< HEAD
         <div className="flex lg:hidden flex-col space-y-2   rounded-lg">
           <h2 className="text-textc1-700 font-semibold">This month</h2>
           <div className="grid grid-cols-3 p-4 border border-gray-100 rounded-lg divide-x-2 text-sm bg-white">
+=======
+        <div className="flex lg:hidden flex-col space-y-2   rounded-xl">
+          <h2 className="text-textc1-700 font-semibold">This month</h2>
+          <div className="grid grid-cols-3 p-4 border border-gray-100 rounded-2xl divide-x-2 text-sm bg-white">
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
             <div className="flex flex-col items-center justify-between   space-y-2 text-center">
               <h2 className="text-green-500 text-center text-sm">Present</h2>
               <p className="text-textc1-700 text-center text-lg">20 Days</p>
@@ -180,7 +211,11 @@ const StudentDashboard = () => {
         </div>
 
         {/* Calendar */}
+<<<<<<< HEAD
         <div className=" bg-white rounded-lg lg:rounded-2xl p-5 border border-gray-100">
+=======
+        <div className=" bg-white rounded-2xl p-5 border border-gray-100">
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-sm font-semibold text-gray-700">August 2025</h3>
             <Calendar size={18} />
@@ -195,10 +230,17 @@ const StudentDashboard = () => {
                   day === 14
                     ? "bg-orange-400 text-white"
                     : day === 7
+<<<<<<< HEAD
                       ? "bg-red-500 text-white"
                       : day === 13
                         ? "bg-green-500 text-white"
                         : " text-gray-600"
+=======
+                    ? "bg-red-500 text-white"
+                    : day === 13
+                    ? "bg-green-500 text-white"
+                    : " text-gray-600"
+>>>>>>> 680854063402819ecaa2706b68de0e2385de8da6
                 }`}
               >
                 {day}
