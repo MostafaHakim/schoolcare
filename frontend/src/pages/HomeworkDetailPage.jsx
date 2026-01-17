@@ -27,7 +27,7 @@ const TeacherHomeworkDetailPage = () => {
         <div className="lg:p-4">
           {/* Image Section */}
           <div className="relative">
-            <div className="flex absolute top-6 text-white lg:hidden items-center  px-4 lg:py-3 ">
+            <div className="flex absolute top-6 text-white lg:hidden items-center   lg:py-3 ">
               <button onClick={() => navigate(-1)}>
                 <ArrowLeft size={22} />
               </button>

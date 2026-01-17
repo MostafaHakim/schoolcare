@@ -31,12 +31,12 @@ const HomeworkPage = () => {
       <Header />
 
       {/* ===== Date Selector ===== */}
-      <div className="p-2 lg:p-4">
+      <div className="py-4 lg:p-4">
         <CalendarHeader />
       </div>
 
       {/* ===== Homework List ===== */}
-      <div className="p-2 lg:p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
+      <div className=" lg:p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
         {loading ? (
           <p className="text-gray-500 col-span-full text-center">Loading...</p>
         ) : studentHomeworkByClass.length === 0 ? (
@@ -57,7 +57,7 @@ export default HomeworkPage;
 
 /* ===== Helper Components ===== */
 const Header = () => (
-  <div className="flex flex-row items-center justify-between lg:bg-white px-4 pt-4 rounded-lg  lg:rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
+  <div className="flex flex-row items-center justify-between lg:bg-white  pt-4 rounded-lg  lg:rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
     <div className="flex flex-row items-center space-x-3 border-0">
       <Link to="/">
         <MoveLeft className="" />

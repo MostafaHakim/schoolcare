@@ -5,18 +5,13 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
-import Layout from "./components/Layout";
 import { ToastContainer } from "react-toastify";
-import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
 import PerformancePage from "./pages/PerformancePage";
-import NoticePage from "./pages/NoticePage";
 import NoticeDetailPage from "./pages/NoticeDetailPage";
 import HomeworkPage from "./pages/HomeworkPage";
 import HomeworkDetailPage from "./pages/HomeworkDetailPage";
 import ComingSoonPage from "./pages/ComingSoonPage";
-
 import TeacherDashboard from "./pages/dashboards/TeacherDashboard";
 import AdminDashboard from "./pages/dashboards/AdminDashboard";
 import RoleBasedRoute from "./middleware/roleBaseRoutes";
@@ -34,7 +29,6 @@ import AdmissionForm from "./components/AdmissionForm";
 import StudentDashboard from "./pages/dashboards/StudentDashboard";
 import AuthorLayout from "./components/layouts/AuthorLayout";
 import { StudentProvider } from "./contexts/studentContext";
-import TeacherProfilePage from "./pages/ProfilePage";
 import Announcement from "./pages/Announcement";
 import AddAnouncement from "./components/AddAnouncement";
 import { AnouncementProvider } from "./contexts/AnoucementContext";
@@ -43,12 +37,13 @@ import ClassWiseAttendance from "./pages/ClassWiseAttendance";
 import { AttendanceProvider } from "./contexts/AttendanceContext";
 import { SocketProvider } from "./contexts/SocketContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-
 import Splash from "./pages/Splash";
 import { useEffect, useState } from "react";
 import Notification from "./pages/Notification";
 import { ClassProvider } from "./contexts/classContext";
 import StudentAnnouncenmect from "./pages/StudentAnnouncement";
+import StudentProfilePage from "./pages/StudentProfilePage";
+import TeacherProfile from "./components/TeacherProfile";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -167,7 +162,7 @@ function App() {
 
                             <Route
                               path="profile"
-                              element={<TeacherProfilePage />}
+                              element={<TeacherProfile />}
                             />
                           </Route>
 
@@ -210,8 +205,14 @@ function App() {
                               path="/student/notice/:id"
                               element={<NoticeDetailPage />}
                             />
-                            <Route path="profile" element={<ProfilePage />} />
-                            <Route path="settings" element={<ProfilePage />} />
+                            <Route
+                              path="profile"
+                              element={<StudentProfilePage />}
+                            />
+                            <Route
+                              path="settings"
+                              element={<ComingSoonPage />}
+                            />
                             <Route
                               path="about-us"
                               element={<ComingSoonPage />}

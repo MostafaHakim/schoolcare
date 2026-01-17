@@ -3,7 +3,8 @@ import { useAuth } from "../contexts/AuthContext";
 import ProfileIcon from "../assets/profileshadow.png";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { useState } from "react";
-const ProfilePage = () => {
+
+const TeacherProfile = () => {
   const { user, logout } = useAuth();
   const [notificatinToggle, setNotificatinToggle] = useState(false);
   return (
@@ -22,7 +23,7 @@ const ProfilePage = () => {
             <div className="flex flex-row items-center justify-between border border-gray-100 p-3 rounded-md lg:rounded-lg relative">
               <div className="flex items-center gap-3 ">
                 <div className="w-[53px] h-[53px] rounded-full bg-gradient-to-tl from-violet-800 to-purple-400 text-white flex items-center justify-center font-semibold">
-                  {user?.name.slice(0, 1)}
+                  {user?.username.slice(0, 1)}
                 </div>
                 <div>
                   <p className="font-medium text-[17px]">{user?.name}</p>
@@ -158,4 +159,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default TeacherProfile;

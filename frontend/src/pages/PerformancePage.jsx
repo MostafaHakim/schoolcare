@@ -20,7 +20,7 @@ const StudentDashboard = () => {
   return (
     <div className="space-y-1 lg:space-y-6 lg:bg-white rounded-lg lg:rounded-xl p-4 pb-20">
       {/* Top Cards */}
-      <div className="flex flex-row items-center justify-between lg:bg-white p-4  rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
+      <div className="flex flex-row items-center justify-between lg:bg-white py-4  rounded-t-2xl lg:border-b lg:border-blue-50 lg:py-8">
         <div className="flex flex-row items-center space-x-3 border-0">
           <Link to="/">
             <MoveLeft className="" />
