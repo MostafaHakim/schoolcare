@@ -133,7 +133,7 @@ const ProfilePage = () => {
                   </span>
                 </div>
               </div>
-              <button className="hidden lg:block w-full py-4 bg-primary-700 text-white capitalize :rounded-xl text-[17px] font-lexend">
+              <button className="hidden lg:block w-full py-4 bg-primary-700 text-white capitalize rounded-xl text-[17px] font-lexend">
                 {" "}
                 contact with school teacher
               </button>
