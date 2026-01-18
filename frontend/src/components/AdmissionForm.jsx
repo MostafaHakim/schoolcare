@@ -116,11 +116,11 @@ const AdmissionForm = () => {
       {/* ===== Form Body ===== */}
       <form
         onSubmit={handleSubmit}
-        className="lg:bg-white p-4 lg:p-6 rounded-b-2xl"
+        className="lg:bg-white py-4 lg:p-6 rounded-b-2xl "
       >
         {/* ===== Avatar ===== */}
         <div className="flex justify-center mb-6">
-          <label className="relative w-28 h-28 rounded-full border-2 border-primary-700 flex items-center justify-center bg-white cursor-pointer overflow-hidden">
+          <label className="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full border border-primary-700 flex items-center justify-center bg-white lg:bg-gray-100 cursor-pointer overflow-hidden">
             {preview ? (
               <img
                 src={preview}
@@ -135,28 +135,22 @@ const AdmissionForm = () => {
         </div>
 
         {/* ===== Form Grid ===== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-3 rounded-[17px]">
           <Input
             label="Student name"
             name="name"
             value={formData.name}
             onChange={handleChange}
           />
-          <Input
-            label="Roll"
-            name="roll"
-            value={formData.roll}
-            onChange={handleChange}
-          />
-
           {/* Class */}
-          <div>
-            <label className="text-sm text-gray-600">Class</label>
+          <fieldset className="border bg-white border-gray-300 rounded-xl px-3 pb-2 focus-within:border-purple-500">
+            <legend className="px-2 text-sm text-gray-600">Class</legend>
+
             <select
               name="classId"
               value={formData.classId}
               onChange={handleChange}
-              className="w-full mt-1 rounded-xl border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500"
+              className="w-full bg-transparent outline-none px-1 py-2 text-sm focus:ring-0"
             >
               <option value="">Select class</option>
               {classes?.map((cls) => (
@@ -165,25 +159,13 @@ const AdmissionForm = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </fieldset>
 
-          <Input
-            label="Student ID"
-            name="studentId"
-            value={formData.studentId}
-            onChange={handleChange}
-          />
           <Input
             label="Date of birth"
             type="date"
             name="dob"
             value={formData.dob}
-            onChange={handleChange}
-          />
-          <Input
-            label="Address"
-            name="address"
-            value={formData.address}
             onChange={handleChange}
           />
           <Input
@@ -193,22 +175,30 @@ const AdmissionForm = () => {
             onChange={handleChange}
           />
           <Input
+            label="Address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+          />
+          <Input
             label="Father name"
             name="fathername"
             value={formData.fathername}
             onChange={handleChange}
           />
+
+          <Input
+            label="Student ID"
+            name="studentId"
+            value={formData.studentId}
+            onChange={handleChange}
+          />
+
           <Input
             label="Password for Login"
             type="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
-          />
-          <Input
-            label="Login Number"
-            name="loginNumber"
-            value={formData.loginNumber}
             onChange={handleChange}
           />
         </div>
@@ -229,17 +219,28 @@ const AdmissionForm = () => {
 };
 
 /* ===== Reusable Input ===== */
-const Input = ({ label, name, value, onChange, type = "text" }) => (
-  <div>
-    <label className="text-sm text-gray-600">{label}</label>
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      className="w-full mt-1 rounded-xl border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-purple-500"
-    />
-  </div>
-);
+
+const Input = ({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+}) => {
+  return (
+    <fieldset className="border bg-white border-gray-300 rounded-xl px-3  focus-within:border-purple-500">
+      <legend className="px-2 text-sm text-gray-600">{label}</legend>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className="w-full bg-transparent outline-none px-1 py-2 text-sm focus:ring-0"
+      />
+    </fieldset>
+  );
+};
 
 export default AdmissionForm;
