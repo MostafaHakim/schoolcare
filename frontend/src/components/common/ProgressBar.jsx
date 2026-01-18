@@ -6,12 +6,12 @@ const ProgressBar = ({ value, gradient }) => {
           className="h-full rounded-full transition-all"
           style={{
             width: `${value}%`,
-            background: gradient
+            background: gradient,
           }}
         />
       </div>
 
-      <div className="flex justify-between text-[10px] sm:text-xs">
+      <div className="flex justify-between text-[12px] lg:text-[17px] sm:text-xs">
         <span className="text-red-500 font-medium">{value}%</span>
         <span className="text-purple-500 font-medium">100%</span>
       </div>

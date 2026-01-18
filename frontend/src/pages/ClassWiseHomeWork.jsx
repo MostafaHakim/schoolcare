@@ -25,17 +25,17 @@ const ClassWiseHomeWork = () => {
   }, [fetchData]);
 
   return (
-    <div className="bg-white/90 flex flex-col space-y-4 min-h-screen">
+    <div className="lg:bg-white lg:rounded-2xl flex flex-col space-y-4 min-h-screen  ">
       {/* ===== Header ===== */}
       <Header name={name} />
 
       {/* ===== Date Selector ===== */}
-      <div className="p-4">
+      <div className="lg:px-4">
         <CalendarHeader />
       </div>
 
       {/* ===== Homework List ===== */}
-      <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="lg:p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
         {loading ? (
           <p className="text-gray-500 col-span-full text-center">Loading...</p>
         ) : homeworkByClass.length === 0 ? (
@@ -61,7 +61,7 @@ export default ClassWiseHomeWork;
 
 /* ===== Helper Components ===== */
 const Header = ({ name }) => (
-  <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b lg:border-gray-200">
+  <div className="flex flex-row items-center justify-between  lg:border-b lg:border-gray-100 lg:py-8 px-4">
     <div className="flex flex-row items-center space-x-2">
       <Link to="/">
         <MoveLeft className="lg:hidden" />

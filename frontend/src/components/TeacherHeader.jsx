@@ -21,8 +21,12 @@ const TeacherHeader = () => {
           >
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <p className="text-sm font-semibold capitalize">{user?.name}</p>
-                <p className="text-xs text-gray-400">{user?.studentId}</p>
+                <p className="text-[14px] font-semibold capitalize">
+                  {user?.school}
+                </p>
+                <p className="text-[12px] text-gray-400">
+                  School ID:{user?.userId}
+                </p>
               </div>
               <img src={user.image} className="w-10 h-10 rounded-full" />
             </div>

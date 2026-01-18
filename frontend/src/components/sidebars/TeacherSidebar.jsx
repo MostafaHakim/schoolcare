@@ -29,11 +29,6 @@ const TeacherSidebar = () => {
   const { logout } = useAuth();
   return (
     <aside className="hidden lg:block w-64 bg-white border-r min-h-screen px-4 py-6">
-      {/* Logo */}
-      <h1 className="text-xl font-semibold text-purple-600 mb-8">
-        School Care ✍️
-      </h1>
-
       {/* Nav */}
       <nav className="space-y-1">
         {navItems.map((item) => (

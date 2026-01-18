@@ -1,14 +1,19 @@
-import { Users } from "lucide-react";
+import { Eye, Heart, icons, Users } from "lucide-react";
 import SectionHeader from "../../components/common/SectionHeader";
 import StatCard from "../../components/common/StatCard";
 import ProgressBar from "../../components/common/ProgressBar";
 import { Link } from "react-router-dom";
 import { useStudent } from "../../contexts/studentContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 const TeacherDashboard = () => {
   const { students } = useStudent();
+  const { user } = useAuth();
+
+  const isDesktop = window.innerWidth >= 768;
+
   return (
-    <div className="p-4 sm:p-6 space-y-4 bg-white/90">
+    <div className="min-h-screen  space-y-4 lg:bg-white lg:p-4 rounded-2xl">
       <div className="lg:hidden">
         <SectionHeader
           title="Good Morning!"
@@ -16,12 +21,19 @@ const TeacherDashboard = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-[15px]">
+        {/* Total Teachers */}
+        <StatCard
+          title="Total Teachers"
+          value={user?.totalTeachers || 10}
+          {...(isDesktop ? null : { icon: Users })}
+          order="order-2 lg:order-4 col-span-1"
+        />
         {/* Average Performance */}
         <StatCard
           title="Average performance"
-          value="34%"
-          order="order-2 lg:order-1"
+          order="order-3 lg:order-1 lg:col-span-2"
+          {...(isDesktop ? { icon: Users } : { status: "Bad" })}
         >
           <ProgressBar
             value={34}
@@ -32,96 +44,104 @@ const TeacherDashboard = () => {
         {/* Today Present */}
         <StatCard
           title="Today Present"
-          value="186"
-          footer="Good"
-          order="order-3"
+          order="order-4 lg:order-2  lg:col-span-2"
+          {...(isDesktop ? { status: students.length } : { status: "Good" })}
         >
-          <div className="h-2 rounded-full bg-gray-200 overflow-hidden">
-            <div className="h-full w-[70%] bg-gradient-to-r from-green-400 to-red-400" />
-          </div>
+          <ProgressBar
+            value={70}
+            gradient="linear-gradient(90deg,#22c55e,#facc15,#fb7185)"
+          />
         </StatCard>
 
         {/* Total Students */}
         <StatCard
           title="Total Students"
           value={students.length}
-          icon={Users}
-          order="order-1 lg:order-3"
+          {...(isDesktop ? null : { icon: Users })}
+          order="order-1 lg:order-3 col-span-1"
         />
       </div>
-      <div className="py-8">
-        <h2 className="text-2xl  font-lexend font-semibold py-4">News</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-12 lg:gap-16 p-4">
-          <div className="col-span-1 flex flex-row md:flex-col space-x-4 md:space-x-0 md:space-y-4 text-sm text-gray-600 border border-blue-100 p-4 rounded-lg">
+      <div className="py-2">
+        <h2 className="text-[17px]  font-lexend font-semibold pb-2">
+          Popular news
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px] lg:gap-4">
+          <div className="col-span-1 flex flex-row items-center md:flex-col space-x-4 md:space-x-0 md:space-y-4 text-sm text-gray-600 border border-gray-100 p-[10px] rounded-[12px]">
             <img
               src="https://picsum.photos/300/200.jpg"
-              className="w-1/4 md:w-full rounded-lg"
+              className="w-[76px] lg:w-full lg:h-auto h-[76px] rounded-[10px]"
               alt="img"
             />
-            <div className="flex flex-col">
-              <h3 className="text-md text-gray-600  font-semibold">
-                text of the printing and typesetting industry. Lorem
+            <div className="flex flex-col space-y-1">
+              <h3 className="text-[12px] lg:text-[17px] text-gray-600  font-semibold font-kalpurush line-clamp-2">
+                ইউনিক ক্যাপশন বাংলা বা আনকমন ক্যাপশন মানে এমন ক্যাপশন
+                যেগুলোইউনিক ক্যাপশন বাংলা বা আনকমন ক্যাপশন মানে এমন ক্যাপশন
+                যেগুলো অন্যরকম, আলাদা এবং একদম ইউনিক। ফেসবুকে পোস্ট করার সময়
+                আমরা সবাই চাই নতুন কিছু,
               </h3>
-              <p className="line-clamp-2 md:line-clamp-3 text-gray-500">
-                is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged. It was popularised
-                in the 1960s with the release of Letraset sheets containing
-                Lorem Ipsum passages, and more recently with desktop publishing
-                software like Aldus PageMaker including versions of Lorem Ipsum.
-              </p>
-              <Link className="text-violet-600">See More</Link>
+              <span className="hidden lg:block text-primary-700 text-[14px]">
+                Read More...
+              </span>
+              <div className="flex flex-row items-center justify-start space-x-8 lg:space-x-0 text-[14px] lg:justify-evenly border border-gray-100 lg:py-2 lg:rounded-[12px]">
+                <span className="flex flex-row space-x-1">
+                  <Eye size={18} /> <span>32</span>
+                </span>
+                <span className="flex flex-row space-x-1">
+                  <Heart size={18} /> <span>1K</span>
+                </span>
+              </div>
             </div>
           </div>
-          <div className="col-span-1 flex flex-row md:flex-col space-x-4 md:space-x-0 md:space-y-4 text-sm text-gray-600 border border-blue-100 p-4 rounded-lg">
+          <div className="col-span-1 flex flex-row items-center md:flex-col space-x-4 md:space-x-0 md:space-y-4 text-sm text-gray-600 border border-gray-100 p-[10px] rounded-[12px]">
             <img
               src="https://picsum.photos/300/200.jpg"
-              className="w-1/4 md:w-full rounded-lg"
+              className="w-[76px] lg:w-full lg:h-auto h-[76px] rounded-[10px]"
               alt="img"
             />
-            <div className="flex flex-col">
-              <h3 className="text-md text-gray-600  font-semibold">
-                text of the printing and typesetting industry. Lorem
+            <div className="flex flex-col space-y-1">
+              <h3 className="text-[12px] lg:text-[17px] text-gray-600  font-semibold font-kalpurush line-clamp-2">
+                ইউনিক ক্যাপশন বাংলা বা আনকমন ক্যাপশন মানে এমন ক্যাপশন
+                যেগুলোইউনিক ক্যাপশন বাংলা বা আনকমন ক্যাপশন মানে এমন ক্যাপশন
+                যেগুলো অন্যরকম, আলাদা এবং একদম ইউনিক। ফেসবুকে পোস্ট করার সময়
+                আমরা সবাই চাই নতুন কিছু,
               </h3>
-              <p className="line-clamp-2 md:line-clamp-3 text-gray-500">
-                is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged. It was popularised
-                in the 1960s with the release of Letraset sheets containing
-                Lorem Ipsum passages, and more recently with desktop publishing
-                software like Aldus PageMaker including versions of Lorem Ipsum.
-              </p>
-              <Link className="text-violet-600">See More</Link>
+              <span className="hidden lg:block text-primary-700 text-[14px]">
+                Read More...
+              </span>
+              <div className="flex flex-row items-center justify-start space-x-8 lg:space-x-0 text-[14px] lg:justify-evenly border border-gray-100 lg:py-2 lg:rounded-[12px]">
+                <span className="flex flex-row space-x-1">
+                  <Eye size={18} /> <span>32</span>
+                </span>
+                <span className="flex flex-row space-x-1">
+                  <Heart size={18} /> <span>1K</span>
+                </span>
+              </div>
             </div>
           </div>
-          <div className="col-span-1 flex flex-row md:flex-col space-x-4 md:space-x-0 md:space-y-4 text-sm text-gray-600 border border-blue-100 p-4 rounded-lg">
+          <div className="col-span-1 flex flex-row items-center md:flex-col space-x-4 md:space-x-0 md:space-y-4 text-sm text-gray-600 border border-gray-100 p-[10px] rounded-[12px]">
             <img
               src="https://picsum.photos/300/200.jpg"
-              className="w-1/4 md:w-full rounded-lg"
+              className="w-[76px] lg:w-full lg:h-auto h-[76px] rounded-[10px]"
               alt="img"
             />
-            <div className="flex flex-col">
-              <h3 className="text-md text-gray-600  font-semibold">
-                text of the printing and typesetting industry. Lorem
+            <div className="flex flex-col space-y-1">
+              <h3 className="text-[12px] lg:text-[17px] text-gray-600  font-semibold font-kalpurush line-clamp-2">
+                ইউনিক ক্যাপশন বাংলা বা আনকমন ক্যাপশন মানে এমন ক্যাপশন
+                যেগুলোইউনিক ক্যাপশন বাংলা বা আনকমন ক্যাপশন মানে এমন ক্যাপশন
+                যেগুলো অন্যরকম, আলাদা এবং একদম ইউনিক। ফেসবুকে পোস্ট করার সময়
+                আমরা সবাই চাই নতুন কিছু,
               </h3>
-              <p className="line-clamp-2 md:line-clamp-3 text-gray-500">
-                is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived
-                not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged. It was popularised
-                in the 1960s with the release of Letraset sheets containing
-                Lorem Ipsum passages, and more recently with desktop publishing
-                software like Aldus PageMaker including versions of Lorem Ipsum.
-              </p>
-              <Link className="text-violet-600">See More</Link>
+              <span className="hidden lg:block text-primary-700 text-[14px]">
+                Read More...
+              </span>
+              <div className="flex flex-row items-center justify-start space-x-8 lg:space-x-0 text-[14px] lg:justify-evenly border border-gray-100 lg:py-2 lg:rounded-[12px]">
+                <span className="flex flex-row space-x-1">
+                  <Eye size={18} /> <span>32</span>
+                </span>
+                <span className="flex flex-row space-x-1">
+                  <Heart size={18} /> <span>1K</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>

@@ -156,7 +156,7 @@ const HomeworkForm = ({
       label="Subject"
       value={subject}
       setValue={setSubject}
-      placeholder="Enter subject"
+      placeholder="Please write the subject here..."
     />
     <TextAreaField
       label="About Homework"
@@ -168,7 +168,7 @@ const HomeworkForm = ({
     <button
       type="submit"
       disabled={loading}
-      className="px-20 py-3 text-white font-semibold bg-violet-600 rounded-full hover:opacity-90 disabled:opacity-60"
+      className="px-20 py-3 text-white font-semibold bg-violet-600 rounded-lg hover:opacity-90 disabled:opacity-60"
     >
       {loading ? "Publishing..." : "Publish"}
     </button>
@@ -176,14 +176,14 @@ const HomeworkForm = ({
 );
 
 const InputField = ({ label, value, setValue, placeholder }) => (
-  <fieldset className="w-full lg:w-1/2 p-4 border rounded-2xl">
+  <fieldset className="w-full lg:w-1/2 p-2  border rounded-2xl">
     <legend className="font-semibold text-gray-700">{label}</legend>
     <input
       type="text"
       value={value}
       onChange={(e) => setValue(e.target.value)}
       placeholder={placeholder}
-      className="w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-violet-500"
+      className="w-full p-4 rounded-xl  focus:outline-none focus:ring-2 focus:ring-violet-500"
     />
   </fieldset>
 );
@@ -196,7 +196,7 @@ const TextAreaField = ({ label, value, setValue, placeholder }) => (
       onChange={(e) => setValue(e.target.value)}
       rows={5}
       placeholder={placeholder}
-      className="w-full p-4 rounded-xl border focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
+      className="w-full p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
     />
   </fieldset>
 );

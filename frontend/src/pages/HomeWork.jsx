@@ -31,8 +31,8 @@ const HomeWork = () => {
     <div className="">
       <div className=" ">
         {/* ===== Header ===== */}
-        <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
-          <div className="flex flex-row items-start justify-start space-x-2">
+        <div className="flex flex-row items-center justify-between lg:bg-white px-4 py-4 lg:py-8 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
+          <div className="flex flex-row items-start justify-start space-x-2 ">
             <MoveLeft className="flex lg:hidden" />
             <h1 className="text-lg font-semibold text-gray-800">Class List</h1>
           </div>
@@ -45,16 +45,16 @@ const HomeWork = () => {
             <span>Add Class</span>
           </button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 bg-white p-4 lg:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 lg:bg-white p-4 lg:p-6 ">
           {classes.map((classItem) => (
             <div
               key={classItem._id}
-              className="col-span-1 flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 border border-blue-100 rounded-2xl space-x-4"
+              className="col-span-1 flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 border border-gray-100 rounded-2xl  lg:space-x-4 bg-white"
             >
-              <div className="flex flex-col items-start justify-between w-full space-y-6">
-                <span className="text-lg ">
-                  Class{" "}
-                  <span className="px-2 text-textc2-700">
+              <div className="flex flex-col items-start justify-between w-full space-y-3 lg:space-y-6">
+                <span className="text-[17px] ">
+                  Class
+                  <span className="px-2 text-textc2-700 text-[17px]">
                     {filterStudent(classItem.name)}
                   </span>
                 </span>
@@ -62,20 +62,20 @@ const HomeWork = () => {
                   {classItem.name}
                 </div>
               </div>
-              <div className="flex flex-col items-end justify-between w-full space-y-4">
+              <div className="flex flex-col items-end justify-between w-full space-y-3 lg:space-y-6">
                 <button
                   onClick={() => {
-                    setDeleteModal(true), setDeleteId(classItem._id);
+                    (setDeleteModal(true), setDeleteId(classItem._id));
                   }}
-                  className="text-rose-500 bg-rose-500/20 p-3  rounded-xl flex"
+                  className="text-rose-500 bg-rose-500/20 p-2  rounded-xl flex"
                 >
                   <Trash2 />
                 </button>
                 <Link
                   to={`${classItem.name}`}
-                  className="text-gray-900 p-2 border border-gray-300 rounded-xl"
+                  className="text-gray-900 p-3 bg-gray-100  rounded-xl"
                 >
-                  <MoveRight />
+                  <MoveRight size={20} />
                 </Link>
               </div>
             </div>
@@ -100,7 +100,7 @@ const HomeWork = () => {
           />
 
           {/* Modal box */}
-          <div className="relative bg-white w-[90%] max-w-md rounded-xl p-6 z-10">
+          <div className="relative bg-white w-[90%] max-w-[400px] rounded-xl p-6 z-10">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Add Class</h2>
               <button onClick={() => setOpen(false)}>✕</button>
@@ -119,13 +119,7 @@ const HomeWork = () => {
           />
 
           {/* Modal box */}
-          <div className="relative bg-white w-[90%] max-w-md rounded-xl p-2 lg:p-6 z-10">
-            <div className="flex items-center justify-end mb-2">
-              <button className="text-lg" onClick={() => setDeleteModal(false)}>
-                ✕
-              </button>
-            </div>
-
+          <div className="relative bg-white w-[90%] max-w-[380px] rounded-xl p-2 lg:p-6 z-10">
             <ClassDeleteModal
               setDeleteModal={setDeleteModal}
               handleDelete={handleDelete}

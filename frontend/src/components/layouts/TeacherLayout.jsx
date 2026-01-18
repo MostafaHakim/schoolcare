@@ -5,13 +5,11 @@ import TeacherHeader from "../TeacherHeader";
 
 const TeacherLayout = () => {
   return (
-    <div className="min-h-screen bg-[#F7F8FA] flex">
-      <TeacherSidebar />
-
-      <div className="flex-1 flex flex-col">
-        <TeacherHeader />
-
-        <main className="flex-1 p-4 lg:p-6 pb-24 lg:pb-6">
+    <div className="flex flex-col bg-[#F7F8FA] ">
+      <TeacherHeader />
+      <div className=" flex flex-row">
+        <TeacherSidebar />
+        <main className="flex-1 p-[15px] lg:p-[20px] min-h-screen pb-20 relative">
           <Outlet />
         </main>
 

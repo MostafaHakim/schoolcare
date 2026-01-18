@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MoveRight, BookOpen, MoveLeft, UsersRound } from "lucide-react";
+import {
+  MoveRight,
+  BookOpen,
+  MoveLeft,
+  UsersRound,
+  Trash2,
+} from "lucide-react";
 import { GoPlus } from "react-icons/go";
 import ClassAddModal from "../components/ClassAddModal";
 import { useClass } from "../contexts/classContext";
@@ -11,20 +17,22 @@ const Admission = () => {
 
   const { students } = useStudent();
   const [open, setOpen] = useState(false);
+  const filterStudent = (cls) =>
+    students.filter((student) => student.classId === cls).length;
 
   return (
     <div className="">
       <div className=" ">
         {/* ===== Header ===== */}
-        <div className="flex flex-row items-center justify-between bg-white px-4 py-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
-          <div className="flex flex-row items-start justify-start space-x-2">
-            <MoveLeft className="flex lg:hidden" />
+        <div className="flex flex-row items-center justify-between lg:bg-white lg:px-4 py-2 lg:py-8 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
+          <div className="flex flex-row items-center justify-start space-x-2">
+            <MoveLeft className="flex " />
             <h1 className="text-lg font-semibold text-gray-800">Admission</h1>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 bg-white p-4 lg:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:bg-white lg:p-6">
           <div className="col-span-1 flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 border bg-[#9542E71A]/10 border-blue-100 rounded-2xl space-x-4">
-            <div className="flex flex-col items-start justify-between w-full space-y-6">
+            <div className="flex flex-col items-start justify-between w-full space-y-2 lg:space-y-6">
               <span className="text-lg ">See All Students</span>
               <div className="text-2xl lg:text-3xl font-semibold lg:font-bold  text-gray-800">
                 {students.length}
@@ -36,7 +44,7 @@ const Admission = () => {
               </h2>
               <Link
                 to="allstudents"
-                className="text-gray-900 p-3 border border-gray-300 rounded-full"
+                className="text-gray-900 p-2 lg:p-3 bg-white border border-gray-300 rounded-full"
               >
                 <MoveRight />
               </Link>
@@ -45,21 +53,26 @@ const Admission = () => {
           {classes.map((classItem) => (
             <div
               key={classItem._id}
-              className="col-span-1 flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 border border-blue-100 rounded-2xl space-x-4"
+              className="col-span-1 bg-white flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 rounded-2xl space-x-4 lg:border border-gray-100"
             >
-              <div className="flex flex-col items-start justify-between w-full space-y-6">
-                <span className="text-lg ">Class</span>
+              <div className="flex flex-col items-start justify-between w-full space-y-2 lg:space-y-6">
+                <span className="text-[17px] ">
+                  Class
+                  <span className="px-2 text-textc2-700 text-[17px]">
+                    {filterStudent(classItem.name)}
+                  </span>
+                </span>
                 <div className="text-2xl lg:text-3xl font-semibold lg:font-bold  text-gray-800">
                   {classItem.name}
                 </div>
               </div>
-              <div className="flex flex-col items-end justify-between w-full space-y-4">
-                <h2 className="text-[#7efff5] bg-[#7efff5]/20 p-3  rounded-full hidden lg:flex">
-                  <BookOpen />
+              <div className="flex flex-col items-end justify-between w-full space-y-2 lg:space-y-6">
+                <h2 className="text-rose-500 bg-rose-500/20 p-2 lg:p-3  rounded-lg ">
+                  <Trash2 />
                 </h2>
                 <Link
                   to={`${classItem.name}`}
-                  className="text-gray-900 p-3 border border-gray-300 rounded-full"
+                  className="text-gray-900 p-2 lg:p-3 bg-white border border-gray-300 rounded-lg lg:rounded-full"
                 >
                   <MoveRight />
                 </Link>

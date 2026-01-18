@@ -74,7 +74,7 @@ const AdmissionForm = () => {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
+        },
       );
       const resdata = await res.data;
       toast.success("Student admitted successfully");
@@ -104,21 +104,23 @@ const AdmissionForm = () => {
   return (
     <div className="w-full">
       {/* ===== Header ===== */}
-      <div className="flex items-center justify-between bg-white px-4 py-4 rounded-t-2xl border-b">
-        <div className="flex items-center gap-2">
-          <MoveLeft className="lg:hidden cursor-pointer" />
-          <h1 className="text-lg font-semibold text-gray-800">Admit Student</h1>
+      <div className="flex items-center justify-between lg:bg-white lg:py-8 lg:px-4  rounded-t-2xl lg:border-b">
+        <div className="flex flex-row items-center gap-2">
+          <MoveLeft size={22} className="cursor-pointer" />
+          <h1 className="text-[14px] lg:text-lg font-semibold text-gray-800">
+            Admit Student
+          </h1>
         </div>
       </div>
 
       {/* ===== Form Body ===== */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-4 lg:p-6 rounded-b-2xl"
+        className="lg:bg-white p-4 lg:p-6 rounded-b-2xl"
       >
         {/* ===== Avatar ===== */}
         <div className="flex justify-center mb-6">
-          <label className="relative w-28 h-28 rounded-full border-2 border-gray-300 flex items-center justify-center bg-gray-100 cursor-pointer overflow-hidden">
+          <label className="relative w-28 h-28 rounded-full border-2 border-primary-700 flex items-center justify-center bg-white cursor-pointer overflow-hidden">
             {preview ? (
               <img
                 src={preview}
@@ -126,7 +128,7 @@ const AdmissionForm = () => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <Camera className="text-gray-500" />
+              <Camera className="text-gray-500 text-primary-700" />
             )}
             <input type="file" hidden accept="image/*" onChange={handleImage} />
           </label>
