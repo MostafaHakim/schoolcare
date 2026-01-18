@@ -1,4 +1,4 @@
-import { ArrowLeft, Bell, Wallet, Info, LogOut } from "lucide-react";
+import { ArrowLeft, Bell, Wallet, Info, LogOut, MoveLeft } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import ProfileIcon from "../assets/profileshadow.png";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
@@ -7,10 +7,10 @@ const StudentProfilePage = () => {
   const { user, logout } = useAuth();
   const [notificatinToggle, setNotificatinToggle] = useState(false);
   return (
-    <div className="space-y-4 lg:bg-white  p-4 pb-20">
+    <div className="space-y-4 lg:bg-white  p-4 pb-20 lg:rounded-2xl min-h-screen">
       {/* ===== Header ===== */}
-      <div className="flex items-center lg:p-6 space-x-4 pt-4 ">
-        <ArrowLeft className="text-gray-600 size-5" />
+      <div className="flex items-center lg:p-6 space-x-2 pt-4 ">
+        <MoveLeft className="text-gray-600 size-5" />
         <h1 className="text-[14px] lg:text-2xl font-semibold">Profile</h1>
       </div>
 

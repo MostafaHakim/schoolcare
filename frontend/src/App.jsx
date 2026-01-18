@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
 import LoginPage from "./pages/LoginPage";
 import PerformancePage from "./pages/PerformancePage";
@@ -44,6 +44,7 @@ import { ClassProvider } from "./contexts/classContext";
 import StudentAnnouncenmect from "./pages/StudentAnnouncement";
 import StudentProfilePage from "./pages/StudentProfilePage";
 import TeacherProfile from "./components/TeacherProfile";
+import StudentNewsDetail from "./pages/NewsDetails";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -184,6 +185,10 @@ function App() {
                             <Route
                               path="homework/:id"
                               element={<HomeworkDetailPage />}
+                            />
+                            <Route
+                              path="news/:id"
+                              element={<StudentNewsDetail />}
                             />
                             <Route
                               path="results"

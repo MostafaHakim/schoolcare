@@ -8,7 +8,7 @@ const StudentHeader = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-2 hidden lg:flex flex-row items-center justify-between">
+    <header className="bg-white border-b border-gray-200 px-6 py-2 hidden lg:flex flex-row items-center justify-between ">
       <div className="w-52">
         <img className="" src={SplashIcon} alt="School Care" />
       </div>

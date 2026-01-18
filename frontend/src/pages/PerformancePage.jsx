@@ -1,12 +1,10 @@
-import { Calendar, MoveLeft } from "lucide-react";
+import { ArrowRight, Calendar, MoveLeft } from "lucide-react";
 
 import StudentImage from "../assets/students.png";
 import { useHomework } from "../contexts/HomeworkContext";
 import { Link } from "react-router-dom";
 
 const StudentDashboard = () => {
-  const { homework } = useHomework();
-
   const calendarDays = [
     ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     [28, 29, 30, 31, 1, 2, 3],
@@ -59,10 +57,10 @@ const StudentDashboard = () => {
                 <span className="font-medium text-gray-800">
                   Average performance
                 </span>
-
-                <span className="flex items-center gap-2 text-red-500 font-medium">
-                  <span className="text-purple-500 tracking-widest">
-                    ············→
+                <span className="flex  gap-2 text-red-500 font-medium">
+                  <span className="flex items-center justify-end text-purple-500 tracking-widest">
+                    ···········
+                    <ArrowRight className="inline w-3 h-3" />
                   </span>
                   Bad
                 </span>

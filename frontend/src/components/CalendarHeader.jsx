@@ -196,40 +196,41 @@ const CalendarHeader = ({ selectedDate, setSelectedDate }) => {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg lg:rounded-2xl border shadow-sm px-4 py-4 grid grid-cols-2 lg:flex flex-col  lg:flex-row gap-4 items-center justify-center lg:justify-between">
-      {/* Month */}
-      <h2 className="text-[17px] lg:text-lg font-semibold text-gray-800 whitespace-nowrap col-span-1 order-1">
-        {format(normalizedDate, "MMMM yyyy")}
-      </h2>
+    <div>
+      <div className="bg-white hidden rounded-lg lg:rounded-2xl border shadow-sm px-4 py-4 grid grid-cols-2 lg:flex flex-col  lg:flex-row gap-4 items-center justify-center lg:justify-between">
+        {/* Month */}
+        <h2 className="text-[17px] lg:text-lg font-semibold text-gray-800 whitespace-nowrap col-span-1 order-1">
+          {format(normalizedDate, "MMMM yyyy")}
+        </h2>
 
-      {/* Dates - Scrollbar hidden */}
-      <div className="relative flex-1 max-w-2xl mx-auto col-span-2 order-3 lg:order-2">
-        <div
-          ref={containerRef}
-          onScroll={handleScroll}
-          className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-12 overflow-x-auto scrollbar-hide px-1 p-2 cursor-grab active:cursor-grabbing"
-          style={{ scrollBehavior: "smooth" }}
-        >
-          {days.map((date) => {
-            const isActive = isSameDay(date, normalizedDate);
-            const isToday = isSameDay(date, today);
-            const isSelectable = isDateSelectable(date);
-            const isFuture = isFutureDate(date);
+        {/* Dates - Scrollbar hidden */}
+        <div className="relative flex-1 max-w-2xl mx-auto col-span-2 order-3 lg:order-2 ">
+          <div
+            ref={containerRef}
+            onScroll={handleScroll}
+            className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-12 overflow-x-auto scrollbar-hide px-1 p-2 cursor-grab active:cursor-grabbing"
+            style={{ scrollBehavior: "smooth" }}
+          >
+            {days.map((date) => {
+              const isActive = isSameDay(date, normalizedDate);
+              const isToday = isSameDay(date, today);
+              const isSelectable = isDateSelectable(date);
+              const isFuture = isFutureDate(date);
 
-            return (
-              <motion.button
-                key={date.toISOString()}
-                whileTap={isSelectable ? { scale: 0.95 } : {}}
-                onClick={() => handleDateClick(date)}
-                animate={{
-                  scale: isActive ? 1.1 : 1,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 30,
-                }}
-                className={`flex-shrink-0 w-8 sm:w-8 md:w-10 h-16 md:h-18 rounded-full flex flex-col items-center justify-center text-sm transition-all duration-300 relative
+              return (
+                <motion.button
+                  key={date.toISOString()}
+                  whileTap={isSelectable ? { scale: 0.95 } : {}}
+                  onClick={() => handleDateClick(date)}
+                  animate={{
+                    scale: isActive ? 1.1 : 1,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                  }}
+                  className={`flex-shrink-0 w-6 sm:w-8 md:w-10 h-16 md:h-18 rounded-2xl flex flex-col items-center justify-center text-sm transition-all duration-300 relative
                   ${
                     isActive
                       ? "bg-gradient-to-tl from-violet-800 to-[#5777F6] text-white shadow-lg"
@@ -237,75 +238,190 @@ const CalendarHeader = ({ selectedDate, setSelectedDate }) => {
                         ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                         : "text-gray-600 hover:bg-gray-100"
                   } ${isToday && !isActive ? "border border-purple-300" : ""}`}
-                disabled={!isSelectable}
-                title={!isSelectable ? "Future dates cannot be selected" : ""}
-              >
-                <span
-                  className={`font-medium text-[14px] ${
-                    isActive ? "font-semibold" : ""
-                  } ${!isSelectable ? "opacity-50" : ""}`}
+                  disabled={!isSelectable}
+                  title={!isSelectable ? "Future dates cannot be selected" : ""}
                 >
-                  {format(date, "dd")}
-                </span>
-                <span
-                  className={`text-[10px] ${
-                    isActive ? "opacity-90" : "opacity-70"
-                  } ${!isSelectable ? "opacity-50" : ""}`}
-                >
-                  {format(date, "EE")}
-                </span>
-                {isToday && !isActive && (
-                  <div className="absolute bottom-2 w-1 h-1 rounded-full bg-purple-500" />
-                )}
-                {isFuture && (
-                  <div className="absolute top-1 right-1 w-2 h-2">
-                    <svg
-                      className="w-full h-full text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                )}
-              </motion.button>
-            );
-          })}
+                  <span
+                    className={`font-medium text-[14px] ${
+                      isActive ? "font-semibold" : ""
+                    } ${!isSelectable ? "opacity-50" : ""}`}
+                  >
+                    {format(date, "dd")}
+                  </span>
+                  <span
+                    className={`text-[10px] ${
+                      isActive ? "opacity-90" : "opacity-70"
+                    } ${!isSelectable ? "opacity-50" : ""}`}
+                  >
+                    {format(date, "EE")}
+                  </span>
+                  {isToday && !isActive && (
+                    <div className="absolute bottom-2 w-1 h-1 rounded-full bg-purple-500" />
+                  )}
+                  {isFuture && (
+                    <div className="absolute top-1 right-1 w-2 h-2">
+                      <svg
+                        className="w-full h-full text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </motion.button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Controls */}
+        <div className="flex items-center gap-2 justify-end col-span-1 order-2 lg:order-3">
+          <button
+            onClick={handlePrev}
+            className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+          >
+            <ChevronLeft size={18} />
+          </button>
+
+          <button
+            onClick={handleToday}
+            className="px-4 py-2 text-[17px] rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition-colors"
+          >
+            Today
+          </button>
+
+          <button
+            onClick={handleNext}
+            className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+            disabled={!isDateSelectable(addDays(normalizedDate, 1))}
+            title={
+              !isDateSelectable(addDays(normalizedDate, 1))
+                ? "Cannot select future dates"
+                : ""
+            }
+          >
+            <ChevronRight size={18} />
+          </button>
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center gap-2 justify-end col-span-1 order-2 lg:order-3">
-        <button
-          onClick={handlePrev}
-          className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-        >
-          <ChevronLeft size={18} />
-        </button>
+      {/* Mobile Controller */}
+      <div className=" flex lg:hidden flex-col items-center justify-center bg-white  space-y-4 py-1 rounded-xl border border-gray-100">
+        {/* Month */}
+        <div className=" flex flex-row items-center justify-between w-full border-b p-2">
+          <h2 className="text-[17px] lg:text-lg font-semibold text-gray-800 whitespace-nowrap col-span-1 order-1">
+            {format(normalizedDate, "MMMM yyyy")}
+          </h2>
+          {/* Controls */}
+          <div className="flex items-center gap-2 justify-end col-span-1 order-2 lg:order-3">
+            <button
+              onClick={handlePrev}
+              className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+            >
+              <ChevronLeft size={18} />
+            </button>
 
-        <button
-          onClick={handleToday}
-          className="px-4 py-2 text-[17px] rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition-colors"
-        >
-          Today
-        </button>
+            <button
+              onClick={handleToday}
+              className="px-4 py-2 text-[17px] rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium transition-colors"
+            >
+              Today
+            </button>
 
-        <button
-          onClick={handleNext}
-          className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-          disabled={!isDateSelectable(addDays(normalizedDate, 1))}
-          title={
-            !isDateSelectable(addDays(normalizedDate, 1))
-              ? "Cannot select future dates"
-              : ""
-          }
-        >
-          <ChevronRight size={18} />
-        </button>
+            <button
+              onClick={handleNext}
+              className="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+              disabled={!isDateSelectable(addDays(normalizedDate, 1))}
+              title={
+                !isDateSelectable(addDays(normalizedDate, 1))
+                  ? "Cannot select future dates"
+                  : ""
+              }
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+        {/* Dates - Scrollbar hidden */}
+        <div className="relative flex-1 max-w-2xl mx-auto col-span-2 order-3 lg:order-2 ">
+          <div
+            ref={containerRef}
+            onScroll={handleScroll}
+            className="flex gap-4 sm:gap-6 md:gap-8 lg:gap-12 overflow-x-auto scrollbar-hide px-1 p-2 cursor-grab active:cursor-grabbing"
+            style={{ scrollBehavior: "smooth" }}
+          >
+            {days.map((date) => {
+              const isActive = isSameDay(date, normalizedDate);
+              const isToday = isSameDay(date, today);
+              const isSelectable = isDateSelectable(date);
+              const isFuture = isFutureDate(date);
+
+              return (
+                <motion.button
+                  key={date.toISOString()}
+                  whileTap={isSelectable ? { scale: 0.95 } : {}}
+                  onClick={() => handleDateClick(date)}
+                  animate={{
+                    scale: isActive ? 1.1 : 1,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 500,
+                    damping: 30,
+                  }}
+                  className={`flex-shrink-0 w-8 sm:w-8 md:w-10 h-14 md:h-18 rounded-xl flex flex-col items-center justify-center text-sm transition-all duration-300 relative
+                  ${
+                    isActive
+                      ? "bg-gradient-to-tl from-violet-800 to-[#5777F6] text-white shadow-lg"
+                      : !isSelectable
+                        ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        : "text-gray-600 hover:bg-gray-100"
+                  } ${isToday && !isActive ? "border border-purple-300" : ""}`}
+                  disabled={!isSelectable}
+                  title={!isSelectable ? "Future dates cannot be selected" : ""}
+                >
+                  <span
+                    className={`font-medium text-[14px] ${
+                      isActive ? "font-semibold" : ""
+                    } ${!isSelectable ? "opacity-50" : ""}`}
+                  >
+                    {format(date, "dd")}
+                  </span>
+                  <span
+                    className={`text-[10px] ${
+                      isActive ? "opacity-90" : "opacity-70"
+                    } ${!isSelectable ? "opacity-50" : ""}`}
+                  >
+                    {format(date, "EE")}
+                  </span>
+                  {isToday && !isActive && (
+                    <div className="absolute bottom-2 w-1 h-1 rounded-full bg-purple-500" />
+                  )}
+                  {isFuture && (
+                    <div className="absolute top-1 right-1 w-2 h-2">
+                      <svg
+                        className="w-full h-full text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </motion.button>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

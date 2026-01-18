@@ -1,4 +1,4 @@
-import { Calendar, Eye, ChevronRight, Heart } from "lucide-react";
+import { Calendar, Eye, ChevronRight, Heart, ArrowRight } from "lucide-react";
 import { TiPin } from "react-icons/ti";
 import StudentImage from "../../assets/students.png";
 import { useHomework } from "../../contexts/HomeworkContext";
@@ -40,7 +40,7 @@ const StudentDashboard = () => {
       {/* Top Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-6">
         {/* Average Performance */}
-        <div className="h-full bg-white rounded-lg lg:rounded-3xl lg:border  border-gray-100 overflow-hidden lg:relative">
+        <div className="h-full bg-white rounded-[12px] lg:rounded-3xl lg:border  border-gray-100 overflow-hidden lg:relative">
           <img
             className="hidden lg:flex w-full h-1/2"
             src={StudentImage}
@@ -60,15 +60,16 @@ const StudentDashboard = () => {
                 Present
               </span>
             </div>
-            <div className="p-2 lg:p-4 lg:border rounded-md lg:rounded-2xl space-y-2 lg:space-y-4 order-1 lg:order-2">
+            <div className="p-2 lg:p-4 lg:border rounded-[12px] lg:rounded-2xl space-y-2 lg:space-y-4 order-1 lg:order-2">
               <div className="flex items-center flex-row justify-between text-sm lg:text-base">
                 <span className="font-medium text-gray-800">
                   Average performance
                 </span>
 
                 <span className="flex items-center gap-2 text-red-500 font-medium text-sm lg:text-base">
-                  <span className="text-purple-500 tracking-widest">
-                    ············→
+                  <span className="flex items-center justify-end text-purple-500 tracking-widest">
+                    ···········
+                    <ArrowRight className="inline w-3 h-3" />
                   </span>
                   <span className="text-sm lg:text-base">Bad</span>
                 </span>
@@ -154,9 +155,9 @@ const StudentDashboard = () => {
           </div>
         </div>
         {/* ================Monthly Status Mobile================= */}
-        <div className="flex lg:hidden flex-col space-y-2 bg-white p-2 rounded-lg lg:rounded-2xl">
+        <div className="flex lg:hidden flex-col space-y-2 bg-white p-2 rounded-[12px] lg:rounded-2xl">
           {/* Today | Present */}
-          <div className="flex items-center justify-evenly border rounded-md lg:rounded-2xl px-4 py-3   ">
+          <div className="flex items-center justify-evenly border rounded-[8px] lg:rounded-2xl px-4 py-3   ">
             <span className="text-gray-700 font-medium">Today</span>
 
             <span className="w-px h-5 bg-gray-300"></span>
@@ -216,14 +217,14 @@ const StudentDashboard = () => {
       <div className="flex flex-col space-y-1 lg:space-y-4">
         {/* Homework */}
         <div className="flex flex-col lg:rounded-2xl  lg:bg-white   lg:p-5 relative">
-          <div className="flex justify-between mb-1">
+          <div className="flex justify-between mb-1 items-center">
             <h3 className="font-lexend font-semibold text-[17px] lg:text-2xl text-textc1-700">
               Homework today
             </h3>
 
             <Link
               to="/student/homework"
-              className="text-[17px] lg:text-2xl text-primary-700"
+              className="text-[13px] lg:text-[17px] text-primary-700"
             >
               See All
             </Link>
@@ -236,7 +237,7 @@ const StudentDashboard = () => {
               <Link
                 to={`homework/${s._id}`}
                 key={i}
-                className="flex bg-white flex-row lg:flex-col space-x-2 items-start lg:space-y-4 rounded-lg lg:rounded-xl  p-2 lg:p-4 "
+                className="flex bg-white flex-row lg:flex-col space-x-2 items-start lg:space-y-4 rounded-[12px] lg:rounded-xl  p-2 lg:p-4 "
               >
                 <img
                   className="rounded-md lg:rounded-lg w-[76px] h-[76px] lg:w-auto lg:h-auto"
@@ -289,14 +290,14 @@ const StudentDashboard = () => {
         </div>
 
         {/* ===========Mobile================== */}
-        <div className="lg:hidden flex flex-col   lg:bg-white rounded-2xl lg:p-2  py-2">
-          <div className="flex justify-between mb-1">
+        <div className="lg:hidden flex flex-col   lg:bg-white lg:p-2  py-2">
+          <div className="flex justify-between mb-1 items-center">
             <h3 className="font-semibold text-[17px] font-lexend lg:text-2xl text-textc1-700">
               Importent Notice
             </h3>
             <Link
               to="notice"
-              className="text-[17px] lg:text-2xl text-primary-700"
+              className="text-[13px] lg:text-2xl text-primary-700"
             >
               See All
             </Link>
@@ -327,7 +328,10 @@ const StudentDashboard = () => {
           </div>
           <div className="grid grid-cols-3 gap-4">
             {homework.map((s, i) => (
-              <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
+              <Link
+                to={`news/${s._id}`}
+                className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl"
+              >
                 <img className="rounded-2xl" src={s.image} alt="" />
                 <p className="text-sm text-textc3-700">12 january</p>
                 <p className="text-textc2-700 text-md font-kalpurush">
@@ -349,27 +353,27 @@ const StudentDashboard = () => {
                     <span className="text-sm">0</span>
                   </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
 
         {/* Popular News Mobile*/}
-        <div className="lg:hidden flex flex-col  rounded-2xl  ">
-          <div className="flex justify-between mb-1">
+        <div className="lg:hidden flex flex-col   ">
+          <div className="flex justify-between mb-1 items-center">
             <h3 className="font-semibold font-lexend text-[17px] lg:text-2xl text-textc1-700">
               Popular News
             </h3>
 
-            <span className="text-[17px] text-primary-700 lg:text-2xl">
+            <span className="text-[13px] text-primary-700 lg:text-2xl">
               See All
             </span>
           </div>
           <div className="flex flex-col items-center justify-center space-y-2">
             {homework.map((s, i) => (
               <Link
-                to={`announcement/${s._id}`}
-                className=" flex flex-row items-center justify-start space-x-4  p-2 rounded-lg bg-white"
+                to={`news/${s._id}`}
+                className=" flex flex-row items-center justify-start space-x-4  p-2 rounded-[12px] bg-white"
               >
                 <img
                   className="rounded-md w-[76px] h-[76px]"
@@ -451,7 +455,7 @@ const NoticeAnnouncementMobile = ({ title, descriptions, id }) => {
   return (
     <Link
       to={`/announcement/${id}`}
-      className="bg-white flex flex-row items-center justify-between rounded-lg  p-2"
+      className="bg-white flex flex-row items-center justify-between rounded-[12px] p-2"
     >
       <div className="flex flex-row items-center justidy-start space-x-2">
         <img className="w-36" src={Notice2} alt="" />
