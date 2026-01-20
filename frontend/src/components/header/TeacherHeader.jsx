@@ -1,7 +1,7 @@
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import NotificationBell from "./NotificationBell";
-import SplashIcon from "../assets/splash.png";
+import NotificationBell from "../NotificationBell";
+import SplashIcon from "../../assets/splash.png";
 
 const TeacherHeader = () => {
   const { user, logout } = useAuth();

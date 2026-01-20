@@ -4,12 +4,31 @@ import { toast } from "react-toastify";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [teachers, setTeachers] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
   const [userRole, setUserRole] = useState(
-    localStorage.getItem("userRole") || null
+    localStorage.getItem("userRole") || null,
   );
   const [loading, setLoading] = useState(true);
+
+  const fetchTeachersBySchool = async (school) => {
+    try {
+      const url = `${import.meta.env.VITE_BASE_URL}/api/user/${school}`;
+
+      const res = await fetch(url);
+
+      if (!res.ok) throw new Error("Unauthorized");
+
+      const data = await res.json();
+
+      setTeachers(data);
+    } catch (err) {
+      setTeachers(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -117,7 +136,16 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, userRole, token, login, logout, loading }}
+      value={{
+        user,
+        userRole,
+        token,
+        login,
+        logout,
+        loading,
+        fetchTeachersBySchool,
+        teachers,
+      }}
     >
       {children}
     </AuthContext.Provider>

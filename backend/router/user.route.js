@@ -7,6 +7,7 @@ const {
   deleteUser,
   userProfile,
   logoutUser,
+  fetchTeacherBySchool,
 } = require("../controller/user.controller");
 const authUser = require("../middleware/authMiddleware");
 const router = express.Router();
@@ -18,5 +19,6 @@ router.get("/profile", authUser, userProfile);
 router.get("/logout", authUser, logoutUser);
 router.put("/:id", updateUser);
 router.delete("/:id", deleteUser);
+router.get("/:school", fetchTeacherBySchool);
 
 module.exports = router;

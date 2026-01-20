@@ -91,6 +91,22 @@ const updateUser = async (req, res) => {
   }
 };
 
+const fetchTeacherBySchool = async (req, res) => {
+  try {
+    const { school } = req.params;
+
+    const teacher = await User.find({ school });
+
+    if (!teacher) {
+      return res.status(404).send("Teacher not found");
+    }
+
+    res.status(200).json(teacher);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -121,4 +137,5 @@ module.exports = {
   deleteUser,
   userProfile,
   logoutUser,
+  fetchTeacherBySchool,
 };

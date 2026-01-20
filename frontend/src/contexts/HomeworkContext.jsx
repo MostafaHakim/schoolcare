@@ -15,7 +15,7 @@ export const HomeworkProvider = ({ children }) => {
     const fetchHomeworks = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/homework`
+          `${import.meta.env.VITE_BASE_URL}/api/homework`,
         );
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
@@ -38,7 +38,7 @@ export const HomeworkProvider = ({ children }) => {
       const res = await fetch(
         `${
           import.meta.env.VITE_BASE_URL
-        }/api/homework/${className}?teacher=${teacher}`
+        }/api/homework/${className}?teacher=${teacher}`,
       );
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
@@ -55,13 +55,12 @@ export const HomeworkProvider = ({ children }) => {
 
   const fetchHomeworksByClassForStudent = async (className, school) => {
     try {
-      console.log(className, school);
       const res = await fetch(
         `${
           import.meta.env.VITE_BASE_URL
         }/api/homework/classes/${className}?school=${encodeURIComponent(
-          school
-        )}`
+          school,
+        )}`,
       );
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
@@ -104,7 +103,7 @@ export const HomeworkProvider = ({ children }) => {
     try {
       console.log(id, "context");
       const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/homework/single/${id}`
+        `${import.meta.env.VITE_BASE_URL}/api/homework/single/${id}`,
       );
       if (!res.ok) throw new Error("Failed to fetch");
       const data = await res.json();
