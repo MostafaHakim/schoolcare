@@ -34,10 +34,10 @@ const Admission = () => {
   };
 
   return (
-    <div className="">
+    <div className="lg:bg-white lg:min-h-screen">
       <div className=" ">
         {/* ===== Header ===== */}
-        <div className="flex flex-row items-center justify-between lg:bg-white lg:px-4 py-2 lg:py-8 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
+        <div className="flex flex-row items-center justify-between lg:px-4 py-2 lg:py-8 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
           <div className="flex flex-row items-center justify-start space-x-2">
             <MoveLeft className="flex " />
             <h1 className="text-lg font-semibold text-gray-800">Admission</h1>
