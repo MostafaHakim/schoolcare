@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MoveRight, BookOpen, MoveLeft, UsersRound } from "lucide-react";
 import { useClass } from "../contexts/classContext";
 import { useStudent } from "../contexts/studentContext";
@@ -6,7 +6,7 @@ import { useStudent } from "../contexts/studentContext";
 const Attendance = () => {
   const { classes } = useClass();
   const { students } = useStudent();
-
+  const navigate = useNavigate();
   const filterStudent = (cls) =>
     students.filter((student) => student.classId === cls).length;
   return (
@@ -15,7 +15,9 @@ const Attendance = () => {
         {/* ===== Header ===== */}
         <div className="flex flex-row items-center justify-between lg:bg-white  py-4 lg:py-8 lg:px-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
           <div className="flex flex-row items-start justify-start space-x-2">
-            <MoveLeft className="flex " />
+            <button onClick={navigate(-1)}>
+              <MoveLeft className="flex " />
+            </button>
             <h1 className="text-lg font-semibold text-gray-800">Attendance</h1>
           </div>
         </div>
@@ -23,7 +25,7 @@ const Attendance = () => {
           {classes.map((classItem) => (
             <div
               key={classItem._id}
-              className="col-span-1 flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 border bg-white border-blue-100 rounded-2xl space-x-4"
+              className="col-span-1 flex flex-row items-center justify-between px-4 lg:px-6 py-4 lg:py-8 border bg-white border-gray-100 rounded-2xl space-x-4"
             >
               <div className="flex flex-col items-start justify-between w-full space-y-2 lg:space-y-6">
                 <div className="flex flex-row items-center justify-start space-x-2">
