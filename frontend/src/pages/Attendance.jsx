@@ -15,7 +15,7 @@ const Attendance = () => {
         {/* ===== Header ===== */}
         <div className="flex flex-row items-center justify-between lg:bg-white  py-4 lg:py-8 lg:px-4 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
           <div className="flex flex-row items-start justify-start space-x-2">
-            <button onClick={navigate(-1)}>
+            <button onClick={() => navigate(-1)}>
               <MoveLeft className="flex " />
             </button>
             <h1 className="text-lg font-semibold text-gray-800">Attendance</h1>
