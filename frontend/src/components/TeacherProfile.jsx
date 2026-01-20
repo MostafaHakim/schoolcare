@@ -19,7 +19,7 @@ const TeacherProfile = () => {
   const { user, logout } = useAuth();
   const [notificatinToggle, setNotificatinToggle] = useState(false);
   return (
-    <div className="space-y-4 lg:bg-white rounded-2xl pb-20 ">
+    <div className="space-y-4 lg:space-y-20 lg:bg-white rounded-2xl pb-20 min-h-screen">
       {/* ===== Header ===== */}
       <div className="flex items-center lg:p-8 space-x-4  lg:border-b ">
         <MoveLeft className="text-gray-600 size-5" />
@@ -27,7 +27,7 @@ const TeacherProfile = () => {
       </div>
 
       {/* ===== Main Card ===== */}
-      <div className="lg:w-2/3 lg:shadow-lg lg:mx-auto  lg:flex lg:flex-col lg:items-center lg:justify-center lg:bg-white rounded-2xl lg:border border-gray-100 lg:p-4 space-y-4">
+      <div className="lg:w-2/3 lg:shadow-lg lg:mx-auto  lg:flex lg:flex-col lg:items-center lg:justify-center lg:bg-white rounded-2xl lg:border border-gray-100 lg:p-10 space-y-4">
         <div className="w-full grid grid-cols-1 gap-4 capitalize ">
           {/* ===== Student Info ===== */}
           <div className="lg:hidden rounded-lg lg:rounded-2xl p-2 lg:p-4 space-y-2 bg-white">
@@ -69,55 +69,69 @@ const TeacherProfile = () => {
 
           <div className="lg:grid grid-cols-2 lg:space-y-0 lg:gap-4 lg:w-full bg-white rounded-lg lg:rounded-2xl p-2 lg:p-4 space-y-2 ">
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px]   px-1">
                 School Name
               </legend>
-              <p className="label text-textc1-700 text-[12px]">{user.school}</p>
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
+                {user.school}
+              </p>
             </fieldset>
 
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px]  px-1">
                 Total Class
               </legend>
-              <p className="label text-textc1-700 text-[12px]">{user.userId}</p>
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
+                {user.userId}
+              </p>
             </fieldset>
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px]  px-1">
                 Joined on
               </legend>
-              <p className="label text-textc1-700 text-[12px]">
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
                 {new Date().toLocaleDateString()}
               </p>
             </fieldset>
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px] px-1">
                 Contact Number
               </legend>
-              <p className="label text-textc1-700 text-[12px]">{user.phone}</p>
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
+                {user.phone}
+              </p>
             </fieldset>
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px]  px-1">
                 Total Teacher
               </legend>
-              <p className="label text-textc1-700 text-[12px]">10</p>
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
+                10
+              </p>
             </fieldset>
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px]  px-1">
                 Total Students
               </legend>
-              <p className="label text-textc1-700 text-[12px]">344</p>
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
+                344
+              </p>
             </fieldset>
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px]  px-1">
                 Head Master Name
               </legend>
-              <p className="label text-textc1-700 text-[12px]">Md Hanif</p>
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
+                Md Hanif
+              </p>
             </fieldset>
             <fieldset className="fieldset border border-gray-100 rounded-box w-xs  min-h-[56px] px-3 pt-1 pb-2 rounded-md">
-              <legend className="fieldset-legend text-textc2-700 text-[14px] px-1">
+              <legend className="fieldset-legend text-textc2-700 text-[14px] lg:text-[18px]  px-1">
                 School ID
               </legend>
-              <p className="label text-textc1-700 text-[12px]">344</p>
+              <p className="label text-textc1-700 text-[12px] lg:text-[20px]">
+                344
+              </p>
             </fieldset>
           </div>
 

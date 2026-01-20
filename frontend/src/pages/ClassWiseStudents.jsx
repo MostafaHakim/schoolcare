@@ -2,13 +2,21 @@ import { EllipsisVertical, MoveLeft } from "lucide-react";
 import { GoPlus } from "react-icons/go";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useStudent } from "../contexts/studentContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import BlockModal from "../components/ui/BlockModal";
 
 const ClassWiseStudents = () => {
   const { name } = useParams();
   const { user } = useAuth();
   const { fetchClassWiseStudent, classStudents } = useStudent();
+
+  const [activeStudentId, setActiveStudentId] = useState(null);
+
+  const handleToggle = (id) => {
+    setActiveStudentId((prev) => (prev === id ? null : id));
+  };
+
   const navigate = useNavigate();
   useEffect(() => {
     if (name && user?.school) {
@@ -102,7 +110,7 @@ const ClassWiseStudents = () => {
           {classStudents.map((student, index) => (
             <div
               key={index}
-              className="hover:bg-gray-50 transition grid grid-cols-12 text-[17px] text-textc2-700 py-2 items-center px-4"
+              className="hover:bg-gray-50 transition grid grid-cols-12 text-[17px] text-textc2-700 py-2 items-center px-4 relative"
             >
               <p className="col-span-1 px-3 py-2 ">{index + 1}</p>
               <p className="col-span-2 px-3 py-2 ">{student.studentId}</p>
@@ -110,8 +118,18 @@ const ClassWiseStudents = () => {
               <p className="col-span-2 px-3 py-2 "></p>
               <p className="col-span-2 px-3 py-2 ">{student.roll}</p>
               <p className="col-span-2 px-3 py-2 ">{student.classId}</p>
-
-              <EllipsisVertical size={16} className="col-span-1" />
+              <button
+                className="col-span-1 "
+                onClick={() => handleToggle(student._id || student.studentId)}
+              >
+                <EllipsisVertical size={16} />
+              </button>
+              {/* ✅ Modal (image এর মতো position) */}
+              {activeStudentId === (student._id || student.studentId) && (
+                <div className="absolute right-6 top-10 z-50">
+                  <BlockModal />
+                </div>
+              )}
             </div>
           ))}
         </div>

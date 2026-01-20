@@ -31,7 +31,7 @@ const HomeWork = () => {
     <div className="">
       <div className=" ">
         {/* ===== Header ===== */}
-        <div className="flex flex-row items-center justify-between lg:bg-white px-4 py-4 lg:py-8 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
+        <div className="flex flex-row items-center justify-between lg:bg-white p-4 lg:py-8 rounded-t-2xl lg:border-b-[1px] lg:border-gray-200">
           <div className="flex flex-row items-start justify-start space-x-2 ">
             <MoveLeft className="flex lg:hidden" />
             <h1 className="text-lg font-semibold text-gray-800">Class List</h1>
