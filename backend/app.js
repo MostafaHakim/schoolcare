@@ -22,7 +22,7 @@ const Homework = require("./models/homework.model");
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "*",
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -41,7 +41,7 @@ const notificationReadRoute = require("./router/notificationread.route");
 // ===================MiddleWere=====================
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   }),
 );
