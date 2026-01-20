@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { EllipsisVertical, MoveLeft } from "lucide-react";
+import {
+  EllipsisVertical,
+  KeyRound,
+  MoveLeft,
+  Trash2,
+  TriangleAlert,
+} from "lucide-react";
 import { useStudent } from "../contexts/studentContext";
 import Icon from "../assets/icon.png";
 import BlockModal from "../components/ui/BlockModal";
@@ -8,8 +14,10 @@ import { replace, useNavigate } from "react-router-dom";
 const AllStudents = () => {
   const { students } = useStudent();
   const [activeStudentId, setActiveStudentId] = useState(null);
+
   const navigate = useNavigate();
   const modalRef = useRef(null);
+
   const handleToggle = (id) => {
     setActiveStudentId((prev) => (prev === id ? null : id));
   };
@@ -27,6 +35,21 @@ const AllStudents = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const titels = [
+    {
+      name: "block",
+      icon: KeyRound,
+    },
+    {
+      name: "restricted",
+      icon: TriangleAlert,
+    },
+    {
+      name: "delete",
+      icon: Trash2,
+    },
+  ];
 
   return (
     <div className="lg:bg-white min-h-screen rounded-2xl pb-20">
@@ -94,7 +117,7 @@ const AllStudents = () => {
             {/* ✅ Modal (image এর মতো position) */}
             {activeStudentId === (student._id || student.studentId) && (
               <div className="absolute right-6 top-10 z-50">
-                <BlockModal />
+                <BlockModal titels={titels} />
               </div>
             )}
           </div>
@@ -146,7 +169,7 @@ const AllStudents = () => {
             {/* Mobile modal */}
             {activeStudentId === (student._id || student.studentId) && (
               <div className="absolute right-3 top-14 z-50">
-                <BlockModal />
+                <BlockModal titels={titels} />
               </div>
             )}
           </div>
