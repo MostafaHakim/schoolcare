@@ -15,6 +15,7 @@ import ProfileIcon from "../assets/profileshadow.png";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { useState } from "react";
 import Icon from "../assets/icon.png";
+import { Link } from "react-router-dom";
 const TeacherProfile = () => {
   const { user, logout } = useAuth();
   const [notificatinToggle, setNotificatinToggle] = useState(false);
@@ -139,34 +140,52 @@ const TeacherProfile = () => {
           <div className="lg:hidden grid grid-cols-1 bg-white rounded-lg lg:rounded-xl p-2 lg:p-4">
             <div className="col-span-1  flex-col items-center justify-between space-y-2 ">
               <div className="flex flex-col items-center justify-start space-y-2 ">
-                <div className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700">
+                <Link
+                  to="/teacher/admission"
+                  className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700"
+                >
                   <Ticket size={20} />
                   <span className="text-[14px] text-textc1-700">Admission</span>
-                </div>
-                <div className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700">
+                </Link>
+                <Link
+                  to="/teacher/results"
+                  className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700"
+                >
                   <BookOpen size={20} />
                   <span className="text-[14px] text-textc1-700">Results</span>
-                </div>
-                <div className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700">
+                </Link>
+                <Link
+                  to="/teacher/finance"
+                  className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700"
+                >
                   <Wallet size={20} />
                   <span className="text-[14px] text-textc1-700">Finance</span>
-                </div>
-                <div className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700">
+                </Link>
+                <Link
+                  to="/teacher/chat"
+                  className="flex lg:hidden w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700"
+                >
                   <MessageCircleMore size={20} />
                   <span className="text-[14px] text-textc1-700">
                     Chat With Students{" "}
                   </span>
-                </div>
-                <div className="flex lg:hidden  w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700">
+                </Link>
+                <Link
+                  to="/teacher/about"
+                  className="flex lg:hidden  w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700"
+                >
                   <Info size={20} />
                   <span className="text-[14px] text-textc1-700">About Us</span>
-                </div>
-                <div className="flex lg:hidden  w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700">
+                </Link>
+                <Link
+                  to="/teacher/terms"
+                  className="flex lg:hidden  w-full items-center gap-2 p-4 border border-gray-100 rounded-lg text-textc2-700"
+                >
                   <Info size={20} />
                   <span className="text-[14px] text-textc1-700">
                     Terms & Conditions
                   </span>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

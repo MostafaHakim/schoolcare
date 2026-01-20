@@ -102,7 +102,7 @@ const AdmissionForm = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full lg:bg-white">
       {/* ===== Header ===== */}
       <div className="flex items-center justify-between lg:bg-white lg:py-8 lg:px-4  rounded-t-2xl lg:border-b">
         <div className="flex flex-row items-center gap-2">

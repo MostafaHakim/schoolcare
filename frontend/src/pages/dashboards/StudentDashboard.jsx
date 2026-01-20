@@ -284,6 +284,7 @@ const StudentDashboard = () => {
                 like={anouncement.like}
                 teacher={anouncement.teacher}
                 comment={anouncement.conmment}
+                id={anouncement._id}
               />
             ))}
           </div>
@@ -310,6 +311,7 @@ const StudentDashboard = () => {
                 like={anouncement.like}
                 teacher={anouncement.teacher}
                 comment={anouncement.conmment}
+                id={anouncement._id}
               />
             ))}
           </div>
@@ -416,10 +418,14 @@ const NoticeAnnouncement = ({
   like,
   teacher,
   comment,
+  id,
 }) => {
   return (
-    <div className="col-span-1 flex flex-col space-y-4 border border-blue-100 p-4 rounded-2xl">
-      <div className="flex flex-row items-center justify-between border border-blue-100 rounded-2xl p-2">
+    <Link
+      to={`notice/${id}`}
+      className="col-span-1 flex flex-col space-y-4 border border-gray-100 p-4 rounded-2xl"
+    >
+      <div className="flex flex-row items-center justify-between border border-gray-100 rounded-2xl p-2">
         <div className="flex flex-row items-center justidy-start space-x-2">
           <img
             className="w-[65px] h-[67px] lg:w-[54px] lg:h-[56px]"
@@ -434,13 +440,15 @@ const NoticeAnnouncement = ({
         </div>
       </div>
       <div className="flex flex-col space-y-2">
-        <h2 className="text-xl font-semibold font-kalpurush">{title}</h2>
+        <h2 className=" font-semibold font-kalpurush  text-[17px]">{title}</h2>
         <p className="text-lg text-gray-500 ">
-          <span className="font-kalpurush">{descriptions}</span>
-          <span className="text-[#9542E7]">Read More..</span>
+          <span className="font-kalpurush line-clamp-3 text-[17px] text-justify">
+            {descriptions}
+          </span>
+          <span className="text-[#9542E7] text-[17px]">Read More..</span>
         </p>
       </div>
-      <div className="grid grid-cols-2 border border-blue-100 p-3 rounded-lg ">
+      <div className="grid grid-cols-2 border border-gray-100 p-3 rounded-lg ">
         <span className="col-span-1 text-center flex items-center justify-center">
           <Eye /> <span className="pl-1">{like}</span>
         </span>
@@ -448,13 +456,13 @@ const NoticeAnnouncement = ({
           <Heart /> <span className="pl-1">{comment?.length}</span>
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 const NoticeAnnouncementMobile = ({ title, descriptions, id }) => {
   return (
     <Link
-      to={`/announcement/${id}`}
+      to={`notice/${id}`}
       className="bg-white flex flex-row items-center justify-between rounded-[12px] p-2"
     >
       <div className="flex flex-row items-center justidy-start space-x-2">

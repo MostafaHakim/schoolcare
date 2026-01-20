@@ -54,7 +54,7 @@ const AddAnnouncement = () => {
     } catch (error) {
       console.error(error);
       toast.error(
-        error?.response?.data?.message || "Failed to publish announcement"
+        error?.response?.data?.message || "Failed to publish announcement",
       );
     } finally {
       setLoading(false);
@@ -62,12 +62,12 @@ const AddAnnouncement = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen p-4 lg:p-8">
+    <div className="flex flex-col lg:bg-white min-h-screen rounded-3xl space-y-4">
       <Header title="Add Announcement" />
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center mt-10 space-y-6"
+        className="flex flex-col items-center lg:mt-10 space-y-4 lg:space-y-6 bg-white p-3 rounded-xl"
       >
         <InputField
           label="Title"
@@ -88,7 +88,7 @@ const AddAnnouncement = () => {
         <button
           type="submit"
           disabled={loading}
-          className="px-24 py-3 rounded-full bg-violet-600 text-white font-semibold hover:opacity-90 disabled:opacity-60"
+          className="w-full lg:w-1/2 px-24 py-3 lg:py-4 text-[14px] lg:text-[24px] rounded-lg bg-violet-600 text-white font-semibold hover:opacity-90 disabled:opacity-60"
         >
           {loading ? "Publishing..." : "Publish"}
         </button>
@@ -101,18 +101,20 @@ export default AddAnnouncement;
 
 /* ===== Helper Components ===== */
 const Header = ({ title }) => (
-  <div className="flex items-center bg-white px-4 py-4 rounded-xl shadow-sm">
+  <div className="flex items-center  lg:px-6 lg:py-8 border-b border-gray-100 space-x-4">
     <MoveLeft
       onClick={() => window.history.back()}
       className="cursor-pointer"
     />
-    <h1 className="text-lg font-semibold text-gray-800 ml-2">{title}</h1>
+    <h1 className="text-[14px] lg:text-[24px] font-semibold text-gray-800 ml-2">
+      {title}
+    </h1>
   </div>
 );
 
 const InputField = ({ label, name, value, onChange, placeholder }) => (
   <div className="w-full lg:w-1/2">
-    <label className="text-lg block  font-medium text-gray-700 mb-2">
+    <label className="text-[17px] lg:text-[24px] block  font-medium text-gray-700 mb-2">
       {label}
     </label>
     <input
@@ -121,14 +123,14 @@ const InputField = ({ label, name, value, onChange, placeholder }) => (
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+      className="w-full p-4 text-[12px] lg:text-[17px] rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
     />
   </div>
 );
 
 const TextAreaField = ({ label, name, value, onChange, placeholder }) => (
   <div className="w-full lg:w-1/2">
-    <label className="block text-lg font-medium text-gray-700 mb-2">
+    <label className="block text-[17px] lg:text-[24px] font-medium text-gray-700 mb-2">
       {label}
     </label>
     <textarea
@@ -137,7 +139,7 @@ const TextAreaField = ({ label, name, value, onChange, placeholder }) => (
       onChange={onChange}
       rows={6}
       placeholder={placeholder}
-      className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
+      className="w-full p-4 text-[12px] lg:text-[17px] rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
     />
     <p className="text-right text-xs text-gray-400 mt-1">10000</p>
   </div>

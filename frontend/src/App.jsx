@@ -45,6 +45,8 @@ import StudentAnnouncenmect from "./pages/StudentAnnouncement";
 import StudentProfilePage from "./pages/StudentProfilePage";
 import TeacherProfile from "./components/TeacherProfile";
 import StudentNewsDetail from "./pages/NewsDetails";
+import AboutUs from "./pages/AboutUs";
+import Terms from "./pages/Terms";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -119,7 +121,7 @@ function App() {
                               path="homework/:name/addhomework"
                               element={<AddHomeWork />}
                             />
-
+                            {/* ===============Admission================== */}
                             <Route path="admission" element={<Admission />} />
                             <Route
                               path="admission/allstudents"
@@ -133,6 +135,9 @@ function App() {
                               path="admission/:name/form"
                               element={<AdmissionForm />}
                             />
+
+                            {/* ===============Attendance================== */}
+
                             <Route path="attendance" element={<Attendance />} />
                             <Route
                               path="attendance/:name"
@@ -142,6 +147,10 @@ function App() {
                             <Route
                               path="announcement"
                               element={<Announcement />}
+                            />
+                            <Route
+                              path="announcement/:id"
+                              element={<NoticeDetailPage />}
                             />
 
                             <Route
@@ -165,6 +174,8 @@ function App() {
                               path="profile"
                               element={<TeacherProfile />}
                             />
+                            <Route path="about" element={<AboutUs />} />
+                            <Route path="terms" element={<Terms />} />
                           </Route>
 
                           {/*===================== Student =====================*/}
@@ -228,10 +239,10 @@ function App() {
                             />
                           </Route>
 
-                          <Route
+                          {/* <Route
                             path="*"
                             element={<Navigate to="/login" replace />}
-                          />
+                          /> */}
                         </Routes>
                       </NotificationProvider>
                     </SocketProvider>

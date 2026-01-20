@@ -10,6 +10,9 @@ import {
   MessageCircle,
   User,
   LogOut,
+  BadgeQuestionMark,
+  MessageCircleMore,
+  Info,
 } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -23,6 +26,9 @@ const navItems = [
   { to: "/teacher/finance", label: "Finance", icon: DollarSign },
   { to: "/teacher/chat", label: "Chat", icon: MessageCircle },
   { to: "/teacher/profile", label: "Profile", icon: User },
+  { to: "/teacher/about", label: "About Us", icon: BadgeQuestionMark },
+  { to: "/teacher/terms", label: "Terms & Conditions", icon: Info },
+  { to: "/teacher/support", label: "Support Team", icon: MessageCircleMore },
 ];
 
 const TeacherSidebar = () => {

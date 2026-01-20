@@ -112,7 +112,7 @@ const HomeworkForm = ({
 }) => (
   <form
     onSubmit={handleSubmit}
-    className="flex flex-col items-center justify-center w-full space-y-6"
+    className="flex flex-col items-center justify-center w-full space-y-6 "
   >
     {/* Drag & Drop */}
     <div
@@ -168,7 +168,7 @@ const HomeworkForm = ({
     <button
       type="submit"
       disabled={loading}
-      className="px-20 py-3 text-white font-semibold bg-violet-600 rounded-lg hover:opacity-90 disabled:opacity-60"
+      className="w-full lg:w-1/2 px-20 py-3 text-white font-semibold bg-violet-600 rounded-lg hover:opacity-90 disabled:opacity-60 "
     >
       {loading ? "Publishing..." : "Publish"}
     </button>
