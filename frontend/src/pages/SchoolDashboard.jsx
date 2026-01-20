@@ -12,11 +12,11 @@ const SchoolDashboard = () => {
   useEffect(() => {
     if (!id) return;
     fetchSchoolById(id);
-  }, [id]);
+  }, []);
   useEffect(() => {
     if (!schoolById) return;
     fetchTeachersBySchool(schoolById["data"]?.school);
-  }, [schoolById]);
+  }, []);
   return (
     <div className="flex flex-col space-y-4">
       <div className="flex flex-row items-center justify-between">

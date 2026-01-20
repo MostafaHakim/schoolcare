@@ -26,7 +26,7 @@ export const SchoolProvider = ({ children }) => {
     };
 
     fetchSchools();
-  }, [schools]);
+  }, []);
 
   /* ===== Add Homework ===== */
   const AddSchools = async (formData) => {
