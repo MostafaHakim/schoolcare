@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Home, BookOpen, ClipboardCheck, User } from "lucide-react";
-import NotificationBell from "../NotificationBell";
+import { Home, User, CalendarDays, Pencil } from "lucide-react";
 
 const nav = [
   { path: "/teacher", label: "Home", icon: Home },
-  { path: "/teacher/homework", label: "Home work", icon: BookOpen },
-  { path: "/teacher/attendance", label: "Attendance", icon: ClipboardCheck },
+  { path: "/teacher/attendance", label: "Attendance", icon: CalendarDays },
+  { path: "/teacher/homework", label: "Home work", icon: Pencil },
   { path: "/teacher/profile", label: "Profile", icon: User },
 ];
 
@@ -17,7 +16,7 @@ const TeacherMobileBottomNav = () => {
           <NavLink
             key={item.path}
             to={item.path}
-            end={item.to === "/teacher"}
+            end={item.path === "/teacher"}
             className={({ isActive }) =>
               `flex flex-col items-center text-xs ${
                 isActive ? "text-[#6C5DD3]" : "text-gray-400"
