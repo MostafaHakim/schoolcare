@@ -14,7 +14,7 @@ const getNextSchoolId = async () => {
   let nextId;
 
   if (!lastSchool || !lastSchool.schoolId) {
-    nextId = "0001";
+    nextId = "2312";
   } else {
     const idNum = Number(lastSchool.schoolId);
     nextId = String(idNum + 1).padStart(4, "0");
