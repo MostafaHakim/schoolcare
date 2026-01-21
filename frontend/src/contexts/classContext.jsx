@@ -5,7 +5,8 @@ import { useAuth } from "./AuthContext";
 const ClassContext = createContext();
 
 export const ClassProvider = ({ children }) => {
-  const [classes, setClasses] = useState([]); // ✅ array
+  const [classes, setClasses] = useState([]);
+  const [classesBySchool, setClassesBySchool] = useState([]);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
@@ -20,7 +21,7 @@ export const ClassProvider = ({ children }) => {
         const res = await fetch(
           `${
             import.meta.env.VITE_BASE_URL
-          }/api/classes?school=${encodeURIComponent(user?.school)}`
+          }/api/classes?school=${encodeURIComponent(user?.school)}`,
         );
 
         if (!res.ok) throw new Error("Failed to fetch");
@@ -37,6 +38,28 @@ export const ClassProvider = ({ children }) => {
 
     fetchClasses();
   }, [user?.school]);
+
+  // ✅ fetch classes By School
+
+  const fetchClassesBySchool = async (school) => {
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/api/classes?school=${encodeURIComponent(school)}`,
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch");
+
+      const data = await res.json();
+      setClassesBySchool(data);
+    } catch (err) {
+      setClassesBySchool([]);
+      toast.error("Failed to load classes");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   //  add new class
   const addNewClass = async (formData) => {
@@ -71,7 +94,7 @@ export const ClassProvider = ({ children }) => {
         `${import.meta.env.VITE_BASE_URL}/api/classes/${id}`,
         {
           method: "DELETE",
-        }
+        },
       );
 
       if (!res.ok) throw new Error("Failed to Delete");
@@ -87,7 +110,14 @@ export const ClassProvider = ({ children }) => {
 
   return (
     <ClassContext.Provider
-      value={{ classes, loading, addNewClass, deleteClass }}
+      value={{
+        classes,
+        loading,
+        addNewClass,
+        deleteClass,
+        fetchClassesBySchool,
+        classesBySchool,
+      }}
     >
       {children}
     </ClassContext.Provider>

@@ -1,5 +1,6 @@
 const cloudinary = require("../config/cloudinary");
 const Student = require("../models/student.model");
+
 const BlackListToken = require("../models/blackListTokenModel");
 
 const createStudent = async (req, res) => {
@@ -8,7 +9,6 @@ const createStudent = async (req, res) => {
       studentId,
       name,
       fathername,
-      roll,
       classId,
       password,
       phone,
@@ -20,7 +20,6 @@ const createStudent = async (req, res) => {
       !studentId ||
       !name ||
       !fathername ||
-      !roll ||
       !classId ||
       !password ||
       !school ||
@@ -35,9 +34,15 @@ const createStudent = async (req, res) => {
       return res.status(409).send("Username already exists");
     }
 
+    const lastStudent = await Student.findOne({ school, classId })
+      .sort({ roll: -1 })
+      .exec();
+
+    const nextRoll = lastStudent && lastStudent.roll ? lastStudent.roll + 1 : 1;
+
     const result = await cloudinary.uploader.upload(
       `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`,
-      { folder: "student" }
+      { folder: "student" },
     );
 
     const newStudent = new Student({
@@ -45,7 +50,7 @@ const createStudent = async (req, res) => {
       studentId,
       name,
       fathername,
-      roll,
+      roll: nextRoll,
       classId,
       password,
       phone,

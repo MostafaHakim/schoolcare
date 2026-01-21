@@ -1,26 +1,37 @@
 const User = require("../models/user.model");
 const BlackListToken = require("../models/blackListTokenModel");
 
+const getNextUserId = async () => {
+  const lastUser = await User.findOne().sort({ userId: -1 }).exec();
+
+  let nextId;
+
+  if (!lastUser || !lastUser.userId) {
+    nextId = "0001";
+  } else {
+    const idNum = Number(lastUser.userId);
+    nextId = String(idNum + 1).padStart(4, "0");
+  }
+
+  return nextId;
+};
+
 const createUser = async (req, res) => {
   try {
-    const { username, userId, userRole, password, phone, school } = req.body;
-    if (!username || !userId || !password || !userRole || !phone || !school) {
+    const { username, userRole, password, phone, school, address } = req.body;
+    if (!username || !password || !userRole || !phone || !school || !address) {
       return res.status(400).send("Missing required fields");
     }
 
-    const isExistingUser = await User.findOne({ userId });
-
-    if (isExistingUser) {
-      return res.status(409).send("Username already exists");
-    }
-
+    const newUserId = await getNextUserId();
     const newUser = new User({
       username,
-      userId,
+      userId: newUserId,
       userRole,
       password,
       phone,
       school,
+      address,
     });
 
     const user = await newUser.save();

@@ -1,10 +1,31 @@
+const cloudinary = require("../config/cloudinary");
 const School = require("../models/school.model");
+const User = require("../models/user.model");
+const Student = require("../models/student.model");
+const Attendance = require("../models/attendance.model");
+const Classes = require("../models/classes.model");
+const Homework = require("../models/homework.model");
+const Notification = require("../models/notification.model");
+const Anouncement = require("../models/anouncement.model");
+
+const getNextSchoolId = async () => {
+  const lastSchool = await School.findOne().sort({ schoolId: -1 }).exec();
+
+  let nextId;
+
+  if (!lastSchool || !lastSchool.schoolId) {
+    nextId = "0001";
+  } else {
+    const idNum = Number(lastSchool.schoolId);
+    nextId = String(idNum + 1).padStart(4, "0");
+  }
+
+  return nextId;
+};
 
 exports.createSchool = async (req, res) => {
   try {
-    const { school, address, eiin } = req.body;
-    console.log(req.body);
-    // check duplicate school
+    const { school, address, joinedOn, headMasterName, phone } = req.body;
     const existingSchool = await School.findOne({ school });
     if (existingSchool) {
       return res.status(400).json({
@@ -13,10 +34,21 @@ exports.createSchool = async (req, res) => {
       });
     }
 
+    const newSchoolId = await getNextSchoolId();
+
+    const result = await cloudinary.uploader.upload(
+      `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`,
+      { folder: "school" },
+    );
+
     const newSchool = await School.create({
+      schoolId: newSchoolId,
+      image: result.secure_url,
       school,
       address,
-      eiin,
+      joinedOn,
+      headMasterName,
+      phone,
     });
 
     res.status(201).json({
@@ -111,6 +143,14 @@ exports.deleteSchool = async (req, res) => {
         message: "School not found",
       });
     }
+
+    await User.deleteMany({ school: school.school });
+    await Student.deleteMany({ school: school.school });
+    await Classes.deleteMany({ school: school.school });
+    await Homework.deleteMany({ school: school.school });
+    await Anouncement.deleteMany({ school: school.school });
+    await Attendance.deleteMany({ school: school.school });
+    await Notification.deleteMany({ school: school.school });
 
     await school.deleteOne();
 

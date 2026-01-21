@@ -6,6 +6,7 @@ const StudentContext = createContext();
 
 export const StudentProvider = ({ children }) => {
   const [students, setStudents] = useState([]);
+  const [studentsBySchool, setStudentsBySchool] = useState([]);
 
   const [classStudents, setClassStudents] = useState([]);
 
@@ -22,7 +23,7 @@ export const StudentProvider = ({ children }) => {
         const res = await fetch(
           `${
             import.meta.env.VITE_BASE_URL
-          }/api/student?school=${encodeURIComponent(school)}`
+          }/api/student?school=${encodeURIComponent(school)}`,
         );
 
         if (!res.ok) throw new Error("Failed to fetch");
@@ -41,6 +42,29 @@ export const StudentProvider = ({ children }) => {
 
     fetchStudent(user?.school);
   }, [user?.school]);
+  //  fetch School Wise student
+
+  const fetchStudentBySchool = async (school) => {
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/api/student?school=${encodeURIComponent(school)}`,
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch");
+
+      const data = await res.json();
+
+      setStudentsBySchool(data);
+    } catch (err) {
+      setStudentsBySchool([]);
+
+      toast.error("Failed to load classes");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // ================fatch Student By Class=================
 
@@ -49,7 +73,7 @@ export const StudentProvider = ({ children }) => {
       const res = await fetch(
         `${
           import.meta.env.VITE_BASE_URL
-        }/api/student/class/${classId}?school=${encodeURIComponent(school)}`
+        }/api/student/class/${classId}?school=${encodeURIComponent(school)}`,
       );
 
       if (!res.ok) throw new Error("Failed to fetch");
@@ -72,6 +96,8 @@ export const StudentProvider = ({ children }) => {
         setStudents,
         fetchClassWiseStudent,
         classStudents,
+        fetchStudentBySchool,
+        studentsBySchool,
       }}
     >
       {children}

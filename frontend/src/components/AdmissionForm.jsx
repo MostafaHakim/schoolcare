@@ -56,7 +56,7 @@ const AdmissionForm = () => {
   /* ===== Submit ===== */
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     try {
       setLoading(true);
 
@@ -65,7 +65,7 @@ const AdmissionForm = () => {
         data.append(key, formData[key]);
       });
       data.append("image", image);
-
+      console.log(data);
       const res = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/student`,
         data,

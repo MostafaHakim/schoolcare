@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -7,6 +8,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 export const SchoolProvider = ({ children }) => {
   const [schools, setSchools] = useState([]);
   const [schoolById, setSchoolById] = useState({});
+  const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
   /* ===== Fetch all homeworks ===== */
@@ -29,27 +31,24 @@ export const SchoolProvider = ({ children }) => {
   }, []);
 
   /* ===== Add Homework ===== */
-  const AddSchools = async (formData) => {
+  const addSchool = async (formData, image) => {
     try {
-      const res = await fetch(`${baseUrl}/api/schools`, {
-        method: "POST",
-        body: formData,
+      const data = new FormData();
+      Object.keys(formData).forEach((key) => {
+        data.append(key, formData[key]);
       });
+      if (image) data.append("image", image);
 
-      const data = await res.json();
-      if (!res.ok) {
-        toast.error(data.message || "Failed to create homework");
-        return null;
-      }
+      const res = await axios.post(`${baseUrl}/api/schools`, data);
 
-      setSchools((prev) => [...prev, data.data]);
-      return data.data;
+      setSchools((prev) => [...prev, res.data.data]);
+      toast.success("School added successfully");
+      return true;
     } catch (err) {
-      toast.error("Server error. Try again later");
-      return null;
+      toast.error(err.response?.data?.message || "Failed to add school");
+      return false;
     }
   };
-
   // ==============fetch by Id=========================
 
   const fetchSchoolById = async (id) => {
@@ -65,6 +64,23 @@ export const SchoolProvider = ({ children }) => {
       setLoading(false);
     }
   };
+  // ============================Delete School========================
+
+  const deleteSchool = async (id) => {
+    try {
+      console.log(id);
+      const res = await axios.delete(`${baseUrl}/api/schools/${id}`);
+
+      setSchools((prev) => prev.filter((school) => school._id !== id));
+      setOpenModal(false);
+      toast.success("School deleted successfully");
+      return true;
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.message || "Failed to delete school");
+      return false;
+    }
+  };
 
   return (
     <SchoolContext.Provider
@@ -72,8 +88,11 @@ export const SchoolProvider = ({ children }) => {
         schools,
         schoolById,
         fetchSchoolById,
-        AddSchools,
+        addSchool,
         loading,
+        deleteSchool,
+        openModal,
+        setOpenModal,
       }}
     >
       {children}

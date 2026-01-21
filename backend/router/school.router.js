@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../middleware/upload");
 const {
   createSchool,
   getAllSchools,
@@ -9,7 +10,7 @@ const {
 
 const router = express.Router();
 
-router.post("/", createSchool);
+router.post("/", upload.single("image"), createSchool);
 router.get("/", getAllSchools);
 router.get("/:id", getSchoolById);
 router.put("/:id", updateSchool);

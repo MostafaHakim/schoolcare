@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
 import Trash from "../assets/trash.png";
 
-const ClassDeleteModal = ({ setDeleteModal, handleDelete }) => {
+const ClassDeleteModal = ({ setDeleteModal, handleDelete, id }) => {
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <img src={Trash} alt="" />
@@ -18,7 +17,7 @@ const ClassDeleteModal = ({ setDeleteModal, handleDelete }) => {
           No
         </button>
         <button
-          onClick={() => handleDelete()}
+          onClick={() => handleDelete(id)}
           className="bg-white text-primary-700 border border-primary-700 py-2 w-full rounded-md"
         >
           Yes

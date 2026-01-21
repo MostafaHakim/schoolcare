@@ -50,6 +50,10 @@ import Terms from "./pages/Terms";
 import SchoolManagement from "./pages/SchoolManagement";
 import SchoolDashboard from "./pages/SchoolDashboard";
 import { SchoolProvider } from "./contexts/SchoolContext";
+import AddAnnouncement from "./components/AddAnouncement";
+import AddSchool from "./pages/AddSchool";
+import TeacherPanel from "./pages/TeacherPanel";
+import TeacherAddModal from "./components/TeacherAddModal";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -96,9 +100,22 @@ function App() {
                                 path="school"
                                 element={<SchoolManagement />}
                               />
+
                               <Route
                                 path="school/:id"
                                 element={<SchoolDashboard />}
+                              />
+                              <Route
+                                path="school/:id/teacher"
+                                element={<TeacherPanel />}
+                              />
+                              <Route
+                                path="school/:id/teacher/addteacher"
+                                element={<TeacherAddModal />}
+                              />
+                              <Route
+                                path="school/form"
+                                element={<AddSchool />}
                               />
                               <Route path="chat" element={<ComingSoonPage />} />
                               <Route
@@ -273,10 +290,10 @@ function App() {
                               />
                             </Route>
 
-                            <Route
+                            {/* <Route
                               path="*"
                               element={<Navigate to="/login" replace />}
-                            />
+                            /> */}
                           </Routes>
                         </NotificationProvider>
                       </SocketProvider>

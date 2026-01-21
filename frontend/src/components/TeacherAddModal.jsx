@@ -8,10 +8,10 @@ const TeacherAddModal = ({ setUsers, setOpenModal }) => {
   const [formData, setFormData] = useState({
     username: "",
     school: "",
-    userId: "",
     userRole: "teacher",
     password: "",
     phone: "",
+    address: "",
   });
   const { schools } = useSchool();
   const [loading, setLoading] = useState(false);
@@ -31,9 +31,9 @@ const TeacherAddModal = ({ setUsers, setOpenModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, school, userId, password, phone } = formData;
+    const { username, school, password, phone } = formData;
 
-    if (!username || !school || !userId || !password || !phone) {
+    if (!username || !school || !password || !phone) {
       setError("All fields are required");
       return;
     }
@@ -67,9 +67,9 @@ const TeacherAddModal = ({ setUsers, setOpenModal }) => {
       setFormData({
         username: "",
         school: "",
-        userId: "",
         password: "",
         phone: "",
+        address: "",
       });
 
       setOpenModal && setOpenModal(false);
@@ -109,15 +109,7 @@ const TeacherAddModal = ({ setUsers, setOpenModal }) => {
             </option>
           ))}
         </select>
-        {/* User ID */}
-        <input
-          type="text"
-          name="userId"
-          value={formData.userId}
-          onChange={handleChange}
-          placeholder="User ID"
-          className="w-full border rounded-lg px-3 py-2"
-        />
+
         {/* Password */}
         <div className="relative">
           <input
@@ -143,6 +135,15 @@ const TeacherAddModal = ({ setUsers, setOpenModal }) => {
           value={formData.phone}
           onChange={handleChange}
           placeholder="Phone Number"
+          className="w-full border rounded-lg px-3 py-2"
+        />
+        {/* Address */}
+        <input
+          type="text"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          placeholder="Address"
           className="w-full border rounded-lg px-3 py-2"
         />
 
